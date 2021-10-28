@@ -1,0 +1,1 @@
+<object data="<?php echo base_url('assets/berkas/'.$berkas_proposal);?>" type="application/pdf" width="100%" height="850px" style=" display:inline-block;"></object>
