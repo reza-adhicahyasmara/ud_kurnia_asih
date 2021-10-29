@@ -2,11 +2,11 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Tanggal</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Nama proposal</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Berkas</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:7%">Aksi</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Tanggal</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Nama proposal</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Berkas</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
     </thead>
     <tbody>

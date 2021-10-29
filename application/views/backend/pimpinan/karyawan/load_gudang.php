@@ -2,15 +2,15 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Foto</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:5%">NIK</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Nama</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:20%">Alamat</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">No. Telp / HP</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Password</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Username</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:7%">Aksi</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Foto</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">NIK</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Alamat</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No. Telp / HP</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Password</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Username</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
     </thead>
     <tbody>

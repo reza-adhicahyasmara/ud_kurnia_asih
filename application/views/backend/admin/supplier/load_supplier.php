@@ -2,15 +2,15 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Foto</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Nama Supplier</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">PIC</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:20%">Alamat</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">No. Telp / HP</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Username</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Password</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:7%">Aksi</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Foto</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Nama Supplier</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">PIC</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Alamat</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No. Telp / HP</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Username</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Password</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +42,7 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->username_supplier;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->password_supplier;?></td>
             <td style="text-align: center; vertical-align: middle;" >
+                <a class='btn btn-outline-info btn-sm btn-rounded btn_detail_supplier' href="<?php echo base_url('admin/supplier/detail/'). $row->id_supplier; ?>" style="margin:3px"><span class="bx bx-fw bx-show"></span></a>
                 <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_supplier' id_supplier = "<?php echo $row->id_supplier; ?>" ><span class="bx bx-fw bx-pencil"></span></a>
                 <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_supplier' nama_supplier="<?php echo $row->nama_supplier; ?>" id_supplier="<?php echo $row->id_supplier; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>

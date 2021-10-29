@@ -65,22 +65,22 @@
     });
 
     $(document).on('click', '.btn_edit_bahan_baku', function(e) {
-        var kode_bahan_baku=$(this).attr("kode_bahan_baku");
+        var kode_bb=$(this).attr("kode_bb");
         var url = "<?php echo base_url('admin/bahan_baku/form_edit_bahan_baku'); ?>";
 
         $('#modal_bahan_baku').modal('show');
         $('.modal-title').text('Edit Bahan Baku');
-        $('.modal-body').load(url,{kode_bahan_baku : kode_bahan_baku});
+        $('.modal-body').load(url,{kode_bb : kode_bb});
     });  
 
     $(document).ready(function() {
         $('#btn_simpan_bahan_baku').on("click",function(){
             $('#form_bahan_baku').validate({
                 rules: {
-                    kode_bahan_baku_baru: {
+                    kode_bb_baru: {
                         required: true,
                     },
-                    nama_bahan_baku_baru: {
+                    nama_bb_baru: {
                         required: true,
                     },
                     id_supplier: {
@@ -92,15 +92,15 @@
                     kode_satuan: {
                         required: true,
                     },
-                    stok_limit_bahan_baku: {
+                    stok_limit_pab_bb: {
                         required: true,
                     },
                 },
                 messages: {
-                    kode_bahan_baku_baru: {
+                    kode_bb_baru: {
                         required: "Kode harus diisi",
                     },
-                    nama_bahan_baku_baru: {
+                    nama_bb_baru: {
                         required: "Bahan baku harus diisi",
                     },
                     id_supplier: {
@@ -112,7 +112,7 @@
                     kode_satuan: {
                         required: "Satuan harus diisi",
                     },
-                    stok_limit_bahan_baku: {
+                    stok_limit_pab_bb: {
                         required: "Stok limit harus diisi",
                     },
                 },
@@ -197,12 +197,12 @@
     });
 
     $(document).on('click', '.btn_hapus_bahan_baku', function(e) {
-        var kode_bahan_baku = $(this).attr("kode_bahan_baku");
-        var nama_bahan_baku = $(this).attr("nama_bahan_baku");
+        var kode_bb = $(this).attr("kode_bb");
+        var nama_bb = $(this).attr("nama_bb");
         
         Swal.fire({
             title: 'Apakah anda yakin?',
-            text: 'Akan menghapus data"' + nama_bahan_baku + '"!',
+            text: 'Akan menghapus data"' + nama_bb + '"!',
             type: 'warning',
             icon: 'warning',
             showCancelButton: true,
@@ -217,10 +217,10 @@
                     $.ajax({
                         url: '<?php echo base_url('admin/bahan_baku/hapus_bahan_baku'); ?>',
                         method: 'POST',
-                        data: {kode_bahan_baku : kode_bahan_baku},                
+                        data: {kode_bb : kode_bb},                
                     })
                     .done(function(response) {
-                        load_data_satuan();
+                        load_data_bahan_baku();
                         Swal.fire({
                             title: 'Data Barhasil Dihapus',
                             icon: 'success',

@@ -44,6 +44,27 @@ class Supplier extends BaseControllerBackend {
 		$data['edit'] = $this->Mod_supplier->get_supplier($id_supplier);
 		$this->load->view("backend/admin/supplier/form_edit_supplier", $data);
     }
+
+    function detail($id_supplier){
+        $nik_karyawan = $this->session->userdata('ses_nik_karyawan');  
+        $hak_akses = $this->session->userdata('ses_akses');  
+
+        if($nik_karyawan != null && $hak_akses == 'Admin'){
+            $this->global['pageTitle'] = "Detail Supplier";
+
+            $data['supplier'] = $this->Mod_supplier->get_supplier($id_supplier);
+            $this->loadViews("backend/admin/supplier/body_detail",$this->global,$data,"backend/admin/supplier/footer");
+        }
+        else{ 
+            redirect('login');
+        }  
+    }
+
+    function load_data_bahan_baku(){
+        $id_supplier = $this->input->post('id_supplier');
+        $data['bahan_baku'] = $this->Mod_bahan_baku->get_bahan_baku_supplier($id_supplier);
+        $this->load->view('backend/admin/bahan_baku/load_bahan_baku', $data);
+    }
     
     function tambah_supplier(){ 
         $nama_supplier = $this->input->post('nama_supplier');

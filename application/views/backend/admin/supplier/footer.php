@@ -41,6 +41,7 @@
 </script>
 
 
+<!-----------------------DATA SUPPLIER----------------------->
 <script type="text/javascript">
     load_data_supplier();
 	function load_data_supplier(){
@@ -253,5 +254,210 @@
 </script>
 
 
+
+<!-----------------------DATA BAHAN BAKU----------------------->
+<script type="text/javascript">
+    load_data_bahan_baku();
+    function load_data_bahan_baku(){
+        var id_supplier = "<?php echo $this->uri->segment(4); ?>";
+		$.ajax({
+			method : "POST",
+			url : '<?php echo base_url('admin/supplier/load_data_bahan_baku');?>',
+            data : {id_supplier : id_supplier},
+			beforeSend : function(){
+				$('#content_bahan_baku').html('<div style="text-align:center"><i class="bx bx-loader-alt bx-md bx-spin" style="margin-top: 30px; margin-bottom: 30px;" aria-hidden="true"></i></div>');
+			},
+			success : function(response){
+				$('#content_bahan_baku').html(response);
+			}
+		});
+    };
+    
+    $('#btn_tambah_bahan_baku').on("click",function(){
+        var url = "<?php echo base_url('admin/bahan_baku/form_tambah_bahan_baku'); ?>";
+
+        $('#modal_bahan_baku').modal('show');
+        $('.modal-title').text('Tambah Bahan Baku');
+        $('.modal-body').load(url);
+    });
+
+    $(document).on('click', '.btn_edit_bahan_baku', function(e) {
+        var kode_bb=$(this).attr("kode_bb");
+        var url = "<?php echo base_url('admin/bahan_baku/form_edit_bahan_baku'); ?>";
+
+        $('#modal_bahan_baku').modal('show');
+        $('.modal-title').text('Edit Bahan Baku');
+        $('.modal-body').load(url,{kode_bb : kode_bb});
+    });  
+
+    $(document).ready(function() {
+        $('#btn_simpan_bahan_baku').on("click",function(){
+            $('#form_bahan_baku').validate({
+                rules: {
+                    kode_bb_baru: {
+                        required: true,
+                    },
+                    nama_bb_baru: {
+                        required: true,
+                    },
+                    id_supplier: {
+                        required: true,
+                    },
+                    kode_kategori: {
+                        required: true,
+                    },
+                    kode_satuan: {
+                        required: true,
+                    },
+                    stok_limit_pab_bb: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    kode_bb_baru: {
+                        required: "Kode harus diisi",
+                    },
+                    nama_bb_baru: {
+                        required: "Bahan baku harus diisi",
+                    },
+                    id_supplier: {
+                        required: "Supplier harus diisi",
+                    },
+                    kode_kategori: {
+                        required: "Kategori harus diisi",
+                    },
+                    kode_satuan: {
+                        required: "Satuan harus diisi",
+                    },
+                    stok_limit_pab_bb: {
+                        required: "Stok limit harus diisi",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
+                submitHandler: function() {
+                    var jenis = $('#jenis').val();
+                    if (jenis == "Tambah"){
+                        $.ajax({
+                            url : '<?php echo base_url('admin/bahan_baku/tambah_bahan_baku'); ?>',
+                            method: 'POST',
+                            data : $('#form_bahan_baku').serialize(),
+                            success: function(response){
+                                if(response==1){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil!',
+                                        text: 'Data telah ditambahkan',
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
+                                        timer: 3000
+                                    }).then(function(){
+                                        load_data_bahan_baku();
+                                        $('#modal_bahan_baku').modal('hide');
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal!',
+                                        text: response,
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
+                                        timer: 3000
+                                    })
+                                }
+                            }
+                        }); 
+                    }
+                    else if(jenis == "Edit"){
+                        $.ajax({
+                            url : '<?php echo base_url('admin/bahan_baku/edit_bahan_baku'); ?>',
+                            method: 'POST',
+                            data : $('#form_bahan_baku').serialize(),
+                            success: function(response){
+                                if(response==1){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil!',
+                                        text: 'Data telah diedit',
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
+                                        timer: 3000
+                                    }).then(function(){
+                                        load_data_bahan_baku();
+                                        $('#modal_bahan_baku').modal('hide');
+                                    });
+                                }else{
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal!',
+                                        text: response,
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
+                                        timer: 3000
+                                    })
+                                }
+                            } 
+                        });   
+                    }
+                }
+            });
+        });
+    });
+
+    $(document).on('click', '.btn_hapus_bahan_baku', function(e) {
+        var kode_bb = $(this).attr("kode_bb");
+        var nama_bb = $(this).attr("nama_bb");
+        
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: 'Akan menghapus data"' + nama_bb + '"!',
+            type: 'warning',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#6f42c1',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, hapus',
+            cancelButtonText: "Tidak, batalkan",
+            showLoaderOnConfirm: true,
+            customClass: 'animated tada',
+            preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        url: '<?php echo base_url('admin/bahan_baku/hapus_bahan_baku'); ?>',
+                        method: 'POST',
+                        data: {kode_bb : kode_bb},                
+                    })
+                    .done(function(response) {
+                        load_data_bahan_baku();
+                        Swal.fire({
+                            title: 'Data Barhasil Dihapus',
+                            icon: 'success',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#6f42c1',
+                        })
+                    })
+                    .fail(function() {
+                        Swal.fire({
+                            title: 'Terjadi Kesalahan',
+                            icon: 'error',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#6f42c1',
+                        })
+                    });
+                });
+            },
+        });
+    });  
+
+</script>
 </body>
 </html>

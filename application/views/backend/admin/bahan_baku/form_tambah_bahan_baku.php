@@ -2,11 +2,11 @@
 <input type="hidden" id="jenis" value="Tambah">
 <div class="form-group">
     <label>Kode Bahan Baku</label>
-    <input type="text" class="form-control" name="kode_bahan_baku_baru" id="kode_bahan_baku_baru" placeholder="Kode">
+    <input type="text" class="form-control" name="kode_bb_baru" id="kode_bb_baru" placeholder="Kode">
 </div>
 <div class="form-group">
     <label>Nama Bahan Baku</label>
-    <input type="text" class="form-control" name="nama_bahan_baku_baru" id="nama_bahan_baku_baru" placeholder="Nama / Merek Bahan Baku">
+    <input type="text" class="form-control" name="nama_bb_baru" id="nama_bb_baru" placeholder="Nama / Merek Bahan Baku">
 </div>
 <div class="form-group">
     <label>Supplier</label>
@@ -37,11 +37,11 @@
 </div>
 <div class="form-group">
     <label>Stok Limit</label>
-    <input type="text" class="form-control" name="stok_limit_bahan_baku" id="stok_limit_bahan_baku" placeholder="Batas jumlah limit untuk menjaga stok gudang">
+    <input type="text" class="form-control" name="stok_limit_pab_bb" id="stok_limit_pab_bb" placeholder="Batas jumlah limit untuk menjaga stok gudang">
 </div>
     
 <script>
-    $("#stok_limit_bahan_baku").on("input", function(){
+    $("#stok_limit_pab_bb").on("input", function(){
         var regexp = /[^0-9]/g;
         if($(this).val().match(regexp)){
             $(this).val( $(this).val().replace(regexp,'') );

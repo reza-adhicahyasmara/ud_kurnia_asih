@@ -3,13 +3,13 @@
 <?php foreach($edit->result() as $edit) { ?>
 <div class="form-group">
     <label>Kode Bahan Baku</label>
-    <input type="hidden" class="form-control" name="kode_bahan_baku_lama" id="kode_bahan_baku_lama" value="<?php echo $edit->kode_bahan_baku; ?>" readonly placeholder="Kode">
-    <input type="text" class="form-control" name="kode_bahan_baku_baru" id="kode_bahan_baku_baru" value="<?php echo $edit->kode_bahan_baku; ?>" readonly placeholder="Kode">
+    <input type="hidden" class="form-control" name="kode_bb_lama" id="kode_bb_lama" value="<?php echo $edit->kode_bb; ?>" readonly placeholder="Kode">
+    <input type="text" class="form-control" name="kode_bb_baru" id="kode_bb_baru" value="<?php echo $edit->kode_bb; ?>" readonly placeholder="Kode">
 </div>
 <div class="form-group">
     <label>Nama Bahan Baku</label>
-    <input type="hidden" class="form-control" name="nama_bahan_baku_lama" id="nama_bahan_baku_lama" value="<?php echo $edit->nama_bahan_baku; ?>" placeholder="Nama / Merek Bahan Baku">
-    <input type="text" class="form-control" name="nama_bahan_baku_baru" id="nama_bahan_baku_baru" value="<?php echo $edit->nama_bahan_baku; ?>" placeholder="Nama / Merek Bahan Baku">
+    <input type="hidden" class="form-control" name="nama_bb_lama" id="nama_bb_lama" value="<?php echo $edit->nama_bb; ?>" placeholder="Nama / Merek Bahan Baku">
+    <input type="text" class="form-control" name="nama_bb_baru" id="nama_bb_baru" value="<?php echo $edit->nama_bb; ?>" placeholder="Nama / Merek Bahan Baku">
 </div>
 <div class="form-group">
     <label>Supplier</label>
@@ -40,12 +40,12 @@
 </div>
 <div class="form-group">
     <label>Stok Limit</label>
-    <input type="text" class="form-control" name="stok_limit_bahan_baku" id="stok_limit_bahan_baku" value="<?php echo $edit->stok_limit_bahan_baku; ?>" placeholder="Batas jumlah limit untuk menjaga stok gudang">
+    <input type="text" class="form-control" name="stok_limit_pab_bb" id="stok_limit_pab_bb" value="<?php echo $edit->stok_limit_pab_bb; ?>" placeholder="Batas jumlah limit untuk menjaga stok gudang">
 </div>
 <?php } ?>
     
 <script>
-    $("#stok_limit_bahan_baku").on("input", function(){
+    $("#stok_limit_pab_bb").on("input", function(){
         var regexp = /[^0-9]/g;
         if($(this).val().match(regexp)){
             $(this).val( $(this).val().replace(regexp,'') );

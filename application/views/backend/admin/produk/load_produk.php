@@ -2,15 +2,15 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kode</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:17%">Nama</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kategori</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Harga (Rp.)</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Stok Gudang</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Stok Limit</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:5%">Status</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Aksi</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kode</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kategori</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Harga (Rp.)</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Stok Gudang</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Stok Limit</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Status</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
     </thead>
     <tbody>
