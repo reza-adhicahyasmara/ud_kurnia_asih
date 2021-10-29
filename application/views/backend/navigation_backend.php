@@ -334,7 +334,7 @@ by exius-dev
                             $bb_limit_sup = 0; 
                             foreach($this->Mod_bahan_baku->get_all_bahan_baku()->result() as $row) {
                                 if($row->id_supplier == $id_supplier){
-                                    if($row->stok_gudang_supp_bahan_baku <= $row->stok_limit_supp_bahan_baku){
+                                    if($row->stok_gudang_sup_bb <= $row->stok_limit_sup_bb){
                                         $bb_limit_sup += 1;
                                     }
                                 }
@@ -413,6 +413,7 @@ by exius-dev
                             <li class="nav-item"><a href="<?php echo base_url('supplier/pemesanan_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan<?php if($total_pemesanan_sup != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_sup; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-box"></i><p>Bahan Baku <?php if($bb_limit_sup != 0){ ?><span class="badge badge-danger right"> <?php echo $bb_limit_sup; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/retur_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-recycle"></i><p>Retur<?php if($total_retur_sup != 0){ ?><span class="badge badge-danger right"> <?php echo $total_retur_sup; ?></span><?php } ?></p></a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('supplier/ongkos_kirim'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-truck"></i><p>Ongkos Kirim</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/rekening'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-bank"></i><p>Rekening Bank</p></a></li>
                         <?php elseif($this->session->userdata('ses_akses') =='Customer'):
                             $id_customer = $this->session->userdata('ses_id_customer');

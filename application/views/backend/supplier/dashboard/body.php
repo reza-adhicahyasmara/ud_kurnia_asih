@@ -103,17 +103,17 @@
                                 $no = 1;
                                 foreach($bahan_baku->result() as $row) {
                                     if($data1->id_supplier == $id_supplier){
-                                        if($row->stok_gudang_bahan_baku <= $row->stok_limit_bahan_baku + 10){
+                                        if($row->stok_gudang_sup_bb <= $row->stok_limit_sup_bb + 10){
                             ?>
                             <tr>
                                 <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
-                                <td style="text-align: left; vertical-align: middle;"><?php echo $row->kode_bahan_baku;?></td>
-                                <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_bahan_baku;?></td>
+                                <td style="text-align: left; vertical-align: middle;"><?php echo $row->kode_bb;?></td>
+                                <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_bb;?></td>
                                 <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_kategori;?></td>
                                 <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_supplier;?></td>
-                                <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->harga_bahan_baku, 0, ".", ".");?></td>
-                                <td style="text-align: left; vertical-align: middle;"><?php echo number_format($row->stok_gudang_bahan_baku,2,",",".")." ".$row->nama_satuan;?></td>
-                                <td style="text-align: left; vertical-align: middle;"><?php echo number_format($row->stok_limit_bahan_baku,2, ",", ".")." ".$row->nama_satuan;?></td>
+                                <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->harga_bb, 0, ".", ".");?></td>
+                                <td style="text-align: left; vertical-align: middle;"><?php echo number_format($row->stok_gudang_sup_bb,2,",",".")." ".$row->nama_satuan;?></td>
+                                <td style="text-align: left; vertical-align: middle;"><?php echo number_format($row->stok_limit_sup_bb,2, ",", ".")." ".$row->nama_satuan;?></td>
                             </tr>
                             <?php 
                                         $no++; 
@@ -130,12 +130,12 @@
                     <h3 class="card-title">Grafik Transaksi Bahan Baku</h3>
                 </div>
                 <div class="card-body">
-                    <select class="form-control kode_bahan_baku col-3" id="kode_bahan_baku">
+                    <select class="form-control kode_bb col-3" id="kode_bb">
                         <option value="">Pilih Bahan Baku</option>
                         <?php 
                             foreach($bahan_baku->result() as $row){
                                 if($row->id_supplier == $id_supplier){ ?>
-                                <option value="<?php echo $row->kode_bahan_baku; ?>"><?php echo $row->kode_bahan_baku." - ".$row->nama_bahan_baku; ?></option>
+                                <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->kode_bb." - ".$row->nama_bb; ?></option>
                         <?php 
                                 }
                             } 

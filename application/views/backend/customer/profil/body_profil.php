@@ -69,7 +69,7 @@
                                 </div>
                                 </br>
                                 <div class="form-group" style="text-align:center">
-                                    <button type="submit" class="btn bg-purple" id="btn_simpan_customer" style="margin-right:5px"><i class="fa fa-save"></i> Simpan</button>
+                                    <button type="submit" class="btn bg-purple" id="btn_simpan_customer" style="margin-right:5px"><i class="bx bx-fw bx-save"></i> Simpan</button>
                                 </div>
                                 <?php } ?>
                         </div>
