@@ -184,66 +184,66 @@ class Mod_bahan_baku extends CI_Model {
 
     //PEMESANAN ITEM BAHAN BAKU
     function get_all_item_pemesanan_bb(){ 
-        $this->db->select('t_item_pemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_pemesanan_bb.kode_bb', 'left');
+        $this->db->select('t_ipemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_ipemesanan_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->order_by('t_bahan_baku.nama_bb ASC');
-        return $this->db->get('t_item_pemesanan_bb'); 
+        return $this->db->get('t_ipemesanan_bb'); 
     }
 
     function get_item_pemesanan_bb($kode_pemesanan_bb){ 
-        $this->db->select('t_item_pemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_pemesanan_bb.kode_bb', 'left');
+        $this->db->select('t_ipemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_ipemesanan_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
-        $this->db->where('t_item_pemesanan_bb.kode_pemesanan_bb', $kode_pemesanan_bb);
-        return $this->db->get('t_item_pemesanan_bb'); 
+        $this->db->where('t_ipemesanan_bb.kode_pemesanan_bb', $kode_pemesanan_bb);
+        return $this->db->get('t_ipemesanan_bb'); 
     }
 
     function get_tanggal_kadaluwarsa($kode_pemesanan_bb){ 
         $this->db->where('kode_pemesanan_bb', $kode_pemesanan_bb);
-        $this->db->where('tanggal_kadaluwarsa_item_pemesanan_bb', null);
-        return $this->db->get('t_item_pemesanan_bb'); 
+        $this->db->where('tanggal_kadaluwarsa_ipemesanan_bb', null);
+        return $this->db->get('t_ipemesanan_bb'); 
     }
 
     function cek_item_pemesanan_bb($kode_bb){
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_pemesanan_bb.kode_bb', 'left');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_ipemesanan_bb.kode_bb', 'left');
         $this->db->where('t_bahan_baku.kode_bb', $kode_bb);
-        $this->db->where('t_item_pemesanan_bb.status_item_pemesanan_bb', '1');
-        return $this->db->get('t_item_pemesanan_bb');
+        $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb', '1');
+        return $this->db->get('t_ipemesanan_bb');
     }
 
     function cek_item_pemesanan_bb_supplier($id_supplier){
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_pemesanan_bb.kode_bb', 'left');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_ipemesanan_bb.kode_bb', 'left');
         $this->db->where('t_bahan_baku.id_supplier', $id_supplier);
-        $this->db->where('t_item_pemesanan_bb.status_item_pemesanan_bb', '1');
-        return $this->db->get('t_item_pemesanan_bb');
+        $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb', '1');
+        return $this->db->get('t_ipemesanan_bb');
     }
 
     function cek_item_doubel(){ 
-        $this->db->select('t_item_pemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_pemesanan_bb.kode_bb', 'left');
+        $this->db->select('t_ipemesanan_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_ipemesanan_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
-        $this->db->where('t_item_pemesanan_bb.status_item_pemesanan_bb', '1');
-        return $this->db->get('t_item_pemesanan_bb'); 
+        $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb', '1');
+        return $this->db->get('t_ipemesanan_bb'); 
     }
     function insert_item_pemesanan_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
     }
 
-    function update_item_pemesanan_bb($kode_item_pemesanan_bb, $data){
-        $this->db->where('kode_item_pemesanan_bb', $kode_item_pemesanan_bb);
-		$this->db->update('t_item_pemesanan_bb', $data);
+    function update_item_pemesanan_bb($kode_ipemesanan_bb, $data){
+        $this->db->where('kode_ipemesanan_bb', $kode_ipemesanan_bb);
+		$this->db->update('t_ipemesanan_bb', $data);
     }
 
     function delete_item_pemesanan_bb($kode, $tabel){
-        $this->db->where('kode_item_pemesanan_bb', $kode);
+        $this->db->where('kode_ipemesanan_bb', $kode);
         $this->db->delete($tabel);
     }
 
@@ -278,73 +278,73 @@ class Mod_bahan_baku extends CI_Model {
 
     //RETUR ITEM BAHAN BAKU
     function get_all_item_retur_bb(){ 
-        $this->db->select('t_item_retur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_retur_bb.kode_bb', 'left');
+        $this->db->select('t_iretur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_iretur_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->order_by('t_bahan_baku.nama_bb ASC');
-        return $this->db->get('t_item_retur_bb'); 
+        return $this->db->get('t_iretur_bb'); 
     }
     
     function get_item_retur_bb($kode_retur_bb){ 
-        $this->db->select('t_item_retur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_retur_bb.kode_bb', 'left');
+        $this->db->select('t_iretur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_iretur_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
-        $this->db->where('t_item_retur_bb.kode_retur_bb', $kode_retur_bb);
-        return $this->db->get('t_item_retur_bb'); 
+        $this->db->where('t_iretur_bb.kode_retur_bb', $kode_retur_bb);
+        return $this->db->get('t_iretur_bb'); 
     }
 
     function cek_item_retur_bb($kode_bb){
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_retur_bb.kode_bb', 'left');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_iretur_bb.kode_bb', 'left');
         $this->db->where('t_bahan_baku.kode_bb', $kode_bb);
-        $this->db->where('t_item_retur_bb.status_item_retur_bb', '1');
-        return $this->db->get('t_item_retur_bb');
+        $this->db->where('t_iretur_bb.status_iretur_bb', '1');
+        return $this->db->get('t_iretur_bb');
     }
 
     function cek_item_retur_bb_supplier($id_supplier){
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_retur_bb.kode_bb', 'left');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_iretur_bb.kode_bb', 'left');
         $this->db->where('t_bahan_baku.id_supplier', $id_supplier);
-        $this->db->where('t_item_retur_bb.status_item_retur_bb', '1');
-        return $this->db->get('t_item_retur_bb');
+        $this->db->where('t_iretur_bb.status_iretur_bb', '1');
+        return $this->db->get('t_iretur_bb');
     }
 
     function cek_item_retur_doubel(){ 
-        $this->db->select('t_item_retur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_item_retur_bb.kode_bb', 'left');
+        $this->db->select('t_iretur_bb.*, t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_iretur_bb.kode_bb', 'left');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
-        $this->db->where('t_item_retur_bb.status_item_retur_bb', '1');
-        return $this->db->get('t_item_retur_bb'); 
+        $this->db->where('t_iretur_bb.status_iretur_bb', '1');
+        return $this->db->get('t_iretur_bb'); 
     }
 
-    function cek_stok($kode_bb, $qty_item_retur_bb){
-        $this->db->where("stok_gudang_bahan_baku >= '$qty_item_retur_bb'");
+    function cek_stok($kode_bb, $jumlah_iretur_bb){
+        $this->db->where("stok_gudang_bahan_baku >= '$jumlah_iretur_bb'");
         $this->db->where('kode_bb', $kode_bb);
         return $this->db->get('t_bahan_baku');
     }
 
     function cek_item_proses($kode_retur_bb){ 
         $this->db->where('kode_retur_bb', $kode_retur_bb);
-        $this->db->where('status_item_retur_bb = 2');
-        return $this->db->get('t_item_retur_bb'); 
+        $this->db->where('status_iretur_bb = 2');
+        return $this->db->get('t_iretur_bb'); 
     }
 
-    function insert_item_retur_bb($tabel, $data){
+    function insert_iretur_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
     }
 
-    function update_item_retur_bb($kode_item_retur_bb, $data){
-        $this->db->where('kode_item_retur_bb', $kode_item_retur_bb);
-		$this->db->update('t_item_retur_bb', $data);
+    function update_item_retur_bb($kode_iretur_bb, $data){
+        $this->db->where('kode_iretur_bb', $kode_iretur_bb);
+		$this->db->update('t_iretur_bb', $data);
     }
 
     function delete_item_retur_bb($kode, $tabel){
-        $this->db->where('kode_item_retur_bb', $kode);
+        $this->db->where('kode_iretur_bb', $kode);
         $this->db->delete($tabel);
     }
 
@@ -398,11 +398,11 @@ class Mod_bahan_baku extends CI_Model {
 
     //GRAFIK
     function grafik_masuk_bb($kode_bb){
-        $this->db->select("SUM(t_item_pemesanan_bb.qty_item_pemesanan_bb) AS jumlah, MONTH(t_pemesanan_bb.tanggal_pemesanan_bb) AS bulan, YEAR(t_pemesanan_bb.tanggal_pemesanan_bb) AS tahun");
-        $this->db->from('t_item_pemesanan_bb');
-        $this->db->join('t_pemesanan_bb', 't_pemesanan_bb.kode_pemesanan_bb = t_item_pemesanan_bb.kode_pemesanan_bb', 'left');
-        $this->db->where('t_item_pemesanan_bb.status_item_pemesanan_bb = 3');
-        $this->db->where('t_item_pemesanan_bb.kode_bb', $kode_bb);
+        $this->db->select("SUM(t_ipemesanan_bb.jumlah_ipemesanan_bb) AS jumlah, MONTH(t_pemesanan_bb.tanggal_pemesanan_bb) AS bulan, YEAR(t_pemesanan_bb.tanggal_pemesanan_bb) AS tahun");
+        $this->db->from('t_ipemesanan_bb');
+        $this->db->join('t_pemesanan_bb', 't_pemesanan_bb.kode_pemesanan_bb = t_ipemesanan_bb.kode_pemesanan_bb', 'left');
+        $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb = 3');
+        $this->db->where('t_ipemesanan_bb.kode_bb', $kode_bb);
         $this->db->group_by('bulan');
         return $this->db->get();
     }

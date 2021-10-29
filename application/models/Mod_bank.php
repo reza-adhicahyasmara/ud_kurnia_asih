@@ -50,7 +50,7 @@ class Mod_bank extends CI_Model {
     function get_rekening_sup($id_supplier){
         $this->db->select('t_bank.*, t_rekening.*');
         $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank');
-        $this->db->where('id_supplier', $id_supplier);
+        $this->db->where('id', $id_supplier);
         $this->db->order_by('t_bank.nama_bank ASC');
         return $this->db->get('t_rekening');
     }
@@ -58,15 +58,15 @@ class Mod_bank extends CI_Model {
     function get_rekening_cus($id_customer){
         $this->db->select('t_bank.*, t_rekening.*');
         $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank');
-        $this->db->where('id_customer', $id_customer);
+        $this->db->where('id', $id_customer);
         $this->db->order_by('t_bank.nama_bank ASC');
         return $this->db->get('t_rekening');
     }
 
-    function get_rekening_p(){
+    function get_rekening_pab(){
         $this->db->select('t_bank.*, t_rekening.*');
         $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank');
-        $this->db->where('id_customer', '');
+        $this->db->where('id', '');
         $this->db->order_by('t_bank.nama_bank ASC');
         return $this->db->get('t_rekening');
     }
