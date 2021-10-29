@@ -130,6 +130,7 @@
                                     title: 'Berhasil!',
                                     text: 'Data telah diedit',
                                     showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
                                     timer: 3000
                                 }).then(function(){
                                     window.location.replace("<?php echo base_url('login/logout'); ?>");
@@ -140,6 +141,7 @@
                                     title: 'Gagal!',
                                     text: response,
                                     showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
                                     timer: 3000
                                 })
                             }
@@ -204,6 +206,7 @@
                                 icon: 'success',
                                 title: 'Password berhasil diganti..!!',
                                 showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
                                 timer: 3000
                             }).then(function(){
                                 window.location.replace("<?php echo base_url('login/logout'); ?>");
@@ -213,6 +216,7 @@
                                 icon: 'error',
                                 title: response,
                                 showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
                                 timer: 3000
                             })
                         }
