@@ -344,7 +344,7 @@ class Mod_bahan_baku extends CI_Model {
     }
 
     function cek_stok($kode_bb, $jumlah_iretur_bb){
-        $this->db->where("stok_gudang_bahan_baku >= '$jumlah_iretur_bb'");
+        $this->db->where("stok_gudang_pab_bb >= '$jumlah_iretur_bb'");
         $this->db->where('kode_bb', $kode_bb);
         return $this->db->get('t_bahan_baku');
     }
@@ -355,7 +355,7 @@ class Mod_bahan_baku extends CI_Model {
         return $this->db->get('t_iretur_bb'); 
     }
 
-    function insert_iretur_bb($tabel, $data){
+    function insert_item_retur_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
     }

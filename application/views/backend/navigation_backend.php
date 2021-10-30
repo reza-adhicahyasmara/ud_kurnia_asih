@@ -300,9 +300,9 @@ by exius-dev
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_karyawan') != "") { ?>
-                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover;" alt="Image">
+                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover;" alt="Image">
                                     <?php }else{ ?>
-                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
+                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
                                     <?php } ?> 
                                     <p class="text-md" style="margin-left:10px; vertical-align: middle;"><?php echo $this->session->userdata('ses_nama_karyawan'); ?></p>
                                 </a>
@@ -311,7 +311,7 @@ by exius-dev
                                     <li class="nav-item"><a href="<?php echo base_url('profil_karyawan/ubah_password'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-lock"></i><p>Ubah Password</p></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-header" style="padding-top: 0; padding-bottom: 0" ><hr></li>
+                            <li class="nav-header" style="padding-top: 0px; padding-bottom: 0px; margin-top: -10px"><hr></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx bx-fw bx-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('admin/proposal'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-book-open"></i><p> Proposal<?php if($proposal != 0){ ?><span class="badge badge-danger right"> <?php echo $proposal; ?></span><?php } ?></p></a></li>
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bx-sort"></i><p>Transaksi Bahan Baku <i class="fas fa-angle-left right"></i><?php if($transaksi_bb_admin != 0){ ?><span class="badge badge-danger right"> <?php echo $transaksi_bb_admin; ?></span><?php } ?></p></a>
@@ -363,9 +363,9 @@ by exius-dev
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_karyawan') != "") { ?>
-                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover;" alt="Image">
+                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover;" alt="Image">
                                     <?php }else{ ?>
-                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
+                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
                                     <?php } ?> 
                                     <p class="text-md" style="margin-left:10px; vertical-align: middle;"><?php echo $this->session->userdata('ses_nama_karyawan'); ?></p>
                                 </a>
@@ -374,7 +374,7 @@ by exius-dev
                                     <li class="nav-item"><a href="<?php echo base_url('profil_karyawan/ubah_password'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-lock"></i><p>Ubah Password</p></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-header" style="padding-top: 0; padding-bottom: 0" ><hr></li>
+                            <li class="nav-header" style="padding-top: 0px; padding-bottom: 0px; margin-top: -10px"><hr></li>
                             <li class="nav-item"><a href="<?php echo base_url('gudang/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx bx-fw bx-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('gudang/bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-box"></i><p>Bahan Baku <?php if($bb_limit != 0){ ?><span class="badge badge-danger right"> <?php echo $bb_limit; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('gudang/produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxl-dropbox"></i><p>Produk <?php if($produk_limit != 0){ ?><span class="badge badge-danger right"> <?php echo $produk_limit; ?></span><?php } ?></p></a></li>
@@ -399,9 +399,9 @@ by exius-dev
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_karyawan') != "") { ?>
-                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover;" alt="Image">
+                                        <img src="<?php echo $url_foto_karyawan; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover;" alt="Image">
                                     <?php }else{ ?>
-                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
+                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
                                     <?php } ?> 
                                     <p class="text-md" style="margin-left:10px; vertical-align: middle;"><?php echo $this->session->userdata('ses_nama_karyawan'); ?></p>
                                 </a>
@@ -410,7 +410,7 @@ by exius-dev
                                     <li class="nav-item"><a href="<?php echo base_url('profil_karyawan/ubah_password'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-lock"></i><p>Ubah Password</p></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-header" style="padding-top: 0; padding-bottom: 0" ><hr></li>
+                            <li class="nav-header" style="padding-top: 0px; padding-bottom: 0px; margin-top: -10px"><hr></li>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx bx-fw bx-grid-alt"></i><p>Dashboard</p></a></li>      
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-box"></i><p>Bahan Baku <?php if($bb_limit != 0){ ?><span class="badge badge-danger right"> <?php echo $bb_limit; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('pimpinan/produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxl-dropbox"></i><p>Produk <?php if($produk_limit != 0){ ?><span class="badge badge-danger right"> <?php echo $produk_limit; ?></span><?php } ?></p></a></li>
@@ -439,9 +439,9 @@ by exius-dev
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_supplier') != "") { ?>
-                                        <img src="<?php echo $url_foto_supplier; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover;" alt="Image">
+                                        <img src="<?php echo $url_foto_supplier; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover;" alt="Image">
                                     <?php }else{ ?>
-                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
+                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
                                     <?php } ?> 
                                     <p class="text-md" style="margin-left:10px; vertical-align: middle;"><?php echo $this->session->userdata('ses_nama_supplier'); ?></p>
                                 </a>
@@ -450,7 +450,7 @@ by exius-dev
                                     <li class="nav-item"><a href="<?php echo base_url('supplier/profil/ubah_password'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-lock"></i><p>Ubah Password</p></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-header" style="padding-top: 0; padding-bottom: 0" ><hr></li>
+                            <li class="nav-header" style="padding-top: 0px; padding-bottom: 0px; margin-top: -10px"><hr></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx bx-fw bx-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/proposal'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-book-open"></i><p> Proposal<?php if($proposal_sup != 0){ ?><span class="badge badge-danger right"> <?php echo $proposal_sup; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/pemesanan_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan<?php if($total_pemesanan_sup != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_sup; ?></span><?php } ?></p></a></li>
@@ -467,9 +467,9 @@ by exius-dev
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_customer') != "") { ?>
-                                        <img src="<?php echo $url_foto_customer; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover;" alt="Image">
+                                        <img src="<?php echo $url_foto_customer; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover;" alt="Image">
                                     <?php }else{ ?>
-                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:40px; height:40px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
+                                        <img src="<?php echo $url_gambar_profil; ?>" class="img-circle elevation-1" style="width:47px; height:47px; object-fit: cover; background-color:white; border:1px solid #ced4da;" alt="Image">
                                     <?php } ?> 
                                     <p class="text-md" style="margin-left:10px; vertical-align: middle;"><?php echo $this->session->userdata('ses_nama_customer'); ?></p>
                                 </a>
@@ -478,7 +478,7 @@ by exius-dev
                                     <li class="nav-item"><a href="<?php echo base_url('customer/profil/ubah_password'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-lock"></i><p>Ubah Password</p></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-header" style="padding-top: 0; padding-bottom: 0" ><hr></li>
+                            <li class="nav-header" style="padding-top: 0px; padding-bottom: 0px; margin-top: -10px"><hr></li>
                             <li class="nav-item"><a href="<?php echo base_url('customer/dashboard'); ?>" class="nav-link"><i class="nav-icon bx bx bx-fw bx-grid-alt"></i><p>Dashboard</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('customer/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Produk<?php if($total_pemesanan_cus != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_cus; ?></span><?php } ?></p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('customer/retur_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-recycle"></i><p>Retur Produk<?php if($total_retur_cus != 0){ ?><span class="badge badge-danger right"> <?php echo $total_retur_cus; ?></span><?php } ?></p></a></li>
