@@ -170,6 +170,15 @@ class Mod_bahan_baku extends CI_Model {
         return $this->db->get('t_pemesanan_bb');
     }
 
+    function get_pemesanan_bb_supplier($id_supplier){
+        $this->db->select('t_pemesanan_bb.*, t_supplier.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_pemesanan_bb.id_supplier', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_bb.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->where('t_pemesanan_bb.id_supplier', $id_supplier);
+        return $this->db->get('t_pemesanan_bb');
+    }
+
     function insert_pemesanan_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
@@ -232,6 +241,19 @@ class Mod_bahan_baku extends CI_Model {
         $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb', '1');
         return $this->db->get('t_ipemesanan_bb'); 
     }
+
+    function cek_item_retur($kode_pemesanan_bb){ 
+        $this->db->where('kode_pemesanan_bb', $kode_pemesanan_bb);
+        $this->db->where('status_ipemesanan_bb = 5');
+        return $this->db->get('t_ipemesanan_bb'); 
+    }
+
+    function cek_item_kirim($kode_pemesanan_bb){ 
+        $this->db->where('kode_pemesanan_bb', $kode_pemesanan_bb);
+        $this->db->where('status_ipemesanan_bb = 3');
+        return $this->db->get('t_ipemesanan_bb'); 
+    }
+
     function insert_item_pemesanan_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;

@@ -22,6 +22,7 @@
     $menunggu_verifikasi = 0;
     $proses = 0;
     $dikirim = 0;
+    $retur = 0;
     $total_pemesanan_bb = 0;
     foreach($this->Mod_bahan_baku->get_all_pemesanan_bb()->result() as $row) {
         if($row->status_pemesanan_bb == 1){
@@ -36,8 +37,11 @@
         elseif($row->status_pemesanan_bb == 4){
             $dikirim += 1;
         }
+        elseif($row->status_pemesanan_bb == 7){
+            $retur += 1;
+        }
     }
-    $total_pemesanan_bb = $menuggu_pembayaran + $menunggu_verifikasi + $proses + $dikirim;
+    $total_pemesanan_bb = $menuggu_pembayaran + $menunggu_verifikasi + $proses + $dikirim + $retur;
 
 
 
@@ -68,7 +72,7 @@
     $transaksi_bb_admin = $total_pemesanan_bb + $total_retur;
 
     $transaksi_bb_gudang = 0;
-    $transaksi_bb_gudang = $dikirim + $total_retur;
+    $transaksi_bb_gudang = $dikirim + $retur + $total_retur;
 
     $master_data = 0;
     $master_data = $bb_limit + $produk_limit;
@@ -98,24 +102,26 @@
         $menunggu_verifikasi_sup = 0;
         $proses_sup = 0;
         $dikirim_sup = 0;
+        $retur_sup = 0;
         $total_pemesanan_sup = 0;
-        foreach($this->Mod_bahan_baku->get_all_pemesanan_bb()->result() as $row) {
-            if($row->id_supplier == $id_supplier){
-                if($row->status_pemesanan_bb == 1){
-                    $menuggu_pembayaran_sup += 1;
-                }
-                elseif($row->status_pemesanan_bb == 2){
-                    $menunggu_verifikasi_sup += 1;
-                }
-                elseif($row->status_pemesanan_bb == 3){
-                    $proses_sup += 1;
-                }
-                elseif($row->status_pemesanan_bb == 4){
-                    $dikirim_sup += 1;
-                }
+        foreach($this->Mod_bahan_baku->get_pemesanan_bb_supplier($id_supplier)->result() as $row) {
+            if($row->status_pemesanan_bb == 1){
+                $menuggu_pembayaran_sup += 1;
+            }
+            elseif($row->status_pemesanan_bb == 2){
+                $menunggu_verifikasi_sup += 1;
+            }
+            elseif($row->status_pemesanan_bb == 3){
+                $proses_sup += 1;
+            }
+            elseif($row->status_pemesanan_bb == 4){
+                $dikirim_sup += 1;
+            }
+            elseif($row->status_pemesanan_bb == 7){
+                $retur_sup += 1;
             }
         }
-        $total_pemesanan_sup = $menuggu_pembayaran_sup + $menunggu_verifikasi_sup + $proses_sup + $dikirim;
+        $total_pemesanan_sup = $menuggu_pembayaran_sup + $menunggu_verifikasi_sup + $proses_sup + $dikirim_sup + $retur_sup; 
 
         $menunggu_konfirmasi_sup = 0;
         $retur_dikrim_sup = 0;
@@ -292,7 +298,7 @@ by exius-dev
                             </li>                     
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bx-sort"></i><p>Transaksi Produk <i class="fas fa-angle-left right"></i></p></a>
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item"><a href="<?php echo base_url('admin/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Customer<?php if($total_pemesanan != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan; ?></span><?php } ?></p></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('admin/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Customer<?php if($total_pemesanan_pro != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_pro; ?></span><?php } ?></p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/produk_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/produk_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-up-arrow-alt"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/penyesuaian_stok_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-refresh"></i><p>Penyesuaian Stok</p></a></li>
@@ -348,7 +354,8 @@ by exius-dev
                             <li class="nav-item"><a href="<?php echo base_url('gudang/produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxl-dropbox"></i><p>Produk <?php if($produk_limit != 0){ ?><span class="badge badge-danger right"> <?php echo $produk_limit; ?></span><?php } ?></p></a></li>
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bx-sort"></i><p>Transaksi Bahan Baku <i class="fas fa-angle-left right"></i><?php if($transaksi_bb_gudang != 0){ ?><span class="badge badge-danger right"> <?php echo $transaksi_bb_gudang; ?></span><?php } ?></p></a>
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item"><a href="<?php echo base_url('gudang/bahan_baku_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk<?php if($dikirim != 0){ ?><span class="badge badge-danger right"> <?php echo $dikirim; ?></span><?php } ?></p></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('gudang/pemesanan_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Supplier<?php if($dikirim + $retur != 0){ ?><span class="badge badge-danger right"> <?php echo $dikirim + $retur; ?></span><?php } ?></p></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('gudang/bahan_baku_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/bahan_baku_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-up-arrow-alt"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/penyesuaian_stok_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-refresh"></i><p>Penyesuaian Stok</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/retur_bahan_baku'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-recycle"></i><p>Retur<?php if($total_retur != 0){ ?><span class="badge badge-danger right"> <?php echo $total_retur; ?></span><?php } ?></p></a></li>
@@ -356,6 +363,7 @@ by exius-dev
                             </li>                     
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bx-sort"></i><p>Transaksi Produk <i class="fas fa-angle-left right"></i></p></a>
                                 <ul class="nav nav-treeview">
+                                    <li class="nav-item"><a href="<?php echo base_url('gudang/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Customer<?php if($total_pemesanan_pro != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_pro; ?></span><?php } ?></p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/produk_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/produk_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-up-arrow-alt"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/penyesuaian_stok_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-refresh"></i><p>Penyesuaian Stok</p></a></li>

@@ -40,12 +40,15 @@
                     $status_ipemesanan_bb = $row->status_ipemesanan_bb;
                     if($status_ipemesanan_bb == 2 || $status_ipemesanan_bb == 3){
                         echo "Proses";
+                        if($row->jumlah_retur_ipemesanan_bb != ""){
+                            echo "<br>Retur<br>Jumlah : ".$row->jumlah_retur_ipemesanan_bb."<br>Ket : ".$row->keterangan_retur_ipemesanan_bb;
+                        }
                     }elseif($status_ipemesanan_bb == 3){
                         echo "Dikirim";
                     }elseif($status_ipemesanan_bb == 4){
-                        echo "Diterima";
+                        echo "Baik";
                     }elseif($status_ipemesanan_bb == 5){
-                        echo "Diretur";
+                        echo "Retur<br>Jumlah : ".$row->jumlah_retur_ipemesanan_bb."<br>Ket : ".$row->keterangan_retur_ipemesanan_bb;
                     }
                 ?>
             </td>
