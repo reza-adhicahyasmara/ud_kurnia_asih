@@ -373,18 +373,18 @@ class Mod_bahan_baku extends CI_Model {
 
     //BAHAN BAKU KELUAR
     function get_all_bahan_baku_keluar(){ 
-        $this->db->select('t_bahan_baku_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bahan_baku_keluar.kode_bb', 'inner');
+        $this->db->select('t_bb_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'inner');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
-        $this->db->order_by('t_bahan_baku_keluar.tanggal_bahan_baku_keluar ASC');
-        return $this->db->get('t_bahan_baku_keluar'); 
+        $this->db->order_by('t_bb_keluar.tanggal_bb_keluar ASC');
+        return $this->db->get('t_bb_keluar'); 
     }
 
     function get_bahan_baku_keluar($kode_bb_keluar){
         $this->db->where('kode_bb_keluar', $kode_bb_keluar);
-        return $this->db->get('t_bahan_baku_keluar');
+        return $this->db->get('t_bb_keluar');
     }
 
     function insert_bahan_baku_keluar($tabel, $data){
@@ -394,7 +394,7 @@ class Mod_bahan_baku extends CI_Model {
 
     function update_bahan_baku_keluar($kode_bb_keluar, $data){
         $this->db->where('kode_bb_keluar', $kode_bb_keluar);
-        $this->db->update('t_bahan_baku_keluar', $data);
+        $this->db->update('t_bb_keluar', $data);
     }
 
     function delete_bahan_baku_keluar($kode, $tabel){
@@ -430,8 +430,8 @@ class Mod_bahan_baku extends CI_Model {
     }
 
     function grafik_keluar_bb($kode_bb){
-        $this->db->select("SUM(jumlah_bahan_baku_keluar) AS jumlah, MONTH(tanggal_bahan_baku_keluar) AS bulan, YEAR(tanggal_bahan_baku_keluar) AS tahun");
-        $this->db->from('t_bahan_baku_keluar');
+        $this->db->select("SUM(jumlah_bb_keluar) AS jumlah, MONTH(tanggal_bb_keluar) AS bulan, YEAR(tanggal_bb_keluar) AS tahun");
+        $this->db->from('t_bb_keluar');
         $this->db->where('kode_bb', $kode_bb);
         $this->db->group_by('bulan');
         return $this->db->get();
@@ -464,14 +464,14 @@ class Mod_bahan_baku extends CI_Model {
     }
 
     function get_laporan_keluar($tanggal_awal, $tanggal_akhir,){ 
-        $this->db->select('t_bahan_baku_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bahan_baku_keluar.kode_bb', 'inner');
+        $this->db->select('t_bb_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'inner');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
-        $this->db->where("t_bahan_baku_keluar.tanggal_bahan_baku_keluar BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
-        $this->db->order_by('t_bahan_baku_keluar.tanggal_bahan_baku_keluar ASC');
-        return $this->db->get('t_bahan_baku_keluar'); 
+        $this->db->where("t_bb_keluar.tanggal_bb_keluar BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->order_by('t_bb_keluar.tanggal_bb_keluar ASC');
+        return $this->db->get('t_bb_keluar'); 
     }
 
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir,){ 

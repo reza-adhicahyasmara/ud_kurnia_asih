@@ -29,38 +29,32 @@
 
 <!-----------------------FUNGSI----------------------->
 <script type="text/javascript">
-    var url_produk =  "<?php echo base_url('admin/bahan_baku_masuk'); ?>";
-    var url = url_produk ;
+    var url_bahan_baku_keluar =  "<?php echo base_url('admin/bahan_baku_keluar'); ?>";
+    var url = url_bahan_baku_keluar ;
     $('ul.nav-sidebar a').filter(function() {
         return this.href == url;
     }).addClass('active ');
     $('ul.nav-treeview a').filter(function() {
         return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
-
-    $(document).ready(function() {
-        $('.kode_pemesanan_bb').select2({
-            theme: 'bootstrap4',
-        })
-    });
 </script>
 
 
 <script type="text/javascript">
-    load_data_bahan_baku_masuk();
-	function load_data_bahan_baku_masuk(){
+
+    load_data_bahan_baku_keluar();
+	function load_data_bahan_baku_keluar(){
 		$.ajax({
 			method : "GET",
-			url : '<?php echo base_url('admin/bahan_baku_masuk/load_data_bahan_baku_masuk'); ?>',
+			url : '<?php echo base_url('admin/bahan_baku_keluar/load_data_bahan_baku_keluar'); ?>',
 			beforeSend : function(){
-				$('#content_bahan_baku_masuk').html('<div style="text-align:center"><i class="fa fa-refresh fa-3x fa-spin" style="margin-top: 30px; margin-bottom: 30px;" aria-hidden="true"></i></div>');
+				$('#content_data_bahan_baku_keluar').html('<div style="text-align:center"><i class="fa fa-refresh fa-3x fa-spin" style="margin-top: 30px; margin-bottom: 30px;" aria-hidden="true"></i></div>');
 			},
 			success : function(response){
-				$('#content_bahan_baku_masuk').html(response);
+				$('#content_data_bahan_baku_keluar').html(response);
 			}
 		});
     };
-
 </script>
 
 </body>
