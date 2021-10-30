@@ -120,32 +120,32 @@ class Mod_bahan_baku extends CI_Model {
     
 
     //PENYESUAIAN STOK
-    function get_all_penyesuaian_stok_bb(){ 
-        $this->db->select('t_penyesuaian_stok_bb.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_penyesuaian_stok_bb.kode_bb', 'inner');
+    function get_all_penyesuaian_bb(){ 
+        $this->db->select('t_penyesuaian_bb.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_penyesuaian_bb.kode_bb', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
-        $this->db->order_by('t_penyesuaian_stok_bb.tanggal_penyesuaian_stok_bb ASC');
-        return $this->db->get('t_penyesuaian_stok_bb'); 
+        $this->db->order_by('t_penyesuaian_bb.tanggal_penyesuaian_bb ASC');
+        return $this->db->get('t_penyesuaian_bb'); 
     }
 
-    function get_penyesuaian_stok_bb($kode_penyesuaian_stok_bb){
-        $this->db->where('kode_penyesuaian_stok_bb', $kode_penyesuaian_stok_bb);
-        return $this->db->get('t_penyesuaian_stok_bb');
+    function get_penyesuaian_bb($kode_penyesuaian_bb){
+        $this->db->where('kode_penyesuaian_bb', $kode_penyesuaian_bb);
+        return $this->db->get('t_penyesuaian_bb');
     }
 
-    function insert_penyesuaian_stok_bb($tabel, $data){
+    function insert_penyesuaian_bb($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
     }
 
-    function update_penyesuaian_stok_bb($kode_penyesuaian_stok_bb, $data){
-        $this->db->where('kode_penyesuaian_stok_bb', $kode_penyesuaian_stok_bb);
-		$this->db->update('t_penyesuaian_stok_bb', $data);
+    function update_penyesuaian_bb($kode_penyesuaian_bb, $data){
+        $this->db->where('kode_penyesuaian_bb', $kode_penyesuaian_bb);
+		$this->db->update('t_penyesuaian_bb', $data);
     }
 
-    function delete_penyesuaian_stok_bb($kode, $tabel){
-        $this->db->where('kode_penyesuaian_stok_bb', $kode);
+    function delete_penyesuaian_bb($kode, $tabel){
+        $this->db->where('kode_penyesuaian_bb', $kode);
         $this->db->delete($tabel);
     }
 
@@ -475,14 +475,14 @@ class Mod_bahan_baku extends CI_Model {
     }
 
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir,){ 
-        $this->db->select('t_penyesuaian_stok_bb.*, t_supplier.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
+        $this->db->select('t_penyesuaian_bb.*, t_supplier.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
         $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bahan_baku.kode_bb', 'inner');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
-        $this->db->where("t_penyesuaian_stok_bb.tanggal_penyesuaian_stok_bb BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
-        $this->db->order_by('t_penyesuaian_stok_bb.tanggal_penyesuaian_stok_bb ASC');
-        return $this->db->get('t_penyesuaian_stok_bb'); 
+        $this->db->where("t_penyesuaian_bb.tanggal_penyesuaian_bb BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->order_by('t_penyesuaian_bb.tanggal_penyesuaian_bb ASC');
+        return $this->db->get('t_penyesuaian_bb'); 
     }
 
 

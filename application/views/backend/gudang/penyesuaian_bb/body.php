@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bx-up-arrow-alt"></span> Data Bahan Baku Keluar</h1>
+                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bx-refresh"></span> Data Penyesuaian Stok Bahan Baku</h1>
                 </div>
                 <div class="col-sm-6 float-sm-right">
                     <ol class="breadcrumb float-sm-right m-2">
                         <span class="breadcrumb-item"><a href="<?php echo base_url('gudang/dashboard'); ?>">Dashboard</a></span>
-                        <span class="breadcrumb-item active">Data Bahan Baku Keluar</span>
+                        <span class="breadcrumb-item active">Data Penyesuaian Stok Bahan Baku</span>
                     </ol>
                 </div>
             </div>
@@ -20,12 +20,12 @@
             <div class="card card-secondary card-outline card-outline-tabs">
                 <div class="card-body">
                     <div class="float-right">
-                        <button type="button" class="btn bg-purple" id="btn_tambah_bahan_baku_keluar"><span class="bx bx-fw bx-plus"></span> Tambah Data </a>
+                        <button type="button" class="btn bg-purple" id="btn_tambah_penyesuaian_bb"><span class="bx bx-fw bx-plus"></span> Tambah Data </a>
                     </div>
                     <br>
                     <br>
                     <br>
-                    <div id="content_data_bahan_baku_keluar">
+                    <div id="content_penyesuaian_bb">
                         <!--LOAD DATA-->
                     </div>
                 </div>
@@ -34,8 +34,8 @@
     </section>
 </div>
 
-<form role="form" id="form_bahan_baku_keluar" method="post">
-    <div id="modal_bahan_baku_keluar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<form role="form" id="form_penyesuaian_bb" method="post">
+    <div id="modal_penyesuaian_bb" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="bx bx-fw bx-x"></span> Batal</button>
-                    <button type="submit" id="btn_simpan_bahan_baku_keluar" class="btn bg-purple"><span class="bx bx-fw bx-save"></span> Simpan</button>
+                    <button type="submit" id="btn_simpan_penyesuaian_bb" class="btn bg-purple"><span class="bx bx-fw bx-save"></span> Simpan</button>
                 </div>
             </div>
         </div>
