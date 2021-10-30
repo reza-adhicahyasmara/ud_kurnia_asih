@@ -2,7 +2,7 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Bank</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Atas Nama</th>
             <th id="" style="text-align: center; vertical-align: middle; ">No. Rekening</th>
@@ -21,8 +21,8 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->an_rekening;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->no_rekening;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_rekening' kode_rekening="<?php echo $row->kode_rekening; ?>"><span class="bx bx-fw bx-pencil"></span></a>
-                <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_rekening' no_rekening="<?php echo $row->no_rekening; ?>" kode_rekening="<?php echo $row->kode_rekening; ?>"><span class="bx bx-fw bx-trash"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_rekening' kode_rekening="<?php echo $row->kode_rekening; ?>"><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-danger btn-sm btn-rounded btn_hapus_rekening' no_rekening="<?php echo $row->no_rekening; ?>" kode_rekening="<?php echo $row->kode_rekening; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>
         <?php

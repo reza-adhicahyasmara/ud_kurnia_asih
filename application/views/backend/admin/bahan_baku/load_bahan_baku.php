@@ -2,7 +2,7 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Kode</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Kategori</th>
@@ -38,8 +38,8 @@
                 ?>
             </td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_bahan_baku' kode_bb="<?php echo $row->kode_bb; ?>"><span class="bx bx-fw bx-pencil" style="margin:3px"></span></a>
-                <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_bahan_baku' nama_bb="<?php echo $row->nama_bb; ?>" kode_bb="<?php echo $row->kode_bb; ?>" style="margin:3px"><span class="bx bx-fw bx-trash"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_bahan_baku' kode_bb="<?php echo $row->kode_bb; ?>"><span class="bx bx-fw bx-pencil" style="margin:3px"></span></a>
+                <a class='btn btn-danger btn-sm btn-rounded btn_hapus_bahan_baku' nama_bb="<?php echo $row->nama_bb; ?>" kode_bb="<?php echo $row->kode_bb; ?>" style="margin:3px"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>
         <?php

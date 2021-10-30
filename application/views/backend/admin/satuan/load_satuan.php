@@ -2,7 +2,7 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Nama Satuan</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
@@ -16,8 +16,8 @@
             <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_satuan;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_satuan' kode_satuan="<?php echo $row->kode_satuan; ?>"><span class="bx bx-fw bx-pencil"></span></a>
-                <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_satuan' nama_satuan="<?php echo $row->nama_satuan; ?>" kode_satuan="<?php echo $row->kode_satuan; ?>"><span class="bx bx-fw bx-trash"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_satuan' kode_satuan="<?php echo $row->kode_satuan; ?>"><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-danger btn-sm btn-rounded btn_hapus_satuan' nama_satuan="<?php echo $row->nama_satuan; ?>" kode_satuan="<?php echo $row->kode_satuan; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>
         <?php

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bxs-truck"></span>Data Customer</h1>
+                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bxs-factory"></span>Data Customer</h1>
                 </div>
                 <div class="col-sm-6 float-sm-right">
                     <ol class="breadcrumb float-sm-right m-2">

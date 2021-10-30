@@ -24,7 +24,7 @@
         <td style="text-align: center; vertical-align: middle;"><?php echo number_format($tmp->jumlah_ipemesanan_bb, 0, ".", ".")." ".$tmp->nama_satuan;?></td>
         <td style="text-align: right; vertical-align: middle;"><?php echo number_format($tmp->subtotal_ipemesanan_bb, 2, ",", ".");?></td>
         <td style="text-align: center; vertical-align: middle;">
-            <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_item_pemesanan_bb' kode_ipemesanan_bb="<?php echo $tmp->kode_ipemesanan_bb; ?>"><i class="bx bx-fw bx-trash"></i></a>
+            <a class='btn btn-danger btn-sm btn-rounded btn_hapus_item_pemesanan_bb' kode_ipemesanan_bb="<?php echo $tmp->kode_ipemesanan_bb; ?>"><i class="bx bx-fw bx-trash"></i></a>
         </td>
     </tr>
     <?php

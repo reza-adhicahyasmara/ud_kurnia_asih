@@ -2,7 +2,7 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Tanggal</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Proposal</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Berkas</th>
@@ -21,8 +21,8 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->judul_proposal;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->berkas_proposal;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded view_pdf_permintaan' berkas_proposal="<?php echo $row->berkas_proposal; ?>" kode_proposal="<?php echo $row->kode_proposal; ?>"><span class="bx bx-fw bxs-file-pdf"></span></a>
-                <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_permintaan' judul_proposal="<?php echo $row->judul_proposal; ?>" kode_proposal="<?php echo $row->kode_proposal; ?>" berkas_proposal="<?php echo $row->berkas_proposal; ?>"><span class="bx bx-fw bx-trash"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded view_pdf_permintaan' berkas_proposal="<?php echo $row->berkas_proposal; ?>" kode_proposal="<?php echo $row->kode_proposal; ?>"><span class="bx bx-fw bxs-file-pdf"></span></a>
+                <a class='btn btn-danger btn-sm btn-rounded btn_hapus_permintaan' judul_proposal="<?php echo $row->judul_proposal; ?>" kode_proposal="<?php echo $row->kode_proposal; ?>" berkas_proposal="<?php echo $row->berkas_proposal; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>
         <?php

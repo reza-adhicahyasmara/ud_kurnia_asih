@@ -3,15 +3,15 @@
     <thead>
         <tr>
             <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kode</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:17%">Nama</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kategori</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Supplier</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Harga (Rp.)</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Stok Gudang Supplier</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Stok Limit Supplier</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:5%">Status</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Aksi</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kode</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kategori</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Supplier</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Harga (Rp.)</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Stok Gudang Supplier</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Stok Limit Supplier</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Status</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
                 ?>
             </td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_bahan_baku' kode_bb="<?php echo $row->kode_bb; ?>"><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_bahan_baku' kode_bb="<?php echo $row->kode_bb; ?>"><span class="bx bx-fw bx-pencil"></span></a>
             </td>
         </tr>
         <?php

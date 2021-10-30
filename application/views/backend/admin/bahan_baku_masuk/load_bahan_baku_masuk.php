@@ -3,13 +3,13 @@
     <thead>
         <tr>
             <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kode Pemesanan</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Tanggal Masuk</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Tanggal Kadaluwarsa</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Supplier</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:15%">Bahan Baku</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Kategori</th>
-            <th id="" style="text-align: center; vertical-align: middle; width:10%">Stok Masuk</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kode Pemesanan</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Tanggal Masuk</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Tanggal Kadaluwarsa</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Supplier</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Bahan Baku</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Kategori</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Stok Masuk</th>
         </tr>
     </thead>
     <tbody>

@@ -2,7 +2,7 @@
     <caption></caption>
     <thead>
         <tr>
-            <th id="" style="text-align: center; vertical-align: middle; ">No.</th>
+            <th id="" style="text-align: center; vertical-align: middle; width:3%">No.</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Foto</th>
             <th id="" style="text-align: center; vertical-align: middle; ">NIK</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Nama</th>
@@ -43,8 +43,8 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->password_karyawan;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->username_karyawan;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-outline-info btn-sm btn-rounded btn_edit_karyawan' nik_karyawan="<?php echo $row->nik_karyawan; ?>"><span class="bx bx-fw bx-pencil"></span></a>
-                <a class='btn btn-outline-danger btn-sm btn-rounded btn_hapus_karyawan' nama_karyawan="<?php echo $row->nama_karyawan; ?>" nik_karyawan="<?php echo $row->nik_karyawan; ?>" foto_karyawan="<?php echo $row->foto_karyawan;?>"><span class="bx bx-fw bxs-trash"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_karyawan' nik_karyawan="<?php echo $row->nik_karyawan; ?>"><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-danger btn-sm btn-rounded btn_hapus_karyawan' nama_karyawan="<?php echo $row->nama_karyawan; ?>" nik_karyawan="<?php echo $row->nik_karyawan; ?>" foto_karyawan="<?php echo $row->foto_karyawan;?>"><span class="bx bx-fw bxs-trash"></span></a>
             </td>
         </tr>
         <?php 
