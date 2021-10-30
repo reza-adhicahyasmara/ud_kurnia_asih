@@ -203,9 +203,10 @@
                         data: {kode_rekening : kode_rekening},                
                     })
                     .done(function(response) {
-                        load_data_satuan();
+                        load_data_rekening();
+                        $('#modal_rekening').modal('hide');
                         Swal.fire({
-                            title: 'Data Barhasil Dihapus',
+                            title: 'Data Berhasil Dihapus',
                             icon: 'success',
                             showConfirmButton: true,
                             confirmButtonColor: '#6f42c1',

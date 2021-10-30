@@ -45,6 +45,33 @@
 
 
 
+    $menuggu_pembayaran_pro = 0;
+    $menunggu_verifikasi_pro = 0;
+    $proses_pro = 0;
+    $dikirim_pro = 0;
+    $retur_pro = 0;
+    $total_pemesanan_bb = 0;
+    foreach($this->Mod_bahan_baku->get_all_pemesanan_bb()->result() as $row) {
+        if($row->status_pemesanan_bb == 1){
+            $menuggu_pembayaran_pro += 1;
+        }
+        elseif($row->status_pemesanan_bb == 2){
+            $menunggu_verifikasi_pro += 1;
+        }
+        elseif($row->status_pemesanan_bb == 3){
+            $proses_pro += 1;
+        }
+        elseif($row->status_pemesanan_bb == 4){
+            $dikirim_pro += 1;
+        }
+        elseif($row->status_pemesanan_bb == 7){
+            $retur_pro += 1;
+        }
+    }
+    $total_pemesanan_pro = $menuggu_pembayaran_pro + $menunggu_verifikasi_pro + $proses_pro + $dikirim_pro + $retur_pro;
+
+
+
     $menunggu_konfirmasi = 0;
     $retur_dikrim = 0;
     $total_retur;
@@ -300,7 +327,6 @@ by exius-dev
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item"><a href="<?php echo base_url('admin/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Customer<?php if($total_pemesanan_pro != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_pro; ?></span><?php } ?></p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/produk_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk</p></a></li>
-                                    <li class="nav-item"><a href="<?php echo base_url('admin/produk_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-up-arrow-alt"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/penyesuaian_stok_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-refresh"></i><p>Penyesuaian Stok</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/retur_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-recycle"></i><p>Retur</p></a></li>
                                 </ul>
@@ -365,7 +391,6 @@ by exius-dev
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/pemesanan_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-calendar-check"></i><p>Pemesanan Customer<?php if($total_pemesanan_pro != 0){ ?><span class="badge badge-danger right"> <?php echo $total_pemesanan_pro; ?></span><?php } ?></p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/produk_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-down-arrow-alt"></i><p>Masuk</p></a></li>
-                                    <li class="nav-item"><a href="<?php echo base_url('gudang/produk_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-up-arrow-alt"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/penyesuaian_stok_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-refresh"></i><p>Penyesuaian Stok</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('gudang/retur_produk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bx-recycle"></i><p>Retur</p></a></li>
                                 </ul>

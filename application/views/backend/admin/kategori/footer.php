@@ -190,9 +190,10 @@
                         data: {kode_kategori : kode_kategori},                
                     })
                     .done(function(response) {
-                        load_data_satuan();
+                        load_data_kategori();
+                        $('#modal_kategori').modal('hide');
                         Swal.fire({
-                            title: 'Data Barhasil Dihapus',
+                            title: 'Data Berhasil Dihapus',
                             icon: 'success',
                             showConfirmButton: true,
                             confirmButtonColor: '#6f42c1',

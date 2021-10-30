@@ -168,8 +168,9 @@
                     })
                     .done(function(response) {
                         load_data_bahan_baku_keluar();
+                        $('#modal_bahan_baku_keluar').modal('hide');
                         Swal.fire({
-                            title: 'Data Barhasil Dihapus',
+                            title: 'Data Berhasil Dihapus',
                             icon: 'success',
                             showConfirmButton: true,
                             confirmButtonColor: '#6f42c1',

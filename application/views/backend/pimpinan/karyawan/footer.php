@@ -203,6 +203,7 @@
                                         load_data_admin();
                                         load_data_gudang();
                                         load_data_pimpinan();
+                                        $('#modal_karyawan').modal('hide');
                                     });
                                 } else {
                                     Swal.fire({
@@ -234,6 +235,7 @@
                                         load_data_admin();
                                         load_data_gudang();
                                         load_data_pimpinan();
+                                        $('#modal_karyawan').modal('hide');
                                     });
                                 } else {
                                     Swal.fire({
@@ -283,8 +285,9 @@
                         load_data_admin();
                         load_data_gudang();
                         load_data_pimpinan();
+                        $('#modal_karyawan').modal('hide');
                         Swal.fire({
-                            title: 'Data Barhasil Dihapus',
+                            title: 'Data Berhasil Dihapus',
                             icon: 'success',
                             showConfirmButton: true,
                             confirmButtonColor: '#6f42c1',

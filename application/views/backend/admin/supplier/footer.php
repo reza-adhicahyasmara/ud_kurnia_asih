@@ -230,9 +230,10 @@
                         data: {id_supplier : id_supplier},                
                     })
                     .done(function(response) {
-                        load_data_satuan();
+                        load_data_supplier();
+                        $('#modal_supplier').modal('hide');
                         Swal.fire({
-                            title: 'Data Barhasil Dihapus',
+                            title: 'Data Berhasil Dihapus',
                             icon: 'success',
                             showConfirmButton: true,
                             confirmButtonColor: '#6f42c1',
@@ -438,6 +439,7 @@
                     })
                     .done(function(response) {
                         load_data_bahan_baku();
+                        $('#modal_bahan_baku').modal('hide');
                         Swal.fire({
                             title: 'Data Barhasil Dihapus',
                             icon: 'success',

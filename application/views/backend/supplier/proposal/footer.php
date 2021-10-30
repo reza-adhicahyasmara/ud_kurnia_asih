@@ -176,10 +176,21 @@
                     })
                     .done(function(response) {
                         load_data_penawaran();
-                        Swal.fire('Berhasil!', 'Data telah dihapus.', 'success')
+                        $('#modal_proposal').modal('hide');
+                        Swal.fire({
+                            title: 'Data Berhasil Dihapus',
+                            icon: 'success',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#6f42c1',
+                        })
                     })
                     .fail(function() {
-                        Swal.fire('Oops...', 'Terjadi kesahan!', 'error')
+                        Swal.fire({
+                            title: 'Terjadi Kesalahan',
+                            icon: 'error',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#6f42c1',
+                        })
                     });
                 });
             },

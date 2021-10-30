@@ -117,10 +117,11 @@
                                     title: 'Berhasil!',
                                     text: 'Data telah diedit',
                                     showConfirmButton: true,
-                                        confirmButtonColor: '#6f42c1',
+                                    confirmButtonColor: '#6f42c1',
                                     timer: 3000
                                 }).then(function(){
-                                    window.location.replace(url_bahan_baku);
+                                    load_data_bahan_baku();
+                                    $('#modal_bahan_baku').modal('hide');
                                 });
                             }else{
                                 Swal.fire({
@@ -128,7 +129,7 @@
                                     title: 'Gagal!',
                                     text: response,
                                     showConfirmButton: true,
-                                        confirmButtonColor: '#6f42c1',
+                                    confirmButtonColor: '#6f42c1',
                                     timer: 3000
                                 })
                             }
