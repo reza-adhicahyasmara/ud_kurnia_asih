@@ -45,31 +45,31 @@ class Mod_produk extends CI_Model {
 
 
     //PENYESUAIAN STOK
-    function get_all_penyesuaian_stok_produk(){ 
-        $this->db->select('t_penyesuaian_stok_produk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_stok_produk.kode_produk', 'inner');
+    function get_all_penyesuaian_produk(){ 
+        $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->order_by('t_penyesuaian_stok_produk.tanggal_penyesuaian_stok_produk ASC');
-        return $this->db->get('t_penyesuaian_stok_produk'); 
+        $this->db->order_by('t_penyesuaian_produk.tanggal_penyesuaian_produk ASC');
+        return $this->db->get('t_penyesuaian_produk'); 
     }
 
-    function get_penyesuaian_stok_produk($kode_penyesuaian_stok_produk){
-        $this->db->where('kode_penyesuaian_stok_produk', $kode_penyesuaian_stok_produk);
-        return $this->db->get('t_penyesuaian_stok_produk');
+    function get_penyesuaian_produk($kode_penyesuaian_produk){
+        $this->db->where('kode_penyesuaian_produk', $kode_penyesuaian_produk);
+        return $this->db->get('t_penyesuaian_produk');
     }
 
-    function insert_penyesuaian_stok_produk($tabel, $data){
+    function insert_penyesuaian_produk($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;
     }
 
-    function update_penyesuaian_stok_produk($kode_penyesuaian_stok_produk, $data){
-        $this->db->where('kode_penyesuaian_stok_produk', $kode_penyesuaian_stok_produk);
-        $this->db->update('t_penyesuaian_stok_produk', $data);
+    function update_penyesuaian_produk($kode_penyesuaian_produk, $data){
+        $this->db->where('kode_penyesuaian_produk', $kode_penyesuaian_produk);
+        $this->db->update('t_penyesuaian_produk', $data);
     }
 
-    function delete_penyesuaian_stok_produk($kode, $tabel){
-        $this->db->where('kode_penyesuaian_stok_produk', $kode);
+    function delete_penyesuaian_produk($kode, $tabel){
+        $this->db->where('kode_penyesuaian_produk', $kode);
         $this->db->delete($tabel);
     }
 
@@ -201,12 +201,12 @@ class Mod_produk extends CI_Model {
     }
     
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir){ 
-        $this->db->select('t_penyesuaian_stok_produk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_stok_produk.kode_produk', 'inner');
+        $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->where("t_penyesuaian_stok_produk.tanggal_penyesuaian_stok_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
-        $this->db->order_by('t_penyesuaian_stok_produk.tanggal_penyesuaian_stok_produk ASC');
-        return $this->db->get('t_penyesuaian_stok_produk'); 
+        $this->db->where("t_penyesuaian_produk.tanggal_penyesuaian_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->order_by('t_penyesuaian_produk.tanggal_penyesuaian_produk ASC');
+        return $this->db->get('t_penyesuaian_produk'); 
     }
 
     function get_laporan_retur($tanggal_awal, $tanggal_akhir){ 
