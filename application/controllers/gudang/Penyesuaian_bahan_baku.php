@@ -3,7 +3,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseControllerBackend.php';
 
-class Penyesuaian_stok_bahan_baku extends BaseControllerBackend {
+class Penyesuaian_bahan_baku extends BaseControllerBackend {
 
     public function __construct() {
         parent::__construct();
@@ -35,7 +35,7 @@ class Penyesuaian_stok_bahan_baku extends BaseControllerBackend {
         $this->load->view('backend/gudang/penyesuaian_bb/load_penyesuaian_bb', $data);
     }
     
-    function form_tambah_penyesuaian_stok_bahan_baku(){
+    function form_tambah_penyesuaian_bahan_baku(){
         $data['bahan_baku'] = $this->Mod_bahan_baku->get_all_bahan_baku();
         $this->load->view("backend/gudang/penyesuaian_bb/form_tambah_penyesuaian_bb",$data);
     }

@@ -70,8 +70,8 @@
 <script>
     //Oploadna ditembak
     Dropzone.autoDiscover = false;
-    var url_delete = "<?php echo base_url('gudang/penyesuaian_stok_bahan_baku/hapus_foto'); ?>";
-    var url_save = "<?php echo base_url('gudang/penyesuaian_stok_bahan_baku/simpan_foto'); ?>";
+    var url_delete = "<?php echo base_url('gudang/penyesuaian_bahan_baku/hapus_foto'); ?>";
+    var url_save = "<?php echo base_url('gudang/penyesuaian_bahan_baku/simpan_foto'); ?>";
 
     var gambar1 = new Dropzone("#my_drop",{ 
         url: url_save,

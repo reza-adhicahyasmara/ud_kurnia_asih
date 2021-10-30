@@ -3,7 +3,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseControllerBackend.php';
 
-class Penyesuaian_stok_bahan_baku extends BaseControllerBackend {
+class Penyesuaian_bahan_baku extends BaseControllerBackend {
 
     public function __construct() {
         parent::__construct();

@@ -29,7 +29,7 @@
 
 <!-----------------------FUNGSI----------------------->
 <script type="text/javascript">
-    var url_penyesuaian_bb =  "<?php echo base_url('admin/penyesuaian_stok_bahan_baku'); ?>";
+    var url_penyesuaian_bb =  "<?php echo base_url('admin/penyesuaian_bahan_baku'); ?>";
     var url = url_penyesuaian_bb ;
     $('ul.nav-sidebar a').filter(function() {
         return this.href == url;
@@ -46,7 +46,7 @@
 	function load_data_penyesuaian_bb(){
 		$.ajax({
 			method : "GET",
-			url : '<?php echo base_url('admin/penyesuaian_stok_bahan_baku/load_data_penyesuaian_bb'); ?>',
+			url : '<?php echo base_url('admin/penyesuaian_bahan_baku/load_data_penyesuaian_bb'); ?>',
 			beforeSend : function(){
 				$('#content_penyesuaian_bb').html('<div style="text-align:center"><i class="fa fa-refresh fa-3x fa-spin" style="margin-top: 30px; margin-bottom: 30px;" aria-hidden="true"></i></div>');
 			},
