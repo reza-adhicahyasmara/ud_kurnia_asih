@@ -15,8 +15,8 @@
                     </div>
                     <div class="col-sm-6 float-sm-right">
                         <ol class="breadcrumb float-sm-right m-2">
-                            <span class="breadcrumb-item"><a href="<?php echo base_url('supplier/dashboard'); ?>">Dashboard</a></span>
-                            <span class="breadcrumb-item"><a href="<?php echo base_url('supplier/pemesanan_bahan_baku'); ?>">Data Pemesanan Bahan Baku</a></span>
+                            <span class="breadcrumb-item"><a href="<?php echo base_url('gudang/dashboard'); ?>">Dashboard</a></span>
+                            <span class="breadcrumb-item"><a href="<?php echo base_url('gudang/pemesanan_bahan_baku'); ?>">Data Pemesanan Bahan Baku</a></span>
                             <span class="breadcrumb-item active">Detail Pemesanan Bahan Baku</span>
                         </ol>
                     </div>

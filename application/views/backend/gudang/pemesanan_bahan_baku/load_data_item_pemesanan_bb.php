@@ -61,6 +61,8 @@
                         echo "Baik";
                     }elseif($status_ipemesanan_bb == 5){
                         echo "Retur<br>Jumlah : ".$row->jumlah_retur_ipemesanan_bb."<br>Ket : ".$row->keterangan_retur_ipemesanan_bb;
+                    }elseif($status_ipemesanan_bb == 6){
+                        echo "Selesai";
                     }
                 ?>
             </td>

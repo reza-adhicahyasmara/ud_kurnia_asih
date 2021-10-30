@@ -60,18 +60,6 @@
         }
     });
 
-    $(document).ready(function() {
-        $('.id_supplier').select2({
-            theme: 'bootstrap4',
-        })
-    });
-
-    $(document).ready(function() {
-        $('.kode_bahan_baku').select2({
-            theme: 'bootstrap4',
-        })
-    });
-
     $(function () {
         $("#dataTable1").DataTable({
         "responsive": true,
