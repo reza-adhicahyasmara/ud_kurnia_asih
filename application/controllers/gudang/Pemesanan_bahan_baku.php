@@ -58,19 +58,36 @@ class Pemesanan_bahan_baku extends BaseControllerBackend {
     
     function update_status_item_bb(){
         $kode_ipemesanan_bb = $this->input->post('kode_ipemesanan_bb');
+        $jumlah_ipemesanan_bb = $this->input->post('jumlah_ipemesanan_bb');
         $jumlah_retur_ipemesanan_bb = $this->input->post('jumlah_retur_ipemesanan_bb');
         $keterangan_retur_ipemesanan_bb = $this->input->post('keterangan_retur_ipemesanan_bb');
         $status_ipemesanan_bb = $this->input->post('status_ipemesanan_bb');
 
-        echo 1;         
-        $save  = array( 
-            'kode_ipemesanan_bb'                => $kode_ipemesanan_bb,
-            'jumlah_retur_ipemesanan_bb'        => $jumlah_retur_ipemesanan_bb,
-            'keterangan_retur_ipemesanan_bb'    => $keterangan_retur_ipemesanan_bb,
-            'status_ipemesanan_bb'              => $status_ipemesanan_bb
-        );
-                    
-        $this->Mod_bahan_baku->update_item_pemesanan_bb($kode_ipemesanan_bb, $save); 
+        if($status_ipemesanan_bb == 5){
+            if($jumlah_ipemesanan_bb < $jumlah_retur_ipemesanan_bb){
+                echo "Jumlah melebihi yang dipesan";
+            }else{
+                echo 1;         
+                $save  = array( 
+                    'kode_ipemesanan_bb'                => $kode_ipemesanan_bb,
+                    'jumlah_retur_ipemesanan_bb'        => $jumlah_retur_ipemesanan_bb,
+                    'keterangan_retur_ipemesanan_bb'    => $keterangan_retur_ipemesanan_bb,
+                    'status_ipemesanan_bb'              => $status_ipemesanan_bb
+                );
+                            
+                $this->Mod_bahan_baku->update_item_pemesanan_bb($kode_ipemesanan_bb, $save); 
+            }
+        }else{
+            echo 1;         
+            $save  = array( 
+                'kode_ipemesanan_bb'                => $kode_ipemesanan_bb,
+                'jumlah_retur_ipemesanan_bb'        => $jumlah_retur_ipemesanan_bb,
+                'keterangan_retur_ipemesanan_bb'    => $keterangan_retur_ipemesanan_bb,
+                'status_ipemesanan_bb'              => $status_ipemesanan_bb
+            );
+                        
+            $this->Mod_bahan_baku->update_item_pemesanan_bb($kode_ipemesanan_bb, $save); 
+        }
     }
 
     function update_status_pemesanan_bb(){
@@ -79,7 +96,7 @@ class Pemesanan_bahan_baku extends BaseControllerBackend {
         $tanggal_masuk = date("Y-m-d H:m:s");
 
         $cek_retur_item = $this->Mod_bahan_baku->cek_item_retur($kode_pemesanan_bb);
-        $cek_kirim_item = $this->Mod_bahan_baku->cek_kirim_retur($kode_pemesanan_bb);
+        $cek_kirim_item = $this->Mod_bahan_baku->cek_item_kirim($kode_pemesanan_bb);
 
         if($status_pemesanan_bb == 5){
             if($cek_retur_item->num_rows() > 0){

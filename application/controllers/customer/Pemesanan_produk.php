@@ -194,6 +194,7 @@ class Pemesanan_produk extends BaseControllerBackend {
         }
     }
 
+    //STATUS PBY PENERIMAAN & RETUR
     function load_data_item_pemesanan_produk(){
         $kode_pemesanan_produk = $this->input->post('kode_pemesanan_produk');
         $data['total_pby_pemesanan_produk'] = $this->input->post('total_pby_pemesanan_produk');
@@ -218,6 +219,95 @@ class Pemesanan_produk extends BaseControllerBackend {
                     
         $this->Mod_produk->update_pemesanan_produk($kode_pemesanan_produk, $save);        
 
+    }
+
+    function update_status_item_produk(){
+        $kode_ipemesanan_produk = $this->input->post('kode_ipemesanan_produk');
+        $jumlah_ipemesanan_produk = $this->input->post('jumlah_ipemesanan_produk');
+        $jumlah_retur_ipemesanan_produk = $this->input->post('jumlah_retur_ipemesanan_produk');
+        $keterangan_retur_ipemesanan_produk = $this->input->post('keterangan_retur_ipemesanan_produk');
+        $status_ipemesanan_produk = $this->input->post('status_ipemesanan_produk');
+        
+        if($status_ipemesanan_produk == 5){
+            if($jumlah_ipemesanan_produk < $jumlah_retur_ipemesanan_produk){
+                echo "Jumlah melebihi yang dipesan";
+            }else{
+                echo 1;         
+                $save  = array( 
+                    'kode_ipemesanan_produk'                => $kode_ipemesanan_produk,
+                    'jumlah_retur_ipemesanan_produk'        => $jumlah_retur_ipemesanan_produk,
+                    'keterangan_retur_ipemesanan_produk'    => $keterangan_retur_ipemesanan_produk,
+                    'status_ipemesanan_produk'              => $status_ipemesanan_produk
+                );
+                            
+                $this->Mod_produk->update_item_pemesanan_produk($kode_ipemesanan_produk, $save); 
+            }
+        }else{
+            echo 1;         
+            $save  = array( 
+                'kode_ipemesanan_produk'                => $kode_ipemesanan_produk,
+                'jumlah_retur_ipemesanan_produk'        => $jumlah_retur_ipemesanan_produk,
+                'keterangan_retur_ipemesanan_produk'    => $keterangan_retur_ipemesanan_produk,
+                'status_ipemesanan_produk'              => $status_ipemesanan_produk
+            );
+                        
+            $this->Mod_produk->update_item_pemesanan_produk($kode_ipemesanan_produk, $save); 
+        }
+    }
+
+    
+    function update_status_pemesanan_produk(){
+        $kode_pemesanan_produk = $this->input->post('kode_pemesanan_produk');
+        $status_pemesanan_produk = $this->input->post('status_pemesanan_produk');
+        $tanggal_masuk = date("Y-m-d H:m:s");
+
+        $cek_retur_item = $this->Mod_produk->cek_item_retur($kode_pemesanan_produk);
+        $cek_kirim_item = $this->Mod_produk->cek_item_kirim($kode_pemesanan_produk);
+
+        if($status_pemesanan_produk == 5){
+            if($cek_retur_item->num_rows() > 0){
+                echo "Pastikan semua item diterima dengan kondisi baik";
+            }elseif($cek_kirim_item->num_rows() > 0){
+                echo "Pastikan item sudah diproses";
+            }else{
+                echo 1;         
+                $save  = array( 
+                    'kode_pemesanan_produk'                => $kode_pemesanan_produk,
+                    'tanggal_terima_pemesanan_produk'      => $tanggal_masuk,
+                    'status_pemesanan_produk'              => $status_pemesanan_produk
+                );
+                            
+                $this->Mod_produk->update_pemesanan_produk($kode_pemesanan_produk, $save); 
+
+                $item = $this->Mod_produk->get_item_pemesanan_produk($kode_pemesanan_produk)->result();
+
+                foreach($item as $row){
+                    $kode_ipemesanan_produk = $row->kode_ipemesanan_produk;
+                   
+                    $data_update_status[] = array(
+                        "kode_ipemesanan_produk" => $kode_ipemesanan_produk,
+                        "status_ipemesanan_produk" => '6',
+                        "tanggal_masuk_ipemesanan_produk" =>  $tanggal_masuk
+                    );
+        
+                    $this->db->update_batch("t_ipemesanan_produk",$data_update_status,"kode_ipemesanan_produk");
+                }
+            }
+        }else if($status_pemesanan_produk == 7){
+            if($cek_retur_item->num_rows() > 0){
+                echo 1;         
+                $save  = array( 
+                    'kode_pemesanan_produk'                => $kode_pemesanan_produk,
+                    'status_pemesanan_produk'              => $status_pemesanan_produk
+                );
+                            
+                $this->Mod_produk->update_pemesanan_produk($kode_pemesanan_produk, $save); 
+            }elseif($cek_kirim_item->num_rows() > 0){
+                echo "Pastikan item sudah diproses";
+            }else{
+                echo "Pastikan salah satu item diretur";
+            }  
+        }
     }
 
     function save_image(){

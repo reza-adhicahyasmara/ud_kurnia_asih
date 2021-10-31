@@ -30,7 +30,7 @@
 
 <!-----------------------FUNGSI----------------------->
 <script type="text/javascript">
-    var url_outlet =  "<?php echo base_url('customer/pemesanan_produk'); ?>";
+    var url_outlet =  "<?php echo base_url('gudang/pemesanan_produk'); ?>";
     var url = url_outlet ;
     $('ul.nav-sidebar a').filter(function() {
         return this.href == url;
@@ -38,6 +38,13 @@
     $('ul.nav-treeview a').filter(function() {
         return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+
+    $("#jumlah_item_pemesanan_produk").on("input", function(){
+        var regexp = /[^0-9]/g;
+        if($(this).val().match(regexp)){
+            $(this).val( $(this).val().replace(regexp,'') );
+        }
+    });
 
     $(function () {
         $("#dataTable1").DataTable({
@@ -112,7 +119,7 @@
 
         $.ajax({
             method : "POST",
-            url : '<?php echo base_url('customer/pemesanan_produk/load_data_item_pemesanan_produk');?>',
+            url : '<?php echo base_url('gudang/pemesanan_produk/load_data_item_pemesanan_produk');?>',
             data : {
                 kode_pemesanan_produk:kode_pemesanan_produk,
                 total_pby_pemesanan_produk:total_pby_pemesanan_produk,
@@ -128,62 +135,124 @@
     };
 </script>
 
-<!-----------------------TRANSAKSI PEMBAYARAN----------------------->
-<script type="text/javascript">
-    $('#btn_upload').on("click",function(){
-        $('#modal_upload').modal('show');
-        $('.modal-title').text('Upload Bukti Pembayaran');
-    });
-
+<!-----------------------KONFIRMASI PEMBAYARAN----------------------->
+<script>
     $('#btn_bukti_pembayaran').on("click",function(){
         $('#modal_bukti_pembayaran').modal('show');
         $('.modal-title').text('Bukti Pembayaran');
     });
 
-    $(document).ready(function() {
-        $('#simpan_upload').on("click",function(){
-            $.ajax({
-                url : '<?php echo base_url('customer/pemesanan_produk/update_pemesanan_produk'); ?>',
-                method: 'POST',
-                data : $('#form_upload').serialize(),
-                success: function(response){
-                    if(response==1){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: 'Data telah diupdate',
-                            showConfirmButton: true,
-                            confirmButtonColor: '#6f42c1',
-                            timer: 3000
-                        }).then(function(){
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: response,
-                            showConfirmButton: true,
-                            confirmButtonColor: '#6f42c1',
-                            timer: 3000
+    var url_global = '<?php echo base_url('gudang/pemesanan_produk/update_pemesanan_produk'); ?>';
+    
+    $('#btn_verifikasi_pembayaran').on("click",function(){
+        var kode_pemesanan_produk = $('#kode_pemesanan_produk').val();
+        var status_pemesanan_produk = "3";
+        var status_pby_pemesanan_produk = "3";
+
+        Swal.fire({
+            title: 'Verifikasi Pembayaran',
+            text: 'Apakah anda yakin memverifikasi pembayaran ini',
+            type: 'warning',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#6f42c1',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, simpan',
+            cancelButtonText: "Tidak, batalkan",
+            showLoaderOnConfirm: true,
+
+            preConfirm: (response) => {       
+                $.ajax({
+                    url: url_global,
+                    method: 'POST',
+                    data: {
+                        kode_pemesanan_produk:kode_pemesanan_produk,
+                        status_pemesanan_produk:status_pemesanan_produk,
+                        status_pby_pemesanan_produk:status_pby_pemesanan_produk
+                    },   
+                    success: function(response){ 
+                        if(response==1){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data telah diupdate!',
+                                showConfirmButton: true,
+                                confirmButtonColor: '#6f42c1',
+                                timer: 3000
+                            }).then(function(){
+                                window.location.reload();
+                            })
+                        }     
+                    }
+                })
+            },
+        });
+    });
+
+    $('#btn_pembatalan_pembayaran').on("click",function(){
+        var kode_pemesanan_produk = $('#kode_pemesanan_produk').val();
+        var status_pemesanan_produk = "6";
+        var status_pby_pemesanan_produk = "4";
+
+        Swal.fire({
+            title: 'Verifikasi Pembayaran',
+            text: 'Apakah anda yakin memverifikasi pembayaran ini',
+            type: 'warning',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#6f42c1',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, simpan',
+            cancelButtonText: "Tidak, batalkan",
+            showLoaderOnConfirm: true,
+            html: `<textarea type="text" id="keterangan_batal_pemesanan_produk" class="swal2-input" placeholder="Keterangan" style="height:100px"></textarea>`,
+
+            preConfirm: (response) => {                 
+                const keterangan_batal_pemesanan_produk = Swal.getPopup().querySelector('#keterangan_batal_pemesanan_produk').value
+                if(response==1){
+                    if (!keterangan_batal_pemesanan_produk) {
+                        Swal.showValidationMessage('Keterangan tidak boleh kosong')
+                    }else{
+                        $.ajax({
+                            url: url_global,
+                            method: 'POST',
+                            data: {
+                                kode_pemesanan_produk:kode_pemesanan_produk,
+                                keterangan_batal_pemesanan_produk:keterangan_batal_pemesanan_produk,
+                                status_pemesanan_produk:status_pemesanan_produk,
+                                status_pby_pemesanan_produk:status_pby_pemesanan_produk
+                            },   
+                            success: function(response){ 
+                                if(response==1){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Data telah diupdate!',
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#6f42c1',
+                                        timer: 3000
+                                    }).then(function(){
+                                        window.location.reload();
+                                    })
+                                }     
+                            }
                         })
                     }
                 }
-            }); 
-        });
+            }
+        })
     });
-
 </script>
 
-<!-----------------------KONFIRMASI PENERIMAAN----------------------->
+
+<!-----------------------KONFIRMASI PENGIRIMAN----------------------->
 <script>
-    $('.btn_terima').on("click",function(){
-        var kode_pemesanan_produk = $(this).attr("kode_pemesanan_produk");
-        var status_pemesanan_produk = "5";
+    $('#btn_pengiriman').on("click",function(){
+        var kode_pemesanan_produk = $('#kode_pemesanan_produk').val();
+        var status_pemesanan_produk = "4";
+        var status_pby_pemesanan_produk = "3";
 
         Swal.fire({
-            title: 'Verifikasi Penerimaan',
-            text: 'Pastikan semua item diterima dalam keadaan baik',
+            title: 'Verifikasi Pengiriman',
+            text: 'Pastikan pengiriman sesuai dengan pemesanan',
             type: 'warning',
             icon: 'warning',
             showCancelButton: true,
@@ -195,11 +264,12 @@
 
             preConfirm: (response) => {       
                 $.ajax({
-                    url: '<?php echo base_url('customer/pemesanan_produk/update_status_pemesanan_produk'); ?>',
+                    url: url_global,
                     method: 'POST',
                     data: {
                         kode_pemesanan_produk:kode_pemesanan_produk,
-                        status_pemesanan_produk:status_pemesanan_produk
+                        status_pemesanan_produk:status_pemesanan_produk,
+                        status_pby_pemesanan_produk:status_pby_pemesanan_produk
                     },   
                     success: function(response){ 
                         if(response==1){
@@ -227,13 +297,18 @@
         });
     });
 
-    $('.btn_retur').on("click",function(){
-        var kode_pemesanan_produk = $(this).attr("kode_pemesanan_produk");
+</script>
+
+
+<!-----------------------KONFIRMASI PENGIRIMAN----------------------->
+<script>
+    $('#btn_pengiriman_retur').on("click",function(){
+        var kode_pemesanan_produk = $('#kode_pemesanan_produk').val();
         var status_pemesanan_produk = "7";
 
         Swal.fire({
-            title: 'Verifikasi Retur',
-            text: 'Pastikan salah satu item diterur',
+            title: 'Verifikasi Pengiriman',
+            text: 'Pastikan pengiriman sesuai dengan item yang telah diretur',
             type: 'warning',
             icon: 'warning',
             showCancelButton: true,
@@ -242,9 +317,10 @@
             confirmButtonText: 'Ya, simpan',
             cancelButtonText: "Tidak, batalkan",
             showLoaderOnConfirm: true,
+
             preConfirm: (response) => {       
                 $.ajax({
-                    url: '<?php echo base_url('customer/pemesanan_produk/update_status_pemesanan_produk'); ?>',
+                    url: url_global,
                     method: 'POST',
                     data: {
                         kode_pemesanan_produk:kode_pemesanan_produk,
@@ -275,82 +351,64 @@
             },
         });
     });
+
 </script>
+    
 
+<!-----------------------KONFIRMASI PEMBATALAN PEMESANAN----------------------->
 <script>
-    //Oploadna ditembak
-    Dropzone.autoDiscover = false;
-    var url_save = "<?php echo base_url('customer/pemesanan_produk/save_image'); ?>";
-    var url_delete = "<?php echo base_url('customer/pemesanan_produk/delete_image'); ?>";
-    var bukti_pembayaran1 = new Dropzone("#my_drop",{ 
-        url: url_save,
-        maxFiles : 1,
-        acceptedFiles : 'image/*',
-        dictInvalidFileType:"Type file ini tidak dizinkan",
-        dictMaxFilesExceeded: "Hanya dapat unggah satu gambar",
-        dictRemoveFile: "Hapus",
-        addRemoveLinks:true,
-        init: function(){  
-            var foto = $('#bukti_pby_pemesanan_produk').val();
-            if(foto == null){
-                this.on("success",function(file,response){
-                    $('#bukti_pby_pemesanan_produk').val(response);
-                }); 
-            }else{
-                this.on("success",function(file,response){
-                    $('#bukti_pby_pemesanan_produk').val(response);
-                    $.ajax({
-                        url: url_delete,
-                        type: "post",
-                        data: {bukti_pby_pemesanan_produk:foto},
-                        cache: false,
-                        dataType: 'json',
-                        success: function(response){
-                            if(response == 1){
+    $('#btn_pembatalan_pemesanan').on("click",function(){
+        var kode_pemesanan_produk = $('#kode_pemesanan_produk').val();
+        var status_pemesanan_produk = "6";
+        var status_pby_pemesanan_produk = "1";
+
+        Swal.fire({
+            title: 'Verifikasi Pembayaran',
+            text: 'Apakah anda yakin memverifikasi pembayaran ini',
+            type: 'warning',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#6f42c1',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, simpan',
+            cancelButtonText: "Tidak, batalkan",
+            showLoaderOnConfirm: true,
+            html: `<textarea type="text" id="keterangan_batal_pemesanan_produk" class="swal2-input" placeholder="Keterangan" style="height:100px"></textarea>`,
+
+            preConfirm: (response) => {                 
+                const keterangan_batal_pemesanan_produk = Swal.getPopup().querySelector('#keterangan_batal_pemesanan_produk').value
+                if(response==1){
+                    if (!keterangan_batal_pemesanan_produk) {
+                        Swal.showValidationMessage('Keterangan tidak boleh kosong')
+                    }else{
+                        $.ajax({
+                            url: url_global,
+                            method: 'POST',
+                            data: {
+                                kode_pemesanan_produk:kode_pemesanan_produk,
+                                keterangan_batal_pemesanan_produk:keterangan_batal_pemesanan_produk,
+                                status_pemesanan_produk:status_pemesanan_produk,
+                                status_pby_pemesanan_produk:status_pby_pemesanan_produk
+                            },   
+                            success: function(response){ 
+                                if(response==1){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Data telah diupdate!',
+                                        showConfirmButton: true,
+                                        timer: 3000
+                                    }).then(function(){
+                                        window.location.reload();
+                                    })
+                                }     
                             }
-                        }
-                    });
-                });
-            }
-        }
-    });
-
-    //Teu jadi upload
-    bukti_pembayaran1.on("removedfile",function(){
-        var bukti_pby_pemesanan_produk = $('#bukti_pby_pemesanan_produk').val();
-        $.ajax({
-            url: url_delete,
-            type: "post",
-            data: {bukti_pby_pemesanan_produk:bukti_pby_pemesanan_produk},
-            cache: false,
-            dataType: 'json',
-            success: function(response){
-                if(response == 1){
-                    $("#bukti_pby_pemesanan_produk").val("");
+                        })
+                    }
                 }
             }
-        });
+        })
     });
 
-     //Ngahapus gambar
-     $('#hapus_gambar').on("click",function(){
-        var bukti_pby_pemesanan_produk = $('#bukti_pby_pemesanan_produk').val();
-        $.ajax({
-            url: url_delete,
-            type: "post",
-            data: {bukti_pby_pemesanan_produk:bukti_pby_pemesanan_produk},
-            cache: false,
-            dataType: 'json',
-            success: function(response){
-                if(response == 1){
-                    $("#bukti_pby_pemesanan_produk").val("");
-                    $("img#assets").show(500); 
-                    $("img#foto").hide(500); 
-                    $("a#teks").hide(500); 
-                }
-            }
-        });
-    });
 </script>
 
 </body>

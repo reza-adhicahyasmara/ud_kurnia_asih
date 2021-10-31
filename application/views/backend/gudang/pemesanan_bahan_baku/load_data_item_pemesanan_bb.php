@@ -68,8 +68,8 @@
             </td>
             <?php if($status_pemesanan_bb == 4){ ?>
                 <td style="text-align: center; vertical-align: middle;">
-                    <a class='btn btn-success btn-sm btn-rounded btn_edit_item_bb_terima' kode_ipemesanan_bb="<?php echo $row->kode_ipemesanan_bb; ?>"><span class="bx bx-fw bx-check"></span></a>
-                    <a class='btn btn-danger btn-sm btn-rounded btn_edit_item_bb_retur' kode_ipemesanan_bb="<?php echo $row->kode_ipemesanan_bb; ?>"><span class="bx bx-fw bx-x"></span></a>
+                    <a class='btn btn-success btn-sm btn-rounded btn_edit_item_bb_terima' kode_ipemesanan_bb="<?php echo $row->kode_ipemesanan_bb; ?>" jumlah_ipemesanan_bb="<?php echo $row->jumlah_ipemesanan_bb; ?>"><span class="bx bx-fw bx-check"></span></a>
+                    <a class='btn btn-danger btn-sm btn-rounded btn_edit_item_bb_retur' kode_ipemesanan_bb="<?php echo $row->kode_ipemesanan_bb; ?>" jumlah_ipemesanan_bb="<?php echo $row->jumlah_ipemesanan_bb; ?>"><span class="bx bx-fw bx-x"></span></a>
                 </td>
             <?php } ?> 
         </tr>
@@ -92,6 +92,7 @@
 <script>
     $('.btn_edit_item_bb_terima').on("click",function(){
         var kode_ipemesanan_bb = $(this).attr("kode_ipemesanan_bb");
+        var jumlah_ipemesanan_bb = "";
         var jumlah_retur_ipemesanan_bb = "";
         var keterangan_retur_ipemesanan_bb = "";
         var status_ipemesanan_bb = "4";
@@ -114,6 +115,7 @@
                     method: 'POST',
                     data: {
                         kode_ipemesanan_bb:kode_ipemesanan_bb,
+                        jumlah_ipemesanan_bb:jumlah_ipemesanan_bb,
                         jumlah_retur_ipemesanan_bb:jumlah_retur_ipemesanan_bb,
                         keterangan_retur_ipemesanan_bb:keterangan_retur_ipemesanan_bb,
                         status_ipemesanan_bb:status_ipemesanan_bb
@@ -146,6 +148,7 @@
 
     $('.btn_edit_item_bb_retur').on("click",function(){
         var kode_ipemesanan_bb = $(this).attr("kode_ipemesanan_bb");
+        var jumlah_ipemesanan_bb = $(this).attr("jumlah_ipemesanan_bb");
         var status_ipemesanan_bb = "5";
 
         Swal.fire({
@@ -185,6 +188,7 @@
                         method: 'POST',
                         data: {
                             kode_ipemesanan_bb:kode_ipemesanan_bb,
+                            jumlah_ipemesanan_bb:jumlah_ipemesanan_bb,
                             jumlah_retur_ipemesanan_bb:jumlah_retur_ipemesanan_bb,
                             keterangan_retur_ipemesanan_bb:keterangan_retur_ipemesanan_bb,
                             status_ipemesanan_bb:status_ipemesanan_bb

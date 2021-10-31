@@ -3,6 +3,7 @@
         $status_pemesanan_produk = $haha->status_pemesanan_produk;
         $status_pby_pemesanan_produk = $haha->status_pby_pemesanan_produk;
 ?>
+    <input type="hidden" id="status_pemesanan_produk" value="<?php echo $haha->status_pemesanan_produk;?>" />
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -29,10 +30,12 @@
                                 <div class="form-group">
                                     <button class="btn btn-success" id="btn_bukti_pembayaran" style="width:200px; margin-left: 5px;"><i class="bx bx-fw bx-money"></i> Lihat Pembayaran </button>
                                 </div>
-                            <?php } 
-                            if($status_pemesanan_produk == 4){ ?>
+                            <?php } if($status_pemesanan_produk == 4){ ?>
                                 <div class="form-group">
-                                    <a href="<?php echo base_url('customer/bahan_baku_masuk');?>" class="btn btn-primary" style="width:200px; margin-left: 5px;"><i class="bx bx-fw bxl-dropbox"></i> Produk Masuk </a>
+                                    <button class="btn btn-primary btn_terima" kode_pemesanan_produk = "<?php echo $haha->kode_pemesanan_produk; ?>" style="width:200px; margin-left:5px;"><i class="bx bx-fw bx-arrow-to-bottom"></i> Terima Produk</button>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger btn_retur" kode_pemesanan_produk = "<?php echo $haha->kode_pemesanan_produk; ?>" style="width:200px; margin-left:5px;"><i class="bx bx-fw bx-recycle"></i> Retur Produk</button>
                                 </div>
                             <?php } ?>
                             <div class="form-group">
