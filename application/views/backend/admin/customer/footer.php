@@ -65,12 +65,12 @@
     });
 
     $(document).on('click', '.btn_edit_customer', function(e) {
-        var kode_customer=$(this).attr("kode_customer");
+        var id_customer = $(this).attr("id_customer");
         var url = "<?php echo base_url('admin/customer/form_edit_customer'); ?>";
 
         $('#modal_customer').modal('show');
         $('.modal-title').text('Edit Customer');
-        $('.modal-body').load(url,{kode_customer : kode_customer});
+        $('.modal-body').load(url,{id_customer : id_customer});
     });  
 
     $(document).ready(function() {
@@ -96,6 +96,13 @@
                         required: true,
                         minlength: 5,
                     },
+                    ongkir_customer: {
+                        required: true,
+                        minlength: 5,
+                    },
+                    berat_ongkir_customer: {
+                        required: true,
+                    },
                     password_customer: {
                         required: true,
                         minlength: 5,
@@ -109,12 +116,19 @@
                         required: "PIC harus diisi",
                     },
                     kontak_customer: {
-                        required: "Mo. Telepon / HP harus diisi",
+                        required: "No. Telepon / HP harus diisi",
                         minlength: "Minimal 11 karakter",
                         maxlength: "Maksimal 15 karakter",
                     },
                     alamat_customer: {
                         required: "Alamat harus diisi",
+                    },
+                    ongkir_customer: {
+                        required: "Ongkos kiri, harus diisi",
+                        minlength: "Minimal 5 karakter",
+                    },
+                    berat_ongkir_customer: {
+                        required: "Berat harus diisi",
                     },
                     username_customer_baru: {
                         required: "Username harus diisi",

@@ -1,55 +1,86 @@
 <div id="alert_edit"></div>
 <input type="hidden" id="jenis" value="Edit">
 <?php foreach($edit->result() as $edit) { ?>
-<div class="form-group">
-    <div class="d-flex justify-content-center mt-3 mb-5"> 
-        <div class="dropzone dz-clickable" id="my_drop" style="border-radius:50%; border:1px solid #ced4da; width: 150px; height: 150px">
-            <div class="dz-default dz-message" data-dz-message="" style="margin-left: -20px; margin-right: -20px;">
-                <?php if($edit->foto_customer != "") { ?>
-                    <img src="<?php echo base_url('assets/img/customer/'.$edit->foto_customer);?>" class="product-image" id="foto" alt="Image" style="width:150px; height:150px; margin-left: -50px; margin-right: -50px; margin-top: -50px; vertical-align: top; border-radius: 50%; object-fit: cover; overflow:hidden">
-                    <img src="<?php echo base_url('assets/img/banner/image_add.svg');?>" class="product-image"  id="assets_customer" alt="Image" style="width:100px; height:100px; margin-top: -30px; vertical-align: top; display: none;">   
-                    </br>
-                    <a href="#" id="teks_customer" style="color: #007bff; display: block; margin-top: -30px; margin-bottom:15px;">Ganti</a>
-                <?php }else{ ?>
-                    <img src="<?php echo base_url('assets/img/banner/image_add.svg');?>" class="product-image" alt="Image" style="width:100px; height:100px; margin-top: -30px; vertical-align: top;">
-                <?php } ?> 
-                <?php if( $edit->foto_customer != "") { ?>
-                    <a href="#" id="hapus_gambar_customer" style="color: #007bff; display: block; margin-top: 1px; margin-bottom:-16px;">Hapus</a>
-                <?php } ?>
+<div class="row">
+    <div class="col-md-6 col-12 mb-5">
+        <h5 class="mb-3">Data Profil</h5>
+        <div class="form-group">
+            <div class="d-flex justify-content-center mt-4 mb-4"> 
+                <div class="dropzone dz-clickable" id="my_drop" style="border-radius:50%; border:1px solid #ced4da; width: 150px; height: 150px">
+                    <div class="dz-default dz-message" data-dz-message="" style="margin-left: -20px; margin-right: -20px;">
+                        <?php if($edit->foto_customer != "") { ?>
+                            <img src="<?php echo base_url('assets/img/customer/'.$edit->foto_customer);?>" class="product-image" id="foto" alt="Image" style="width:150px; height:150px; margin-left: -50px; margin-right: -50px; margin-top: -50px; vertical-align: top; border-radius: 50%; object-fit: cover; overflow:hidden">
+                            <img src="<?php echo base_url('assets/img/banner/image_add.svg');?>" class="product-image"  id="assets_customer" alt="Image" style="width:100px; height:100px; margin-top: -30px; vertical-align: top; display: none;">   
+                            </br>
+                            <a href="#" id="teks_customer" style="color: #007bff; display: block; margin-top: -30px; margin-bottom:15px;">Ganti</a>
+                        <?php }else{ ?>
+                            <img src="<?php echo base_url('assets/img/banner/image_add.svg');?>" class="product-image" alt="Image" style="width:100px; height:100px; margin-top: -30px; vertical-align: top;">
+                        <?php } ?> 
+                        <?php if( $edit->foto_customer != "") { ?>
+                            <a href="#" id="hapus_gambar_customer" style="color: #007bff; display: block; margin-top: 1px; margin-bottom:-16px;">Hapus</a>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
+            <input type="hidden" id="foto_customer" name="foto_customer" value="<?php echo $edit->foto_customer; ?>"/>
+        </div>
+        <div class="form-group">
+            <label>Nama Customer</label>
+            <input type="hidden" class="form-control" name="id_customer" id="id_customer" value="<?php echo $edit->id_customer; ?>">
+            <input type="text" class="form-control" name="nama_customer" id="nama_customer" value="<?php echo $edit->nama_customer; ?>" placeholder="Nama customer" readonly>
+        </div>
+        <div class="form-group">
+            <label>PIC</label>
+            <input type="text" class="form-control" name="pic_customer" id="pic_customer" value="<?php echo $edit->pic_customer; ?>" placeholder="PIC">
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <textarea type="text" class="form-control" name="alamat_customer" id="alamat_customer" placeholder="Alamat" style="height:100px;"><?php echo $edit->alamat_customer; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label>No. Telepon / HP</label>
+            <input type="text" class="form-control" name="kontak_customer" id="kontak_customer" value="<?php echo $edit->kontak_customer; ?>" placeholder="No. Telepon / HP">
         </div>
     </div>
-    <input type="hidden" id="foto_customer" name="foto_customer" value="<?php echo $edit->foto_customer; ?>"/>
-</div>
-<div class="form-group">
-    <label>Nama Customer</label>
-    <input type="hidden" class="form-control" name="id_customer" id="id_customer" value="<?php echo $edit->id_customer; ?>">
-    <input type="text" class="form-control" name="nama_customer" id="nama_customer" value="<?php echo $edit->nama_customer; ?>" placeholder="Nama customer" readonly>
-</div>
-<div class="form-group">
-    <label>PIC</label>
-    <input type="text" class="form-control" name="pic_customer" id="pic_customer" value="<?php echo $edit->pic_customer; ?>" placeholder="PIC">
-</div>
-<div class="form-group">
-    <label>Alamat</label>
-    <textarea type="text" class="form-control" name="alamat_customer" id="alamat_customer" placeholder="Alamat" style="height:100px;"><?php echo $edit->alamat_customer; ?></textarea>
-</div>
-<div class="form-group">
-    <label>No. Telepon / HP</label>
-    <input type="text" class="form-control" name="kontak_customer" id="kontak_customer" value="<?php echo $edit->kontak_customer; ?>" placeholder="No. Telepon / HP">
-</div>
-<div class="form-group">
-    <label>Username</label>
-    <input type="hidden" class="form-control" name="username_customer_lama" id="username_customer_lama" value="<?php echo $edit->username_customer; ?>" placeholder="Password">
-    <input type="text" class="form-control" name="username_customer_baru" id="username_customer_baru" value="<?php echo $edit->username_customer; ?>" placeholder="Password">
-</div>
-<div class="form-group">
-    <label>Password</label>
-    <input type="text" class="form-control" name="password_customer" id="password_customer" value="<?php echo $edit->password_customer; ?>" placeholder="Password">
+    <div class="col-md-6 col-12 mb-3">
+        <h5 class="mb-3">Data Akun</h5>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="hidden" class="form-control" name="username_customer_lama" id="username_customer_lama" value="<?php echo $edit->username_customer; ?>" placeholder="Password">
+            <input type="text" class="form-control" name="username_customer_baru" id="username_customer_baru" value="<?php echo $edit->username_customer; ?>" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" name="password_customer" id="password_customer" value="<?php echo $edit->password_customer; ?>" placeholder="Password">
+        </div>
+        <h5 class="mb-3 mt-5">Data Ongkos Kirim</h5>
+        <div class="form-group">
+            <label>Ongkos Kirim (Rp.)</label>
+            <input type="text" class="form-control" name="ongkir_customer" id="ongkir_customer" value="<?php echo $edit->ongkir_customer; ?>" placeholder="Biaya ongkos kirim ke customer per truk">
+        </div>
+        <div class="form-group">
+            <label>Berat Muatan per Truk (Kg)</label>
+            <input type="text" class="form-control" name="berat_ongkir_customer" id="berat_ongkir_customer" value="<?php echo $edit->berat_ongkir_customer; ?>" placeholder="Berat muatan per truk">
+        </div>
+    </div>
 </div>
 <?php } ?>
 
 <script>
+    $("#ongkir_customer").on("input", function(){
+        var regexp = /[^0-9]/g;
+        if($(this).val().match(regexp)){
+            $(this).val( $(this).val().replace(regexp,'') );
+        }
+    });
+
+    $("#berat_ongkir_customer").on("input", function(){
+        var regexp = /[^0-9]/g;
+        if($(this).val().match(regexp)){
+            $(this).val( $(this).val().replace(regexp,'') );
+        }
+    });
+
     $("#kontak_customer").on("input", function(){
         var regexp = /[^0-9]/g;
         if($(this).val().match(regexp)){

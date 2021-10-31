@@ -66,6 +66,8 @@ class Login extends CI_Controller {
             $this->session->set_userdata('ses_alamat_customer',$data['alamat_customer']);
             $this->session->set_userdata('ses_kontak_customer',$data['kontak_customer']);
             $this->session->set_userdata('ses_foto_customer',$data['foto_customer']);
+            $this->session->set_userdata('ses_ongkir_customer',$data['ongkir_customer']);
+            $this->session->set_userdata('ses_berat_ongkir_customer',$data['berat_ongkir_customer']);  
             $this->session->set_userdata('ses_username_customer',$data['username_customer']);
             $this->session->set_userdata('ses_password_customer',$data['password_customer']);     
             echo "customer/dashboard";

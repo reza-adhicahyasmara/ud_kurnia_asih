@@ -66,7 +66,7 @@ class Mod_bank extends CI_Model {
     function get_rekening_pab(){
         $this->db->select('t_bank.*, t_rekening.*');
         $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank');
-        $this->db->where('id', '');
+        $this->db->where('id', null);
         $this->db->order_by('t_bank.nama_bank ASC');
         return $this->db->get('t_rekening');
     }

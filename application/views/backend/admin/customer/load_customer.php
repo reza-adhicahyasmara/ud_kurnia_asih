@@ -8,6 +8,8 @@
             <th id="" style="text-align: center; vertical-align: middle; ">PIC</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Alamat</th>
             <th id="" style="text-align: center; vertical-align: middle; ">No. Telp / HP</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Ongkir / Truk (Rp)</th>
+            <th id="" style="text-align: center; vertical-align: middle; ">Berat / Truk (Kg)</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Username</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Password</th>
             <th id="" style="text-align: center; vertical-align: middle; ">Aksi</th>
@@ -39,10 +41,12 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->pic_customer;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->alamat_customer;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->kontak_customer;?></td>
+            <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->ongkir_customer, 0, ".", ".");?></td>
+            <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->berat_ongkir_customer, 0, ".", ".");?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->username_customer;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->password_customer;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-info btn-sm btn-rounded btn_edit' href="<?php echo base_url('admin/customer/form_edit_customer/').$row->id_customer; ?>" ><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_customer' id_customer = "<?php echo $row->id_customer; ?>" ><span class="bx bx-fw bx-pencil"></span></a>
                 <a class='btn btn-danger btn-sm btn-rounded btn_hapus_customer' nama_customer="<?php echo $row->nama_customer; ?>" id_customer="<?php echo $row->id_customer; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>

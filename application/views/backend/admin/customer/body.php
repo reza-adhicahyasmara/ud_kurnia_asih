@@ -36,7 +36,7 @@
 
 <form role="form" id="form_customer" method="post">
     <div id="modal_customer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <strong><span class="modal-title text-lg" id="myModalLabel"></span></strong>

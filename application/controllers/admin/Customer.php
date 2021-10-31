@@ -39,7 +39,8 @@ class Customer extends BaseControllerBackend {
         $this->load->view("backend/admin/customer/form_tambah_customer", NULL);
     }
 
-    function form_edit_customer($id_customer){
+    function form_edit_customer(){
+        $id_customer = $this->input->post('id_customer');
 		$data['edit'] = $this->Mod_customer->get_customer($id_customer);
 		$this->load->view("backend/admin/customer/form_edit_customer", $data);
     }
@@ -50,6 +51,8 @@ class Customer extends BaseControllerBackend {
         $kontak_customer = $this->input->post('kontak_customer');
         $alamat_customer = $this->input->post('alamat_customer');
         $foto_customer = $this->input->post('foto_customer');
+        $ongkir_customer = $this->input->post('ongkir_customer');
+        $berat_ongkir_customer = $this->input->post('berat_ongkir_customer');
         $username_customer_baru = $this->input->post('username_customer_baru');
         $password_customer = $this->input->post('password_customer');
         $id_customer = md5($nama_customer).date('Ymd');
@@ -67,6 +70,8 @@ class Customer extends BaseControllerBackend {
                 'kontak_customer'       => $kontak_customer,
                 'alamat_customer'       => $alamat_customer,
                 'foto_customer'         => $foto_customer,
+                'ongkir_customer'       => $ongkir_customer,
+                'berat_ongkir_customer' => $berat_ongkir_customer,
                 'username_customer'     => $username_customer_baru,
                 'password_customer'     => $password_customer            
             );
@@ -83,6 +88,8 @@ class Customer extends BaseControllerBackend {
         $kontak_customer = $this->input->post('kontak_customer');
         $alamat_customer = $this->input->post('alamat_customer');
         $foto_customer = $this->input->post('foto_customer');
+        $ongkir_customer = $this->input->post('ongkir_customer');
+        $berat_ongkir_customer = $this->input->post('berat_ongkir_customer');
         $username_customer_lama = $this->input->post('username_customer_lama');
         $username_customer_baru = $this->input->post('username_customer_baru');
         $password_customer = $this->input->post('password_customer');
@@ -98,6 +105,8 @@ class Customer extends BaseControllerBackend {
                 'kontak_customer'       => $kontak_customer,
                 'alamat_customer'       => $alamat_customer,
                 'foto_customer'         => $foto_customer,
+                'ongkir_customer'       => $ongkir_customer,
+                'berat_ongkir_customer' => $berat_ongkir_customer,
                 'username_customer'     => $username_customer_baru,
                 'password_customer'     => $password_customer  
             );
@@ -116,6 +125,8 @@ class Customer extends BaseControllerBackend {
                     'kontak_customer'       => $kontak_customer,
                     'alamat_customer'       => $alamat_customer,
                     'foto_customer'         => $foto_customer,
+                    'ongkir_customer'       => $ongkir_customer,
+                    'berat_ongkir_customer' => $berat_ongkir_customer,
                     'username_customer'     => $username_customer_baru,
                     'password_customer'     => $password_customer  
                 );     

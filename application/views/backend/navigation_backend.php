@@ -175,12 +175,49 @@
 
         $total_notif_supp = 0;
         $total_notif_supp = $bb_limit_sup + $total_pemesanan_sup + $total_retur_sup + $proposal_sup;
-    }elseif($this->session->userdata('ses_akses') =='Supplier'){ 
+    }elseif($this->session->userdata('ses_akses') =='Customer'){ 
+        $id_customer = $this->session->userdata('ses_id_customer');
 
+        $menuggu_pembayaran_cus = 0;
+        $menunggu_verifikasi_cus = 0;
+        $proses_cus = 0;
+        $dikirim_cus = 0;
+        $retur_cus = 0;
+        $total_pemesanan_cus = 0;
+        foreach($this->Mod_produk->get_pemesanan_produk_customer($id_customer)->result() as $row) {
+            if($row->status_pemesanan_produk == 1){
+                $menuggu_pembayaran_cus += 1;
+            }
+            elseif($row->status_pemesanan_produk == 2){
+                $menunggu_verifikasi_cus += 1;
+            }
+            elseif($row->status_pemesanan_produk == 3){
+                $proses_cus += 1;
+            }
+            elseif($row->status_pemesanan_produk == 4){
+                $dikirim_cus += 1;
+            }
+            elseif($row->status_pemesanan_produk == 7){
+                $retur_cus += 1;
+            }
+        }
+        $total_pemesanan_cus = $menuggu_pembayaran_cus + $menunggu_verifikasi_cus + $proses_cus + $dikirim_cus + $retur_cus; 
+
+        $menunggu_konfirmasi_cus = 0;
+        $retur_dikrim_cus = 0;
+        $total_retur_cus = 0;
+        // foreach($this->Mod_produk->get_all_retur_produk()->result() as $row) {
+        //     if($row->id_customer == $id_customer){
+        //         if($row->status_retur_produk == 1){
+        //             $menunggu_konfirmasi_cus += 1;
+        //         }
+        //         elseif($row->status_retur_produk == 2){
+        //             $retur_dikrim_cus += 1;
+        //         }
+        //     }
+        // }
+        // $total_retur_cus = $menunggu_konfirmasi_cus + $retur_dikrim_cus;
     }
-
-
-
 
     $url_foto_karyawan = base_url('assets/img/karyawan/'.$this->session->userdata('ses_foto_karyawan'));
     $url_foto_supplier = base_url('assets/img/supplier/'.$this->session->userdata('ses_foto_supplier'));
@@ -250,28 +287,40 @@ by exius-dev
     
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/backend/css/adminlte.min.css">
     <style>
-    .page-item.active .page-link {
-        z-index: 3;
-        color: #fff;
-        background-color: #6f42c1;
-        border-color: #6f42c1;
-    }
-    .page-link {
-        position: relative;
-        display: block;
-        padding: .5rem .75rem;
-        margin-left: -1px;
-        line-height: 1.25;
-        color: #6f42c1;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-    }
-    a {
-        color: #6f42c1;
-        text-decoration: none;
-        background-color: transparent;
-    }
+        /* COLOR CUSTOM */
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+        }
+        .page-link {
+            position: relative;
+            display: block;
+            padding: .5rem .75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #6f42c1;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+        a {
+            color: #6f42c1;
+            text-decoration: none;
+            background-color: transparent;
+        }
 
+        /* INPUT NUMBER CUSTOM */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 
@@ -435,7 +484,6 @@ by exius-dev
                                 </ul>
                             </li>
                         <?php }elseif($this->session->userdata('ses_akses') =='Supplier'){ ?>
-                            
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">
                                     <?php if($this->session->userdata('ses_foto_supplier') != "") { ?>
@@ -459,10 +507,7 @@ by exius-dev
                             <li class="nav-item"><a href="<?php echo base_url('supplier/ongkos_kirim'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-truck"></i><p>Ongkos Kirim</p></a></li>
                             <li class="nav-item"><a href="<?php echo base_url('supplier/rekening'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-bank"></i><p>Rekening Bank</p></a></li>
                         <?php }elseif($this->session->userdata('ses_akses') =='Customer'){
-                            $id_customer = $this->session->userdata('ses_id_customer');
-                            $total_pemesanan_cus = 0;
-                            $total_retur_cus = 0;
-                        ?>
+                            $id_customer = $this->session->userdata('ses_id_customer'); ?>
                             
                             <li class="nav-item has-treeview"> 
                                 <a href="#" class="nav-link">

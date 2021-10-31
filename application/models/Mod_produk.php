@@ -5,13 +5,17 @@ class Mod_produk extends CI_Model {
 
     //PRODUK
     function get_all_produk(){ 
-        $this->db->select('t_produk.*, t_kategori.*');
+        $this->db->select('t_produk.*, t_kategori.*, t_satuan.*');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
         $this->db->order_by('t_produk.nama_produk ASC');
         return $this->db->get('t_produk'); 
     }
 
     function get_produk($kode_produk){
+        $this->db->select('t_produk.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
         $this->db->where('kode_produk', $kode_produk);
         return $this->db->get('t_produk');
     }
@@ -46,9 +50,10 @@ class Mod_produk extends CI_Model {
 
     //PENYESUAIAN STOK
     function get_all_penyesuaian_produk(){ 
-        $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*');
+        $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
         $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
         $this->db->order_by('t_penyesuaian_produk.tanggal_penyesuaian_produk ASC');
         return $this->db->get('t_penyesuaian_produk'); 
     }
@@ -74,11 +79,132 @@ class Mod_produk extends CI_Model {
     }
 
 
+     //PEMESANAN PRODUK
+     function get_all_pemesanan_produk(){ 
+        $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->order_by('t_pemesanan_produk.tanggal_pemesanan_produk ASC');
+        return $this->db->get('t_pemesanan_produk'); 
+    }
+
+    function get_pemesanan_produk($kode_pemesanan_produk){
+        $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
+        return $this->db->get('t_pemesanan_produk');
+    }
+
+    function get_pemesanan_produk_customer($id_customer){
+        $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->where('t_pemesanan_produk.id_customer', $id_customer);
+        return $this->db->get('t_pemesanan_produk');
+    }
+
+    function insert_pemesanan_produk($tabel, $data){
+        $insert = $this->db->insert($tabel, $data);
+        return $insert;
+    }
+
+    function update_pemesanan_produk($kode_pemesanan_produk, $data){
+        $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
+		$this->db->update('t_pemesanan_produk', $data);
+    }
+
+
+
+    //PEMESANAN ITEM PRODUK
+    function get_all_item_pemesanan_produk(){ 
+        $this->db->select('t_ipemesanan_produk.*, t_produk.*, t_customer.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
+        $this->db->join('t_customer', 't_customer.id_customer = t_ipemesanan_produk.id_customer', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->order_by('t_produk.nama_produk ASC');
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function get_item_pemesanan_produk($kode_pemesanan_produk){ 
+        $this->db->select('t_ipemesanan_produk.*, t_produk.*, t_customer.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
+        $this->db->join('t_customer', 't_customer.id_customer = t_ipemesanan_produk.id_customer', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->where('t_ipemesanan_produk.kode_pemesanan_produk', $kode_pemesanan_produk);
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function get_tanggal_kadaluwarsa($kode_pemesanan_produk){ 
+        $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
+        $this->db->where('tanggal_kadaluwarsa_ipemesanan_produk', null);
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function cek_item_pemesanan_produk($kode_produk){
+        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
+        $this->db->where('t_produk.kode_produk', $kode_produk);
+        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk', '1');
+        return $this->db->get('t_ipemesanan_produk');
+    }
+
+    function cek_item_pemesanan_produk_customer($id_customer){
+        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
+        $this->db->where('t_ipemesanan_produk.id_customer', $id_customer);
+        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk', '1');
+        return $this->db->get('t_ipemesanan_produk');
+    }
+
+    function cek_item_doubel(){ 
+        $this->db->select('t_ipemesanan_produk.*, t_produk.*, t_customer.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
+        $this->db->join('t_customer', 't_customer.id_customer = t_ipemesanan_produk.id_customer', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk', '1');
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function cek_item_retur($kode_pemesanan_produk){ 
+        $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
+        $this->db->where('status_ipemesanan_produk = 5');
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function cek_item_kirim($kode_pemesanan_produk){ 
+        $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
+        $this->db->where('status_ipemesanan_produk = 3');
+        return $this->db->get('t_ipemesanan_produk'); 
+    }
+
+    function insert_item_pemesanan_produk($tabel, $data){
+        $insert = $this->db->insert($tabel, $data);
+        return $insert;
+    }
+
+    function update_item_pemesanan_produk($kode_ipemesanan_produk, $data){
+        $this->db->where('kode_ipemesanan_produk', $kode_ipemesanan_produk);
+		$this->db->update('t_ipemesanan_produk', $data);
+    }
+
+    function delete_item_pemesanan_produk($kode, $tabel){
+        $this->db->where('kode_ipemesanan_produk', $kode);
+        $this->db->delete($tabel);
+    }
+
+
+
     //RETUR STOK
     function get_all_retur_produk(){ 
-        $this->db->select('t_retur_produk.*, t_produk.*, t_kategori.*');
+        $this->db->select('t_retur_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
         $this->db->join('t_produk', 't_produk.kode_produk = t_retur_produk.kode_produk', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
         $this->db->order_by('t_retur_produk.tanggal_retur_produk ASC');
         return $this->db->get('t_retur_produk'); 
     }
@@ -165,9 +291,11 @@ class Mod_produk extends CI_Model {
 
     //GRAFIK
     function grafik_masuk_produk($kode_produk){
-        $this->db->select("SUM(jumlah_produk_masuk) AS jumlah, MONTH(tanggal_produk_masuk) AS bulan, YEAR(tanggal_produk_masuk) AS tahun");
-        $this->db->from('t_produk_masuk');
-        $this->db->where('kode_produk', $kode_produk);
+        $this->db->select("SUM(t_ipemesanan_produk.jumlah_ipemesanan_produk) AS jumlah, MONTH(t_pemesanan_produk.tanggal_pemesanan_produk) AS bulan, YEAR(t_pemesanan_produk.tanggal_pemesanan_produk) AS tahun");
+        $this->db->from('t_ipemesanan_produk');
+        $this->db->join('t_pemesanan_produk', 't_pemesanan_produk.kode_pemesanan_produk = t_ipemesanan_produk.kode_pemesanan_produk', 'left');
+        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk = 3');
+        $this->db->where('t_ipemesanan_produk.kode_produk', $kode_produk);
         $this->db->group_by('bulan');
         return $this->db->get();
     }
@@ -182,13 +310,26 @@ class Mod_produk extends CI_Model {
 
 
     //LAPORAN
-    function get_laporan_masuk($tanggal_awal, $tanggal_akhir){ 
-        $this->db->select('t_produk_masuk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->where("t_produk_masuk.tanggal_produk_masuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
-        $this->db->order_by('t_produk_masuk.tanggal_produk_masuk ASC');
-        return $this->db->get('t_produk_masuk'); 
+    function get_laporan_pemesanan($tanggal_awal, $tanggal_akhir, $status){ 
+        $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->where("t_pemesanan_produk.tanggal_pemesanan_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->where("t_pemesanan_produk.status_pemesanan_produk IN($status)");
+        $this->db->order_by('t_pemesanan_produk.tanggal_pemesanan_produk ASC');
+        return $this->db->get('t_pemesanan_produk'); 
+    }
+    
+    function get_laporan_masuk($tanggal_awal, $tanggal_akhir,){ 
+        $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
+        $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
+        $this->db->join('t_bank', 't_bank.kode_bank = t_rekening.kode_bank', 'left');
+        $this->db->where("t_pemesanan_produk.tanggal_pemesanan_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->where("t_pemesanan_produk.status_pemesanan_produk ", "5");
+        $this->db->order_by('t_pemesanan_produk.tanggal_pemesanan_produk ASC');
+        return $this->db->get('t_pemesanan_produk'); 
     }
     
     function get_laporan_keluar($tanggal_awal, $tanggal_akhir){ 
