@@ -80,15 +80,15 @@
     $menunggu_konfirmasi_pro = 0;
     $retur_dikrim_pro = 0;
     $total_retur_pro = 0;
-    foreach($this->Mod_bahan_baku->get_all_retur_bb()->result() as $row) {
-        if($row->status_retur_bb == 1){
+    foreach($this->Mod_produk->get_all_retur_produk()->result() as $row) {
+        if($row->status_retur_produk == 1){
             $menunggu_konfirmasi_pro += 1;
         }
-        elseif($row->status_retur_bb == 2){
+        elseif($row->status_retur_produk == 2){
             $retur_dikrim_pro += 1;
         }
     }
-    $total_retur_por = $menunggu_konfirmasi_pro + $retur_dikrim_pro;
+    $total_retur_pro = $menunggu_konfirmasi_pro + $retur_dikrim_pro;
     
     $proposal = 0;
     foreach($this->Mod_proposal->get_all_proposal_supplier()->result() as $row) {

@@ -68,6 +68,7 @@ class Pemesanan_bahan_baku extends BaseControllerBackend {
         if($nik_karyawan != null && $hak_akses == 'Admin'){
             $this->global['pageTitle'] = "Invoice";
             
+            $data['list_bahan_baku'] = $this->Mod_bahan_baku->get_item_pemesanan_bb($kode_pemesanan_bb);
             $data['data_detail'] = $this->Mod_bahan_baku->get_pemesanan_bb($kode_pemesanan_bb);
 
             $this->loadViews("backend/admin/pemesanan_bahan_baku/body_invoice",$this->global,$data,"backend/admin/pemesanan_bahan_baku/footer_invoice");
