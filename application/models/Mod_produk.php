@@ -374,7 +374,17 @@ class Mod_produk extends CI_Model {
         return $this->db->get('t_pemesanan_produk'); 
     }
     
-    function get_laporan_masuk($tanggal_awal, $tanggal_akhir,){ 
+    function get_laporan_masuk($tanggal_awal, $tanggal_akhir){ 
+        $this->db->select('t_produk_masuk.*, t_produk.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'inner');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
+        $this->db->where("t_produk_masuk.tanggal_produk_masuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->order_by('t_produk_masuk.tanggal_produk_masuk ASC');
+        return $this->db->get('t_produk_masuk'); 
+    }
+    
+    function get_laporan_keluar($tanggal_awal, $tanggal_akhir,){ 
         $this->db->select('t_pemesanan_produk.*, t_customer.*, t_rekening.*, t_bank.*');
         $this->db->join('t_customer', 't_customer.id_customer = t_pemesanan_produk.id_customer', 'left');
         $this->db->join('t_rekening', 't_rekening.kode_rekening = t_pemesanan_produk.kode_rekening', 'left');
@@ -383,15 +393,6 @@ class Mod_produk extends CI_Model {
         $this->db->where("t_pemesanan_produk.status_pemesanan_produk ", "5");
         $this->db->order_by('t_pemesanan_produk.tanggal_pemesanan_produk ASC');
         return $this->db->get('t_pemesanan_produk'); 
-    }
-    
-    function get_laporan_keluar($tanggal_awal, $tanggal_akhir){ 
-        $this->db->select('t_produk_keluar.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_keluar.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->where("t_produk_keluar.tanggal_produk_keluar BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
-        $this->db->order_by('t_produk_keluar.tanggal_produk_keluar ASC');
-        return $this->db->get('t_produk_keluar'); 
     }
     
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir){ 
@@ -403,11 +404,11 @@ class Mod_produk extends CI_Model {
         return $this->db->get('t_penyesuaian_produk'); 
     }
 
-    function get_laporan_retur($tanggal_awal, $tanggal_akhir){ 
-        $this->db->select('t_retur_produk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_retur_produk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+    function get_laporan_retur($tanggal_awal, $tanggal_akhir, $status){ 
+        $this->db->select('t_retur_produk.*, t_customer.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_retur_produk.id_customer', 'left');
         $this->db->where("t_retur_produk.tanggal_retur_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
+        $this->db->where("t_retur_produk.status_retur_produk IN($status)");
         $this->db->order_by('t_retur_produk.tanggal_retur_produk ASC');
         return $this->db->get('t_retur_produk'); 
     }

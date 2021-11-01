@@ -411,6 +411,7 @@ by exius-dev
                             </li>
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bxs-report"></i><p>Laporan Produk<i class="fas fa-angle-left right"></i></p></a>
                                 <ul class="nav nav-treeview">
+                                    <li class="nav-item"><a href="<?php echo base_url('admin/laporan_produk/data_pemesanan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Pemesanan</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/laporan_produk/data_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Masuk</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/laporan_produk/data_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('admin/laporan_produk/data_penyesuaian_stok'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Penyesuaian Stok</p></a></li>
@@ -487,6 +488,7 @@ by exius-dev
                             </li>
                             <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="nav-icon bx bx-fw bxs-report"></i><p>Laporan Produk<i class="fas fa-angle-left right"></i></p></a>
                                 <ul class="nav nav-treeview">
+                                    <li class="nav-item"><a href="<?php echo base_url('pimpinan/laporan_produk/data_pemesanan'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Pemesanan</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('pimpinan/laporan_produk/data_masuk'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Masuk</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('pimpinan/laporan_produk/data_keluar'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Keluar</p></a></li>
                                     <li class="nav-item"><a href="<?php echo base_url('pimpinan/laporan_produk/data_penyesuaian_stok'); ?>" class="nav-link"><i class="nav-icon bx bx-fw bxs-file"></i><p>Penyesuaian Stok</p></a></li>
