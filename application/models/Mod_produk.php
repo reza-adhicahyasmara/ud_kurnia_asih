@@ -337,23 +337,30 @@ class Mod_produk extends CI_Model {
 
     //GRAFIK
     function grafik_masuk_produk($kode_produk){
-        $this->db->select("SUM(t_ipemesanan_produk.jumlah_ipemesanan_produk) AS jumlah, MONTH(t_pemesanan_produk.tanggal_pemesanan_produk) AS bulan, YEAR(t_pemesanan_produk.tanggal_pemesanan_produk) AS tahun");
-        $this->db->from('t_ipemesanan_produk');
-        $this->db->join('t_pemesanan_produk', 't_pemesanan_produk.kode_pemesanan_produk = t_ipemesanan_produk.kode_pemesanan_produk', 'left');
-        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk = 3');
-        $this->db->where('t_ipemesanan_produk.kode_produk', $kode_produk);
-        $this->db->group_by('bulan');
-        return $this->db->get();
-    }
-
-    function grafik_keluar_produk($kode_produk){
-        $this->db->select("SUM(jumlah_produk_keluar) AS jumlah, MONTH(tanggal_produk_keluar) AS bulan, YEAR(tanggal_produk_keluar) AS tahun");
-        $this->db->from('t_produk_keluar');
+        $this->db->select("SUM(jumlah_produk_masuk) AS jumlah, MONTH(tanggal_produk_masuk) AS bulan, YEAR(tanggal_produk_masuk) AS tahun");
+        $this->db->from('t_produk_masuk');
         $this->db->where('kode_produk', $kode_produk);
         $this->db->group_by('bulan');
         return $this->db->get();
     }
 
+    function grafik_keluar_produk($kode_produk){
+        $this->db->select("SUM(jumlah_ipemesanan_produk) AS jumlah, MONTH(tanggal_masuk_ipemesanan_produk) AS bulan, YEAR(tanggal_masuk_ipemesanan_produk) AS tahun");
+        $this->db->from('t_ipemesanan_produk');
+        $this->db->where('kode_produk', $kode_produk);
+        $this->db->where('status_ipemesanan_produk = 6');
+        $this->db->group_by('bulan');
+        return $this->db->get();
+    }
+
+    function grafik_retur_produk($kode_produk){
+        $this->db->select("SUM(t_iretur_produk.jumlah_iretur_produk) AS jumlah, MONTH(t_retur_produk.tanggal_retur_produk) AS bulan, YEAR(t_retur_produk.tanggal_retur_produk) AS tahun");
+        $this->db->from('t_iretur_produk');
+        $this->db->join('t_retur_produk', 't_retur_produk.kode_retur_produk = t_iretur_produk.kode_retur_produk', 'left');
+        $this->db->where('t_iretur_produk.kode_produk', $kode_produk);
+        $this->db->group_by('bulan');
+        return $this->db->get();
+    }
 
     //LAPORAN
     function get_laporan_pemesanan($tanggal_awal, $tanggal_akhir, $status){ 

@@ -27,6 +27,17 @@
                     pointHighlightStroke: 'rgba(220, 53, 69,1)',
                     data                : <?php echo $jumlah_keluar; ?>
                 },
+                {
+                    label               : 'Retur',
+                    backgroundColor     : 'rgba(111, 66, 193, 0.8)',
+                    borderColor         : 'rgba(111, 66, 193, 0.8)',
+                    pointRadius         : true,
+                    pointColor          : '#6f42c1',
+                    pointStrokeColor    : 'rgba(111, 66, 193, 0.8)',
+                    pointHighlightFill  : '#fff',
+                    pointHighlightStroke: 'rgba(111, 66, 193,1)',
+                    data                : <?php echo $jumlah_retur; ?>
+                },
             ],
         },
         options: {

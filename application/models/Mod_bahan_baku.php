@@ -420,11 +420,10 @@ class Mod_bahan_baku extends CI_Model {
 
     //GRAFIK
     function grafik_masuk_bb($kode_bb){
-        $this->db->select("SUM(t_ipemesanan_bb.jumlah_ipemesanan_bb) AS jumlah, MONTH(t_pemesanan_bb.tanggal_pemesanan_bb) AS bulan, YEAR(t_pemesanan_bb.tanggal_pemesanan_bb) AS tahun");
+        $this->db->select("SUM(jumlah_ipemesanan_bb) AS jumlah, MONTH(tanggal_masuk_ipemesanan_bb) AS bulan, YEAR(tanggal_masuk_ipemesanan_bb) AS tahun");
         $this->db->from('t_ipemesanan_bb');
-        $this->db->join('t_pemesanan_bb', 't_pemesanan_bb.kode_pemesanan_bb = t_ipemesanan_bb.kode_pemesanan_bb', 'left');
-        $this->db->where('t_ipemesanan_bb.status_ipemesanan_bb = 3');
-        $this->db->where('t_ipemesanan_bb.kode_bb', $kode_bb);
+        $this->db->where('kode_bb', $kode_bb);
+        $this->db->where('status_ipemesanan_bb = 6');
         $this->db->group_by('bulan');
         return $this->db->get();
     }
@@ -437,6 +436,14 @@ class Mod_bahan_baku extends CI_Model {
         return $this->db->get();
     }
 
+    function grafik_retur_bb($kode_bb){
+        $this->db->select("SUM(t_iretur_bb.jumlah_iretur_bb) AS jumlah, MONTH(t_retur_bb.tanggal_retur_bb) AS bulan, YEAR(t_retur_bb.tanggal_retur_bb) AS tahun");
+        $this->db->from('t_iretur_bb');
+        $this->db->join('t_retur_bb', 't_retur_bb.kode_retur_bb = t_iretur_bb.kode_retur_bb', 'left');
+        $this->db->where('t_iretur_bb.kode_bb', $kode_bb);
+        $this->db->group_by('bulan');
+        return $this->db->get();
+    }
 
 
 

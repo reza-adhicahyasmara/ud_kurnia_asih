@@ -41,7 +41,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.kode_bahan_baku').select2({
+        $('.kode_bb').select2({
             theme: 'bootstrap4',
         })
     });
@@ -52,12 +52,12 @@
         })
     });
     
-    $('#kode_bahan_baku').on("change",function(){
-        var kode_bahan_baku = $('#kode_bahan_baku').val();
+    $('#kode_bb').on("change",function(){
+        var kode_bb = $('#kode_bb').val();
                 
         var url = '<?php echo base_url('pimpinan/dashboard/load_grafik_bahan_baku'); ?>';
         $('#chart_bahan_baku').load(url,{
-            kode_bahan_baku : kode_bahan_baku
+            kode_bb : kode_bb
         });
     }); 
 
@@ -69,7 +69,6 @@
             kode_produk : kode_produk
         });
     }); 
-
 </script>
 
 </body>

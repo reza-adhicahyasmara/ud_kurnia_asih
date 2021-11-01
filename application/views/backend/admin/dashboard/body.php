@@ -107,10 +107,10 @@
                     <h3 class="card-title">Grafik Transaksi Bahan Baku</h3>
                 </div>
                 <div class="card-body">
-                    <select class="form-control kode_bahan_baku col-3" id="kode_bahan_baku">
+                    <select class="form-control kode_bb col-3" id="kode_bb">
                         <option value="">Pilih Bahan Baku</option>
                         <?php foreach($bahan_baku->result() as $row){ ?>
-                            <option value="<?php echo $row->kode_bahan_baku; ?>"><?php echo $row->kode_bahan_baku." - ".$row->nama_bahan_baku; ?></option>
+                            <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->kode_bb." - ".$row->nama_bb; ?></option>
                         <?php } ?>
                     </select>
                     <div class="chart mt-2" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;">

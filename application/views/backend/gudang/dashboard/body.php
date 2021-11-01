@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bx-grid-alt"></span> Dashboard</h1>
+                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bx-grid-alt"></span>Dashboard</h1>
                 </div>
                 <div class="col-sm-6 float-sm-right">
                     <ol class="breadcrumb float-sm-right m-2">
@@ -15,7 +15,7 @@
     </div>
     
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid">         
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Stok Bahan Baku Akan Habis</h3>
@@ -107,10 +107,10 @@
                     <h3 class="card-title">Grafik Transaksi Bahan Baku</h3>
                 </div>
                 <div class="card-body">
-                    <select class="form-control kode_bahan_baku col-3" id="kode_bahan_baku">
+                    <select class="form-control kode_bb col-3" id="kode_bb">
                         <option value="">Pilih Bahan Baku</option>
                         <?php foreach($bahan_baku->result() as $row){ ?>
-                            <option value="<?php echo $row->kode_bahan_baku; ?>"><?php echo $row->kode_bahan_baku." - ".$row->nama_bahan_baku; ?></option>
+                            <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->kode_bb." - ".$row->nama_bb; ?></option>
                         <?php } ?>
                     </select>
                     <div class="chart mt-2" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;">
