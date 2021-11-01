@@ -72,6 +72,12 @@ class Pemesanan_produk extends BaseControllerBackend {
         $this->load->view('backend/customer/pemesanan_produk/load_data_item_produk', $data);
     }
 
+    function form_tambah(){
+        $kode_produk = $this->input->post('kode_produk');
+        $data['data'] = $this->Mod_produk->get_produk($kode_produk);
+        $this->load->view("backend/customer/pemesanan_produk/form_tambah", $data);
+    }
+
     function insert_item_pemesanan_produk(){
         $id_customer = $this->session->userdata('ses_id_customer');  
         $kode_produk = $this->input->post('kode_produk');

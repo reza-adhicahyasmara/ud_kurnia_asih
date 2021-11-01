@@ -160,16 +160,6 @@ class Mod_produk extends CI_Model {
         return $this->db->get('t_ipemesanan_produk');
     }
 
-    function cek_item_doubel(){ 
-        $this->db->select('t_ipemesanan_produk.*, t_produk.*, t_customer.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_ipemesanan_produk.kode_produk', 'left');
-        $this->db->join('t_customer', 't_customer.id_customer = t_ipemesanan_produk.id_customer', 'left');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
-        $this->db->where('t_ipemesanan_produk.status_ipemesanan_produk', '1');
-        return $this->db->get('t_ipemesanan_produk'); 
-    }
-
     function cek_item_retur($kode_pemesanan_produk){ 
         $this->db->where('kode_pemesanan_produk', $kode_pemesanan_produk);
         $this->db->where('status_ipemesanan_produk = 5');
@@ -199,18 +189,25 @@ class Mod_produk extends CI_Model {
 
 
 
-    //RETUR STOK
+    //RETUR PRODUK
     function get_all_retur_produk(){ 
-        $this->db->select('t_retur_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_retur_produk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->select('t_retur_produk.*, t_customer.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_retur_produk.id_customer', 'left');
         $this->db->order_by('t_retur_produk.tanggal_retur_produk ASC');
         return $this->db->get('t_retur_produk'); 
     }
 
     function get_retur_produk($kode_retur_produk){
+        $this->db->select('t_retur_produk.*, t_customer.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_retur_produk.id_customer', 'left');
         $this->db->where('kode_retur_produk', $kode_retur_produk);
+        return $this->db->get('t_retur_produk');
+    }
+
+    function get_retur_produk_customer($id_customer){
+        $this->db->select('t_retur_produk.*, t_customer.*');
+        $this->db->join('t_customer', 't_customer.id_customer = t_retur_produk.id_customer', 'left');
+        $this->db->where('t_customer.id_customer', $id_customer);
         return $this->db->get('t_retur_produk');
     }
 
@@ -221,14 +218,63 @@ class Mod_produk extends CI_Model {
 
     function update_retur_produk($kode_retur_produk, $data){
         $this->db->where('kode_retur_produk', $kode_retur_produk);
-        $this->db->update('t_retur_produk', $data);
+		$this->db->update('t_retur_produk', $data);
     }
 
-    function delete_retur_produk($kode, $tabel){
-        $this->db->where('kode_retur_produk', $kode);
+
+
+    //RETUR ITEM PRODUK
+    function get_all_item_retur_produk(){ 
+        $this->db->select('t_iretur_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_iretur_produk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->order_by('t_produk.nama_produk ASC');
+        return $this->db->get('t_iretur_produk'); 
+    }
+    
+    function get_item_retur_produk($kode_retur_produk){ 
+        $this->db->select('t_iretur_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_iretur_produk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
+        $this->db->where('t_iretur_produk.kode_retur_produk', $kode_retur_produk);
+        return $this->db->get('t_iretur_produk'); 
+    }
+
+    function cek_item_retur_produk($id_customer, $kode_produk){
+        $this->db->where('id_customer', $id_customer);
+        $this->db->where('kode_produk', $kode_produk);
+        $this->db->where('status_iretur_produk = 1');
+        return $this->db->get('t_iretur_produk');
+    }
+
+    function cek_item_retur_produk_customer($id_customer){
+        $this->db->where('id_customer', $id_customer);
+        $this->db->where('status_iretur_produk = 1');
+        return $this->db->get('t_iretur_produk');
+    }
+
+    function cek_item_proses($kode_retur_produk){ 
+        $this->db->where('kode_retur_produk', $kode_retur_produk);
+        $this->db->where('status_iretur_produk = 2');
+        return $this->db->get('t_iretur_produk'); 
+    }
+
+    function insert_item_retur_produk($tabel, $data){
+        $insert = $this->db->insert($tabel, $data);
+        return $insert;
+    }
+
+    function update_item_retur_produk($kode_iretur_produk, $data){
+        $this->db->where('kode_iretur_produk', $kode_iretur_produk);
+		$this->db->update('t_iretur_produk', $data);
+    }
+
+    function delete_item_retur_produk($kode, $tabel){
+        $this->db->where('kode_iretur_produk', $kode);
         $this->db->delete($tabel);
     }
-
 
     //PRODUK MASUK
     function get_all_produk_masuk(){ 
