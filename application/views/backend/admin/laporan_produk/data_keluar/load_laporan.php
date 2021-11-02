@@ -32,7 +32,7 @@
             $subtotal_harga = 0; 
             $no = 1;
             foreach($data->result() as $row) {
-                $baris = 1;
+                $baris = 0;
                 foreach($item_produk->result() as $row1) {   
                     if($row1->kode_pemesanan_produk == $row->kode_pemesanan_produk){
                         $baris += 1;
