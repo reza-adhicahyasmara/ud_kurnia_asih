@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bxs-file"></span> Laporan Retur Bahan Baku</h1>
+                    <h1 class="m-1 text-dark"><span class="nav-icon bx bx-fw bxs-file"></span> Laporan Retur Porduk</h1>
                 </div>
                 <div class="col-sm-6 float-sm-right">
                     <ol class="breadcrumb float-sm-right m-2">
                         <span class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>">Dashboard</a></span>
-                        <span class="breadcrumb-item active">Laporan Retur Bahan Baku</span>
+                        <span class="breadcrumb-item active">Laporan Retur Porduk</span>
                     </ol>
                 </div>
             </div>
