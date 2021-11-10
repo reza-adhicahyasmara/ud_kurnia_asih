@@ -55,3 +55,98 @@
 </div>
 <?php } ?>
       
+<!-----------------------FUNGSI----------------------->
+<script type="text/javascript">
+    $("#kontak_karyawan").on("input", function(){
+        var regexp = /[^0-9]/g;
+        if($(this).val().match(regexp)){
+            $(this).val( $(this).val().replace(regexp,'') );
+        }
+    });
+
+    $("#nama_karyawan").on("input", function(){
+        var regexp = /[^a-z A-Z]/g;
+        if($(this).val().match(regexp)){
+            $(this).val( $(this).val().replace(regexp,'') );
+        }
+    });
+</script>
+
+<!-----------------------DROPZONE----------------------->
+<script src="<?php echo base_url(); ?>assets/plugins/dropzone/dropzone.js"></script>
+<script>
+    //Oploadna ditembak
+    Dropzone.autoDiscover = false;
+    var url_delete = "<?php echo base_url('pimpinan/karyawan/hapus_foto'); ?>";
+    var url_save = "<?php echo base_url('pimpinan/karyawan/simpan_foto'); ?>";
+
+    var foto_karyawan1 = new Dropzone("#my_drop",{ 
+        url: url_save,
+        maxFiles : 1,
+        acceptedFiles : 'image/*',
+        dictInvalidFileType:"Type file ini tidak dizinkan",
+        dictMaxFilesExceeded: "Hanya dapat unggah satu gambar",
+        dictRemoveFile: "Hapus",
+        addRemoveLinks:true,
+        init: function(){  
+            var foto = $('#foto_karyawan').val();
+            if(foto == null){
+                this.on("success",function(file,response){
+                    $('#foto_karyawan').val(response);
+                }); 
+            }else{
+                this.on("success",function(file,response){
+                    $('#foto_karyawan').val(response);
+                    $.ajax({
+                        url: url_delete,
+                        type: "post",
+                        data: {foto_karyawan:foto},
+                        cache: false,
+                        dataType: 'json',
+                        success: function(response){
+                            if(response == 1){
+                            }
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+    //Teu jadi upload
+    foto_karyawan1.on("removedfile",function(){
+        var foto_karyawan = $('#foto_karyawan').val();
+        $.ajax({
+            url: url_delete,
+            type: "post",
+            data: {foto_karyawan:foto_karyawan},
+            cache: false,
+            dataType: 'json',
+            success: function(response){
+                if(response == 1){
+                    $("#foto_karyawan").val("");
+                }
+            }
+        });
+    });
+
+     //Ngahapus gambar
+     $('#hapus_gambar_karyawan').on("click",function(){
+        var foto_karyawan = $('#foto_karyawan').val();
+        $.ajax({
+            url: url_delete,
+            type: "post",
+            data: {foto_karyawan:foto_karyawan},
+            cache: false,
+            dataType: 'json',
+            success: function(response){
+                if(response == 1){
+                    $("#foto_karyawan").val("");
+                    $("img#assets_karyawan").show(500); 
+                    $("img#foto").hide(500); 
+                    $("a#teks_karyawan").hide(500); 
+                }
+            }
+        });
+    });
+</script>
