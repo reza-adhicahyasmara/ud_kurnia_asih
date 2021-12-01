@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v12.5.1 (64 bit)
+SQLyog Professional v12.5.1 (64 bit)
 MySQL - 10.4.21-MariaDB : Database - ud_kurnia_asih
 *********************************************************************
 */
@@ -25,6 +25,8 @@ CREATE TABLE `t_bahan_baku` (
   `id_supplier` varchar(50) DEFAULT NULL,
   `kode_satuan` int(10) DEFAULT NULL,
   `kode_kategori` int(10) DEFAULT NULL,
+  `kode_proposal` varchar(50) DEFAULT NULL,
+  `status_penawaran_bb` varchar(10) DEFAULT NULL COMMENT '1. penawaran, 2. diterima, 3. ditolak',
   `nama_bb` varchar(50) DEFAULT NULL,
   `harga_bb` float DEFAULT NULL,
   `stok_gudang_pab_bb` float DEFAULT NULL,
@@ -36,9 +38,10 @@ CREATE TABLE `t_bahan_baku` (
 
 /*Data for the table `t_bahan_baku` */
 
-insert  into `t_bahan_baku`(`kode_bb`,`id_supplier`,`kode_satuan`,`kode_kategori`,`nama_bb`,`harga_bb`,`stok_gudang_pab_bb`,`stok_limit_pab_bb`,`stok_gudang_sup_bb`,`stok_limit_sup_bb`) values 
-('BB1','supplier1',8,3,'Bawang Merah',30000,11119.8,1000,-8000,200),
-('BB2','supplier1',8,3,'Bawang Putih',16000,6102,1000,21000,100);
+insert  into `t_bahan_baku`(`kode_bb`,`id_supplier`,`kode_satuan`,`kode_kategori`,`kode_proposal`,`status_penawaran_bb`,`nama_bb`,`harga_bb`,`stok_gudang_pab_bb`,`stok_limit_pab_bb`,`stok_gudang_sup_bb`,`stok_limit_sup_bb`) values 
+('BB1','supplier1',8,3,NULL,'Diterima','Bawang Merah',30000,11119.8,1000,-8000,200),
+('BB2','supplier1',8,3,NULL,'Diterima','Bawang Putih',16000,6102,1000,21000,100),
+('we','supplier1',2,3,'4b21e06d4a4396a10be1e57a9371a175','Diterima','we',2322320,0,2323,NULL,NULL);
 
 /*Table structure for table `t_bank` */
 
@@ -476,7 +479,7 @@ insert  into `t_produk_masuk`(`kode_produk_masuk`,`kode_produk`,`jumlah_produk_m
 DROP TABLE IF EXISTS `t_proposal`;
 
 CREATE TABLE `t_proposal` (
-  `kode_proposal` int(10) NOT NULL AUTO_INCREMENT,
+  `kode_proposal` varchar(50) NOT NULL,
   `id` varchar(50) DEFAULT NULL,
   `tanggal_proposal` datetime DEFAULT NULL,
   `judul_proposal` varchar(100) DEFAULT NULL,
@@ -486,6 +489,9 @@ CREATE TABLE `t_proposal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `t_proposal` */
+
+insert  into `t_proposal`(`kode_proposal`,`id`,`tanggal_proposal`,`judul_proposal`,`berkas_proposal`,`status_proposal`) values 
+('4b21e06d4a4396a10be1e57a9371a175','supplier1','2021-12-01 01:38:06','sdsad','INI_TEH_DEMO_BERKAS_PDF.pdf',2);
 
 /*Table structure for table `t_rekening` */
 
