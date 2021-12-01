@@ -5,10 +5,11 @@ class Mod_bahan_baku extends CI_Model {
 
     //BAHAN BAKU
     function get_all_bahan_baku(){ 
-        $this->db->select('t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
+        $this->db->select('t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*, t_proposal.*');
         $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_proposal', 't_proposal.kode_proposal = t_bahan_baku.kode_proposal', 'left');
         $this->db->order_by('t_bahan_baku.nama_bb ASC');
         return $this->db->get('t_bahan_baku'); 
     }
@@ -33,6 +34,12 @@ class Mod_bahan_baku extends CI_Model {
 
     function cek_bahan_baku($nama_bb){
         $this->db->where('nama_bb', $nama_bb);
+        return $this->db->get('t_bahan_baku');
+    }
+
+    function cek_bahan_baku_penawaran($kode_proposal){
+        $this->db->where('status_penawaran_bb', 'Penawaran');
+        $this->db->where('kode_proposal', $kode_proposal);
         return $this->db->get('t_bahan_baku');
     }
 

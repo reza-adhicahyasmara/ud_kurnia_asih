@@ -83,6 +83,27 @@
     </div>
 </form>
 
+
+<div id="modal_bahan_baku" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong><span class="modal-title text-lg" id="myModalLabel"></span></strong>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- FORM -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="bx bx-fw bx-x"></span> Batal</button>
+                <button type="button" id="btn_update_penawaran" class="btn bg-purple"><span class="bx bx-fw bx-save"></span> Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="modal_view_pdf" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

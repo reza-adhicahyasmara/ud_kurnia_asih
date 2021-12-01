@@ -31,11 +31,54 @@ class Proposal extends BaseControllerBackend {
         }  
     }
 
+    //PENAWARAN
     function load_data_penawaran(){
         $data['penawaran'] = $this->Mod_proposal->get_all_proposal_supplier();
         $this->load->view('backend/admin/proposal/load_penawaran', $data);
     }
 
+    function form_bahan_baku(){
+        $data['kode_proposal'] = $this->input->post('kode_proposal');
+        $data['bahan_baku'] = $this->Mod_bahan_baku->get_all_bahan_baku();
+        $this->load->view("backend/admin/proposal/form_bahan_baku", $data);
+    }
+    
+    function update_bahan_baku(){
+        $aaa = explode("|",$this->input->post('status_penawaran_bb'));
+        $kode_bb = $aaa[0];
+        $status_penawaran_bb = $aaa[1];
+        echo $status_penawaran_bb;  
+
+        $save  = array( 
+            'kode_bb'                => $kode_bb,
+            'status_penawaran_bb'    => $status_penawaran_bb
+        );
+
+        $this->Mod_bahan_baku->update_bahan_baku($kode_bb, $save);    
+    }
+
+    function update_penawaran(){
+        $kode_proposal = $this->input->post('kode_proposal');
+        $status_proposal = 2;
+        
+        $cek_item1 = $this->Mod_bahan_baku->cek_bahan_baku_penawaran($kode_proposal);
+        if($cek_item1->num_rows() > 0){ 
+            echo "Ada item yang belum diproses";
+        } else {
+            
+            echo 1;
+            $save  = array(
+                'kode_proposal'         => $kode_proposal, 
+                'status_proposal'       => $status_proposal
+            );
+            $this->Mod_proposal->update_proposal($kode_proposal, $save);  
+        }
+                    
+    }
+
+
+
+    //PERMINTAAN
     function load_data_permintaan(){
         $data['permintaan'] = $this->Mod_proposal->get_all_proposal_supplier();
         $this->load->view('backend/admin/proposal/load_permintaan', $data);
@@ -46,26 +89,10 @@ class Proposal extends BaseControllerBackend {
     }
 
     function view_pdf_proposal(){
-        $aaa = explode("|",$this->input->post('aaa'));
+        $berkas_proposal = $this->input->post('berkas_proposal');
         
-        $kode_proposal = $aaa[0];
-        $data['berkas_proposal'] = $aaa[1];
-        $status_proposal = 2;
-                    
-        $save  = array(
-            'kode_proposal'         => $kode_proposal, 
-            'status_proposal'       => $status_proposal
-        );
-                    
-        $this->Mod_proposal->update_proposal($kode_proposal, $save);  
-        $this->load->view('backend/admin/proposal/view_pdf', $data);
-    }
-
-    function view_pdf_permintaan(){
-        $aaa = explode("|",$this->input->post('aaa'));
-        
-        $data['berkas_proposal'] = $aaa[1];
-        $this->load->view('backend/admin/proposal/view_pdf', $data);
+        $data['berkas_proposal'] = $berkas_proposal;
+        $this->load->view('backend/supplier/proposal/view_pdf', $data);
     }
 
     function tambah_permintaan(){  

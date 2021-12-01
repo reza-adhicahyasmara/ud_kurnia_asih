@@ -30,7 +30,8 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->judul_proposal;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->berkas_proposal;?></td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-info btn-sm btn-rounded view_pdf_proposal' berkas_proposal="<?php echo $row->berkas_proposal; ?>" kode_proposal="<?php echo $row->kode_proposal; ?>"><span class="bx bx-fw bxs-file-pdf"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded view_pdf_proposal' berkas_proposal="<?php echo $row->berkas_proposal; ?>"><span class="bx bx-fw bxs-file-pdf"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_bahan_baku' kode_proposal="<?php echo $row->kode_proposal; ?>"><span class="bx bx-fw bxl-dropbox"></span></a>
             </td>
         </tr>
         <?php
@@ -49,18 +50,22 @@
         });
     });
     
-    $('.view_pdf_proposal').on("click",function(){ 
+    $('.btn_bahan_baku').on("click",function(){
         var kode_proposal = $(this).attr("kode_proposal");
+        var url = "<?php echo base_url('admin/proposal/form_bahan_baku'); ?>";
+
+        $('#modal_bahan_baku').modal('show');
+        $('.modal-title').text('Daftar Penawaran Bahan Baku');
+        $('.modal-body').load(url, {kode_proposal:kode_proposal});
+    });
+    
+    $('.view_pdf_proposal').on("click",function(){ 
         var berkas_proposal = $(this).attr("berkas_proposal");
-        var aaa = kode_proposal + "|" + berkas_proposal;
         var url = '<?php echo base_url('admin/proposal/view_pdf_proposal'); ?>';
 
         $('#modal_view_pdf').modal('show');
         $('.modal-title').text('PDF');
-        $('.modal-body').load(url, {aaa:aaa});
-
-        
-        load_data_proposal();
+        $('.modal-body').load(url, {berkas_proposal:berkas_proposal});
     });
 
 </script>

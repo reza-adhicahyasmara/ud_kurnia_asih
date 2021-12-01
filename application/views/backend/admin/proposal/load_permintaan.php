@@ -41,14 +41,13 @@
         });
     });
     
-    $('.view_pdf_permintaan').on("click",function(){ 
-        var kode_proposal = $(this).attr("kode_proposal");
+    $('.view_pdf_proposal').on("click",function(){ 
         var berkas_proposal = $(this).attr("berkas_proposal");
-        var aaa = kode_proposal + "|" + berkas_proposal;
-        var url = '<?php echo base_url('admin/proposal/view_pdf_permintaan'); ?>';
+        var url = '<?php echo base_url('admin/proposal/view_pdf_proposal'); ?>';
 
         $('#modal_view_pdf').modal('show');
         $('.modal-title').text('PDF');
-        $('.modal-body').load(url, {aaa:aaa});
+        $('.modal-body').load(url, {berkas_proposal:berkas_proposal});
     });
+
 </script>
