@@ -6,7 +6,7 @@
         <option value="">Pilih</option>
         <?php 
             foreach($bahan_baku->result() as $row){
-                if($row->status_penawaran_bb == "Diterima" && $row->kode_proposal == ""){ 
+                if($row->status_penawaran_bb == "Diterima"){ 
         ?>
         <option value="<?php echo $row->kode_bb; ?>" stok_gudang_pab_bb = <?php echo $row->stok_gudang_pab_bb; ?>><?php echo $row->nama_bb; ?></option>
         <?php 
