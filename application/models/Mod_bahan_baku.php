@@ -51,6 +51,11 @@ class Mod_bahan_baku extends CI_Model {
         $this->db->delete($tabel);
     }
 
+    function delete_all_bahan_baku($kode, $tabel){
+        $this->db->where('kode_bb', $kode);
+        $this->db->delete($tabel);
+    }
+
 
 
     //KATEGORI

@@ -138,7 +138,9 @@
                     var html = '';
                     var i;
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].kode_bb+'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'+'</option>';
+                        if(data[i].status_penawaran_bb == 'Diterima'){ 
+                            html += '<option value='+data[i].kode_bb+'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'+'</option>';
+                        }
                     }
                     $('#kode_bb').html(html);
                 }

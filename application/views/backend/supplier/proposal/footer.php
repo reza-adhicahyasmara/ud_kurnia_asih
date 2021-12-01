@@ -40,6 +40,7 @@
 </script>
 
 
+<!-----------------------PENAWARAN----------------------->
 <script type="text/javascript">
 
     load_data_penawaran();
@@ -76,75 +77,6 @@
         $('#modal_proposal').modal('show');
         $('.modal-title').text('Tambah Penawaran');
         $('.modal-body').load(url);
-    });
-
-    $(document).ready(function() {
-        $('#btn_simpan_proposal').on("click",function(){
-            $('#form_proposal').validate({
-                rules: {
-                    judul_proposal: {
-                        required: true,
-                    },
-                    berkas_proposal: {
-                        required: true,
-                    },
-                },
-                messages: {
-                    judul_proposal: {
-                        required: "Nama harus diisi",
-                    },
-                    berkas_proposal: {
-                        required: "Berkas harus diisi",
-                    },
-                },
-                errorElement: 'span',
-                errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                },
-                submitHandler: function() {
-                    var jenis = $('#jenis').val();
-                    if (jenis == "Tambah"){
-                        
-                        $.ajax({
-                            url : '<?php echo base_url('supplier/proposal/tambah_proposal'); ?>',
-                            method: 'POST',
-                            data : $('#form_proposal').serialize(),
-                            success: function(response){
-                                if(response==1){
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Berhasil!',
-                                        text: 'Data telah ditambahkan',
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#6f42c1',
-                                        timer: 3000
-                                    }).then(function(){
-                                        load_data_penawaran();
-                                        $('#modal_proposal').modal('hide');
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Gagal!',
-                                        text: 'Response',
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#6f42c1',
-                                        timer: 3000
-                                    })
-                                }
-                            }
-                        }); 
-                    }
-                }
-            });
-        });
     });
 
     $(document).on('click', '.btn_hapus_proposal', function(e) {

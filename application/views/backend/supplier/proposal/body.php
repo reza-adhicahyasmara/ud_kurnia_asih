@@ -63,7 +63,7 @@
 
 <form role="form" id="form_proposal" method="post">
     <div id="modal_proposal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <strong><span class="modal-title text-lg" id="myModalLabel"></span></strong>
@@ -73,10 +73,6 @@
                 </div>
                 <div class="modal-body">
                     <!-- FORM -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="bx bx-fw bx-x"></span> Batal</button>
-                    <button type="submit" id="btn_simpan_proposal" class="btn bg-purple"><span class="bx bx-fw bx-save"></span> Simpan</button>
                 </div>
             </div>
         </div>

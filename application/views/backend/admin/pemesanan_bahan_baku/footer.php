@@ -154,9 +154,11 @@
                     var html = '';
                     var i;
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].kode_bb+' harga_bb = '+data[i].harga_bb+' stok_gudang_sup_bb = '+data[i].stok_gudang_sup_bb+'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'+'</option>';
-                        var harga_bb = data[0].harga_bb; //default nilai
-                        var stok_gudang_sup_bb = data[0].stok_gudang_sup_bb; //default nilai
+                        if(data[i].status_penawaran_bb == 'Diterima'){ 
+                            html += '<option value='+data[i].kode_bb+' harga_bb = '+data[i].harga_bb+' stok_gudang_sup_bb = '+data[i].stok_gudang_sup_bb+'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'+'</option>';
+                            var harga_bb = data[0].harga_bb; //default nilai
+                            var stok_gudang_sup_bb = data[0].stok_gudang_sup_bb; //default nilai
+                        }
                     }
                     $('#kode_bb').html(html);
                     var number1 = new Number(harga_bb).toLocaleString("id-ID");

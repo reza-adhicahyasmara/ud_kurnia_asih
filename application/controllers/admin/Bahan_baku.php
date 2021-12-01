@@ -60,6 +60,7 @@ class Bahan_baku extends BaseControllerBackend {
         $harga_bb = 0;
         $stok_gudang_pab_bb = 0;
         $stok_limit_pab_bb = $this->input->post('stok_limit_pab_bb');
+        $status_penawaran_bb = $this->input->post('status_penawaran_bb');
 
         $cek_kode = $this->Mod_bahan_baku->get_bahan_baku($kode_bb_baru);
         $cek_nama = $this->Mod_bahan_baku->cek_bahan_baku($nama_bb_baru);
@@ -78,7 +79,8 @@ class Bahan_baku extends BaseControllerBackend {
                 'nama_bb'               => $nama_bb_baru,
                 'harga_bb'              => $harga_bb,
                 'stok_gudang_pab_bb'    => $stok_gudang_pab_bb,
-                'stok_limit_pab_bb'     => $stok_limit_pab_bb            
+                'stok_limit_pab_bb'     => $stok_limit_pab_bb,
+                'status_penawaran_bb'   => $status_penawaran_bb            
             );
                         
             $this->Mod_bahan_baku->insert_bahan_baku("t_bahan_baku", $save);  

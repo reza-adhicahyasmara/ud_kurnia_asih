@@ -15,6 +15,7 @@
         <?php 
             $no = 1;
             foreach($bahan_baku_keluar->result() as $row) {
+                if($row->status_penawaran_bb == "Diterima" && $row->kode_proposal == ""){
         ?>
         <tr>
             <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
@@ -27,7 +28,8 @@
         </tr>
         <?php
             $no++;
-             } 
+                }
+            } 
         ?>
     </tbody>
 </table>

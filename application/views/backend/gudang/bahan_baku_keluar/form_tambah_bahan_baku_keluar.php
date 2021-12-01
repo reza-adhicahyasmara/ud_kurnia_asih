@@ -4,9 +4,15 @@
     <label>Bahan Baku</label>
     <select class="form-control kode_bb" name="kode_bb" id="kode_bb">
         <option value="">Pilih</option>
-        <?php foreach($bahan_baku->result() as $row){ ?>
+        <?php 
+            foreach($bahan_baku->result() as $row){
+                if($row->status_penawaran_bb == "Diterima" && $row->kode_proposal == ""){
+        ?>
         <option value="<?php echo $row->kode_bb; ?>" stok_gudang_pab_bb = <?php echo $row->stok_gudang_pab_bb; ?>><?php echo $row->nama_bb; ?></option>
-        <?php } ?> 
+        <?php 
+                }
+            }
+        ?> 
     </select>
 </div>
 <div class="form-group mb-3">

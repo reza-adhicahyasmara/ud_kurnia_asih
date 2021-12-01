@@ -43,7 +43,9 @@ class Proposal extends BaseControllerBackend {
     }
 
     function form_tambah_proposal(){
-        $this->load->view("backend/supplier/proposal/form_tambah_penawaran", NULL);
+        $data['kategori'] = $this->Mod_bahan_baku->get_all_kategori();
+        $data['satuan'] = $this->Mod_bahan_baku->get_all_satuan();
+        $this->load->view("backend/supplier/proposal/form_tambah_penawaran", $data);
     }
     
     function view_pdf_proposal(){
@@ -61,23 +63,47 @@ class Proposal extends BaseControllerBackend {
     }
 
     function tambah_proposal(){  
+        
         $id_supplier = $this->session->userdata('ses_id_supplier'); 
         $tanggal_proposal = date("Y-m-d h:i:s");
         $judul_proposal = $this->input->post('judul_proposal');
         $berkas_proposal = $this->input->post('berkas_proposal');
         $status_proposal = 1;
+        $kode_proposal = md5($tanggal_proposal);
 
-        echo 1;
-                    
-        $save  = array(
-            'tanggal_proposal'         => $tanggal_proposal,
-            'id'                       => $id_supplier,  
-            'judul_proposal'           => $judul_proposal,  
-            'berkas_proposal'          => $berkas_proposal,  
-            'status_proposal'          => $status_proposal
-        );
-                    
-        $this->Mod_proposal->insert_proposal("t_proposal", $save);                   
+        if($judul_proposal == ""){
+            echo "Judul propasl harus diisi"; 
+        }elseif($berkas_proposal == ""){
+            echo "Berkas proposal harus diisi";
+        }else{
+            echo 1;
+                        
+            $save  = array(
+                'kode_proposal'            => $kode_proposal,
+                'tanggal_proposal'         => $tanggal_proposal,
+                'id'                       => $id_supplier,  
+                'judul_proposal'           => $judul_proposal,  
+                'berkas_proposal'          => $berkas_proposal,  
+                'status_proposal'          => $status_proposal
+            );
+                        
+            $this->Mod_proposal->insert_proposal("t_proposal", $save);                   
+        }
+
+        $item = $this->Mod_bahan_baku->get_all_bahan_baku()->result();
+
+        foreach($item as $row){
+            if($row->kode_proposal == "" && $row->status_penawaran_bb == "Penawaran"){
+                $kode_bb = $row->kode_bb;
+                
+                $data = array(
+                    'kode_bb'           => $kode_bb,
+                    'kode_proposal'     => $kode_proposal
+                );
+                
+                $this->Mod_bahan_baku->update_bahan_baku($kode_bb, $data); 
+            }
+        }
     }
 
     function hapus_proposal(){
@@ -85,6 +111,7 @@ class Proposal extends BaseControllerBackend {
         $berkas_proposal = $this->input->post('berkas_proposal');
         unlink('assets/berkas/'.$berkas_proposal);
         $this->Mod_proposal->delete_proposal($kode_proposal, 't_proposal');
+        $this->Mod_bahan_baku->delete_all_bahan_baku($kode_proposal, 't_bahan_baku');
     } 
 
     function save_pdf(){
@@ -114,4 +141,53 @@ class Proposal extends BaseControllerBackend {
 			echo $image;
 		}
     }
+
+
+
+    //LIST BAHAN BAKU PENAWARAN
+    function load_data_bahan_baku(){
+        $data['bahan_baku'] = $this->Mod_bahan_baku->get_all_bahan_baku();
+        $this->load->view('backend/supplier/proposal/load_bahan_baku', $data);
+    }
+
+    function tambah_bahan_baku(){ 
+        $kode_bb_baru = $this->input->post('kode_bb_baru');
+        $id_supplier = $this->session->userdata('ses_id_supplier');   
+        $kode_kategori = $this->input->post('kode_kategori');
+        $kode_satuan = $this->input->post('kode_satuan');
+        $nama_bb_baru = $this->input->post('nama_bb_baru');
+        $harga_bb = $this->input->post('harga_bb');
+        $stok_gudang_pab_bb = 0;
+        $stok_limit_pab_bb = $this->input->post('stok_limit_pab_bb');
+        $status_penawaran_bb = "Penawaran";
+
+        $cek_kode = $this->Mod_bahan_baku->get_bahan_baku($kode_bb_baru);
+        $cek_nama = $this->Mod_bahan_baku->cek_bahan_baku($nama_bb_baru);
+
+        if($cek_kode->num_rows() > 0){
+            echo "Kode sudah digunakan";
+        }elseif($cek_nama->num_rows() > 0){
+                echo "Nama sudah digunakan";
+        }else{          
+            echo 1;
+            $save  = array(
+                'kode_bb'               => $kode_bb_baru,
+                'id_supplier'           => $id_supplier,
+                'kode_kategori'         => $kode_kategori,
+                'kode_satuan'           => $kode_satuan,
+                'nama_bb'               => $nama_bb_baru,
+                'harga_bb'              => $harga_bb,
+                'stok_gudang_pab_bb'    => $stok_gudang_pab_bb,
+                'stok_limit_pab_bb'     => $stok_limit_pab_bb,
+                'status_penawaran_bb'   => $status_penawaran_bb            
+            );
+                        
+            $this->Mod_bahan_baku->insert_bahan_baku("t_bahan_baku", $save);  
+        }      
+    }
+
+    function hapus_bahan_baku(){
+        $kode_bb = $this->input->post('kode_bb');
+        $this->Mod_bahan_baku->delete_bahan_baku($kode_bb, 't_bahan_baku');
+    } 
 }

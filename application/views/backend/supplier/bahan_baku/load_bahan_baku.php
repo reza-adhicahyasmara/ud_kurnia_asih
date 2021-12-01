@@ -18,7 +18,7 @@
         <?php 
             $no = 1;
             foreach($bahan_baku->result() as $row) {
-                if($row->id_supplier ==  $this->session->userdata('ses_id_supplier')){
+                if($row->id_supplier == $this->session->userdata('ses_id_supplier') && $row->status_penawaran_bb == "Diterima" && $row->kode_proposal == ""){
         ?>
         <tr>
             <td style="text-align: center; vertical-align: middle;"><?php echo $no;?></td>
