@@ -89,7 +89,6 @@ class Pemesanan_produk extends BaseControllerBackend {
 
         $cek_item1 = $this->Mod_produk->cek_item_pemesanan_produk($kode_produk);
         $cek_item2 = $this->Mod_produk->cek_item_pemesanan_produk_customer($id_customer);
-        $cek_item3 = $this->Mod_produk->cek_item_doubel();
         
 
         if($cek_item1->num_rows() > 0){ 
@@ -103,23 +102,18 @@ class Pemesanan_produk extends BaseControllerBackend {
         }else if($jumlah_ipemesanan_produk > $stok_gudang_produk){
             echo "Jumlah item melebihi stok gudang";
         }else{
-            if($cek_item3->num_rows() > 0){//jika sudah ada data
-                if($cek_item2->num_rows() > 0){ 
-                    echo 1;         
-                    $save  = array( 
-                        'kode_produk'                   => $kode_produk,
-                        'id_customer'               => $id_customer,
-                        'jumlah_ipemesanan_produk'      => $jumlah_ipemesanan_produk,
-                        'harga_ipemesanan_produk'       => $harga_ipemesanan_produk,
-                        'subtotal_ipemesanan_produk'    => $subtotal_ipemesanan_produk,
-                        'status_ipemesanan_produk'      => $status_ipemesanan_produk
-                    );
-                    
-                    $this->Mod_produk->insert_item_pemesanan_produk("t_ipemesanan_produk", $save);  
+            if($cek_item2->num_rows() > 0){ 
+                echo 1;         
+                $save  = array( 
+                    'kode_produk'                   => $kode_produk,
+                    'id_customer'               => $id_customer,
+                    'jumlah_ipemesanan_produk'      => $jumlah_ipemesanan_produk,
+                    'harga_ipemesanan_produk'       => $harga_ipemesanan_produk,
+                    'subtotal_ipemesanan_produk'    => $subtotal_ipemesanan_produk,
+                    'status_ipemesanan_produk'      => $status_ipemesanan_produk
+                );
                 
-                }else{
-                    echo "Hanya satu supplier yang sama dalam satu pemesanan";
-                }
+                $this->Mod_produk->insert_item_pemesanan_produk("t_ipemesanan_produk", $save);  
             }else{ //jika data ksong
                 echo 1;
                 $save  = array( 
