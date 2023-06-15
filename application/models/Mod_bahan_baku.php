@@ -415,6 +415,50 @@ class Mod_bahan_baku extends CI_Model {
     }
 
 
+
+    //RESEP
+    function get_all_resep($kode_produk){ 
+        $this->db->select('t_resep.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'inner');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
+        $this->db->order_by('t_bahan_baku.nama_bb ASC');
+        $this->db->where('kode_produk', $kode_produk);
+        return $this->db->get('t_resep'); 
+    }
+
+    function get_resep($kode_resep){
+        $this->db->select('t_resep.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'inner');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
+        $this->db->where('kode_resep', $kode_resep);
+        return $this->db->get('t_resep');
+    }
+
+    function cek_resep($kode_bb, $kode_produk){
+        $this->db->where('kode_bb', $kode_bb);
+        $this->db->where('kode_produk', $kode_produk);
+        return $this->db->get('t_resep');
+    }
+
+    function insert_resep($tabel, $data){
+        $insert = $this->db->insert($tabel, $data);
+        return $insert;
+    }
+
+    function update_resep($kode_resep, $data){
+        $this->db->where('kode_resep', $kode_resep);
+		$this->db->update('t_resep', $data);
+    }
+
+    function delete_resep($kode, $tabel){
+        $this->db->where('kode_resep', $kode);
+        $this->db->delete($tabel);
+    }
+
+
+
     //PERULANGAN
     
     function getValueOfTable($tableName,$column,$where){

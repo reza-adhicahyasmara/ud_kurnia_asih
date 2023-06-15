@@ -324,5 +324,20 @@
     });
 </script>
 
+
+
+<script type="text/javascript">
+
+    $(document).on('click', '.btn_resep', function(e) {
+        var kode_produk=$(this).attr("kode_produk");
+        var url = "<?php echo base_url('admin/produk/form_resep'); ?>";
+
+        $('#modal_resep').modal('show');
+        $('.modal-title').text('Bill of Material');
+        $('.modal-body').load(url,{kode_produk : kode_produk});
+    });  
+
+</script>
+
 </body>
 </html>

@@ -60,7 +60,7 @@
         var url = "<?php echo base_url('gudang/bahan_baku_keluar/form_tambah_bahan_baku_keluar'); ?>";
 
         $('#modal_bahan_baku_keluar').modal('show');
-        $('.modal-title').text('Tambah Produk Keluar');
+        $('.modal-title').text('Produksi Barang');
         $('.modal-body').load(url);
     });
 

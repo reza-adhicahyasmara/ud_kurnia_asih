@@ -41,7 +41,8 @@ class Produk extends BaseControllerBackend {
         $this->load->view("backend/admin/produk/form_tambah_produk", $data);
     }
 
-    function form_edit_produk($kode_produk){
+    function form_edit_produk(){
+        $kode_produk = $this->input->post('kode_produk');
         $data['kategori'] = $this->Mod_bahan_baku->get_all_kategori();
         $data['satuan'] = $this->Mod_bahan_baku->get_all_satuan();
 		$data['edit'] = $this->Mod_produk->get_produk($kode_produk);
@@ -186,5 +187,52 @@ class Produk extends BaseControllerBackend {
         unlink('assets/img/produk/'.$gambar);
         echo 1;
     }
+
+
+
+
+    function form_resep(){
+        $kode_produk = $this->input->post('kode_produk');
+        $data['produk'] = $this->Mod_produk->get_produk($kode_produk)->row_array();
+		$data['resep'] = $this->Mod_bahan_baku->get_all_resep($kode_produk);
+        $data['bahan_baku'] = $this->Mod_bahan_baku->get_all_bahan_baku();
+		$this->load->view("backend/admin/produk/form_resep", $data);
+    }
+    
+    function load_data_resep(){
+        $kode_produk = $this->input->post('kode_produk');
+		$data['resep'] = $this->Mod_bahan_baku->get_all_resep($kode_produk);
+        $this->load->view('backend/admin/produk/load_resep', $data);
+    }
+
+    function tambah_resep(){ 
+        $kode_bb = $this->input->post('kode_bb');
+        $kode_produk = $this->input->post('kode_produk');
+        $qty_resep = $this->input->post('qty_resep');
+        
+        $cek = $this->Mod_bahan_baku->cek_resep($kode_bb, $kode_produk);
+        if($cek->num_rows() > 0){
+            echo "Bahan baku sudah ada..!!";
+        }
+        elseif($qty_resep == 0){
+            echo "Qty harus diisi..!!";
+        }
+        else {
+            echo 1;
+                        
+            $save  = array(
+                'kode_bb'       => $kode_bb,        
+                'kode_produk'   => $kode_produk,        
+                'qty_resep'     => $qty_resep,        
+            );
+                        
+            $this->Mod_bahan_baku->insert_resep("t_resep", $save);  
+        }                 
+    }
+
+    function hapus_resep(){
+        $kode_resep = $this->input->post('kode_resep');
+        $this->Mod_bahan_baku->delete_resep($kode_resep, 't_resep');
+    } 
     
 }

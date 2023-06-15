@@ -36,7 +36,8 @@
                 ?>
             </td>
             <td style="text-align: center; vertical-align: middle;" >
-                <a class='btn btn-info btn-sm btn-rounded btn_edit' href="<?php echo base_url('admin/produk/form_edit_produk/').$row->kode_produk; ?>" ><span class="bx bx-fw bx-pencil"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_resep' kode_produk = "<?php echo $row->kode_produk; ?>" ><span class="bx bx-fw bx-receipt"></span></a>
+                <a class='btn btn-info btn-sm btn-rounded btn_edit_produk' kode_produk = "<?php echo $row->kode_produk; ?>" ><span class="bx bx-fw bx-pencil"></span></a>
                 <a class='btn btn-danger btn-sm btn-rounded btn_hapus_produk' nama_produk="<?php echo $row->nama_produk; ?>" kode_produk="<?php echo $row->kode_produk; ?>"><span class="bx bx-fw bx-trash"></span></a>
             </td>
         </tr>
