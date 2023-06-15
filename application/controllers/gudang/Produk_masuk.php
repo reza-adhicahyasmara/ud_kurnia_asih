@@ -47,28 +47,68 @@ class Produk_masuk extends BaseControllerBackend {
         $tanggal_produk_masuk = $this->input->post('tanggal_produk_masuk');
         $keterangan_produk_masuk = $this->input->post('keterangan_produk_masuk');
         
-        $kode_produk_masuk = "PRK-".$kode_produk."-".date("YmdHis", strtotime($tanggal_produk_masuk));
-        
-        echo 1;
-        $save  = array(
-            'kode_produk_masuk'          => $kode_produk_masuk,
-            'kode_produk'                => $kode_produk,
-            'jumlah_produk_masuk'        => $jumlah_produk_masuk,
-            'tanggal_produk_masuk'       => $tanggal_produk_masuk,
-            'keterangan_produk_masuk'    => $keterangan_produk_masuk,    
-        );
-                    
-        $this->Mod_produk->insert_produk_masuk("t_produk_masuk", $save);             
-        
-        $stok_gudang_produk = $stok_gudang_produk_lama + $jumlah_produk_masuk;
+        $resep = $this->Mod_bahan_baku->cek_ketersedian_bahan_baku($kode_produk, $jumlah_produk_masuk);
+       
+        if($resep->num_rows() > 0){
+            echo "1";
+        }
+        else{
+            
+            //PENCATATAN PRODUKSI
+            $kode_produk_masuk = "PRK-".$kode_produk."-".date("YmdHis", strtotime($tanggal_produk_masuk));
+            
+            $save  = array(
+                'kode_produk_masuk'          => $kode_produk_masuk,
+                'kode_produk'                => $kode_produk,
+                'jumlah_produk_masuk'        => $jumlah_produk_masuk,
+                'tanggal_produk_masuk'       => $tanggal_produk_masuk,
+                'keterangan_produk_masuk'    => $keterangan_produk_masuk,    
+            );
+                        
+            $this->Mod_produk->insert_produk_masuk("t_produk_masuk", $save);             
+            
+            //PENAMBAHAN STOK PRODUK
+            $stok_gudang_produk = $stok_gudang_produk_lama + $jumlah_produk_masuk;
+    
+            $data2  = array(
+                'kode_produk'          => $kode_produk,
+                'stok_gudang_produk'   => $stok_gudang_produk       
+            );
+                        
+            $this->Mod_produk->update_produk($kode_produk, $data2);      
+    
+            
+            $bahan_baku = $this->Mod_bahan_baku->get_all_resep($kode_produk)->result();
+            foreach($bahan_baku as $row){
 
-        $data2  = array(
-            'kode_produk'          => $kode_produk,
-            'stok_gudang_produk'   => $stok_gudang_produk       
-        );
-                    
-        $this->Mod_produk->update_produk($kode_produk, $data2);      
-        
+                //PENCATATAN BAHAN BAKU KELUAR
+                $kode_bb_keluar = "BBOUT-".$row->kode_bb."-".date("YmdHis", strtotime($tanggal_produk_masuk));
+                
+                $jumlah_bb_keluar = $row->qty_resep * $jumlah_produk_masuk;
+            
+                echo 1;
+                $save  = array(
+                    'kode_bb_keluar'          => $kode_bb_keluar,
+                    'kode_bb'                 => $row->kode_bb,
+                    'jumlah_bb_keluar'        => $jumlah_bb_keluar,
+                    'tanggal_bb_keluar'       => $tanggal_produk_masuk,
+                    'keterangan_bb_keluar'    => $keterangan_produk_masuk,    
+                );
+                     
+                $this->Mod_bahan_baku->insert_bahan_baku_keluar("t_bb_keluar", $save);  
+
+                //PENGURANGAN STOK BAHAN BAKU           
+                $stok_gudang_pab_bb = $row->stok_gudang_pab_bb - $jumlah_bb_keluar;
+    
+                $data2  = array(
+                    'kode_bb'               => $row->kode_bb,
+                    'stok_gudang_pab_bb'    => $stok_gudang_pab_bb       
+                );
+                            
+                $this->Mod_bahan_baku->update_bahan_baku($row->kode_bb, $data2);   
+            }
+
+        }
     }
 
     function hapus_produk_masuk(){

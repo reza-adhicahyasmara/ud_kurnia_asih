@@ -23,7 +23,7 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->kode_bb_keluar;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->kode_bb;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_bb;?></td>
-            <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->jumlah_bb_keluar,0,",",".")." ".$row->nama_satuan;?></td>
+            <td style="text-align: right; vertical-align: middle;"><?php echo number_format($row->jumlah_bb_keluar,2,",",".")." ".$row->nama_satuan;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->keterangan_bb_keluar;?></td>
         </tr>
         <?php

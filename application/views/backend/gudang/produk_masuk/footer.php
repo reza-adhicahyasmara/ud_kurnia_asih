@@ -60,7 +60,7 @@
         var url = "<?php echo base_url('gudang/produk_masuk/form_tambah_produk_masuk'); ?>";
 
         $('#modal_produk_masuk').modal('show');
-        $('.modal-title').text('Tambah Produk Masuk');
+        $('.modal-title').text('Produksi Barang');
         $('.modal-body').load(url);
     });
 
@@ -108,6 +108,15 @@
                         success: function(response){
                             if(response==1){
                                 Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal!',
+                                    text: 'Ada stok di gudang yang kurang, cek lagi',
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#6f42c1',
+                                    timer: 3000
+                                })
+                            } else {
+                                Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil!',
                                     text: 'Data telah ditambahkan',
@@ -118,15 +127,6 @@
                                     load_data_produk_masuk();
                                     $('#modal_produk_masuk').modal('hide');
                                 });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Gagal!',
-                                    text: response,
-                                    showConfirmButton: true,
-                                    confirmButtonColor: '#6f42c1',
-                                    timer: 3000
-                                })
                             }
                         }
                     }); 

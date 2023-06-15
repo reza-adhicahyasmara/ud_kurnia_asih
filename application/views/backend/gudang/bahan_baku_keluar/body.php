@@ -19,12 +19,12 @@
         <div class="container-fluid">
             <div class="card card-secondary card-outline card-outline-tabs">
                 <div class="card-body">
-                    <div class="float-right">
+                    <!-- <div class="float-right">
                         <button type="button" class="btn bg-purple" id="btn_tambah_bahan_baku_keluar"><span class="bx bx-fw bx-plus"></span> Tambah Data </a>
                     </div>
                     <br>
                     <br>
-                    <br>
+                    <br> -->
                     <div id="content_data_bahan_baku_keluar">
                         <!--LOAD DATA-->
                     </div>

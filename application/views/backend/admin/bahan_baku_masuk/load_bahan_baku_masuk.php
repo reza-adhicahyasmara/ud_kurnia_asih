@@ -26,7 +26,7 @@
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_supplier;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_bb;?></td>
             <td style="text-align: left; vertical-align: middle;"><?php echo $row->nama_kategori;?></td>
-            <td style="text-align: center; vertical-align: middle;"><?php echo number_format($row->jumlah_ipemesanan_bb, 0, ".", ".")." ".$row->nama_satuan;?></td>
+            <td style="text-align: center; vertical-align: middle;"><?php echo number_format($row->jumlah_ipemesanan_bb, 2, ".", ".")." ".$row->nama_satuan;?></td>
         </tr>
         <?php
                     $no++;

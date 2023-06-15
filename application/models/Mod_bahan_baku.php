@@ -442,6 +442,15 @@ class Mod_bahan_baku extends CI_Model {
         return $this->db->get('t_resep');
     }
 
+    function cek_ketersedian_bahan_baku($kode_produk, $jumlah_produk_masuk){
+        $countLimit = $this->db->query("SELECT t_resep.*, t_bahan_baku.*
+                                        FROM t_resep
+                                        LEFT JOIN t_bahan_baku ON t_bahan_baku.kode_bb = t_resep.kode_bb
+                                        WHERE IF(t_resep.qty_resep * $jumlah_produk_masuk < t_bahan_baku.stok_gudang_pab_bb, 'YA', 'TIDAK') = 'TIDAK'
+                                       ");
+        return $countLimit;
+    }
+
     function insert_resep($tabel, $data){
         $insert = $this->db->insert($tabel, $data);
         return $insert;

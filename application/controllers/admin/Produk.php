@@ -194,7 +194,6 @@ class Produk extends BaseControllerBackend {
     function form_resep(){
         $kode_produk = $this->input->post('kode_produk');
         $data['produk'] = $this->Mod_produk->get_produk($kode_produk)->row_array();
-		$data['resep'] = $this->Mod_bahan_baku->get_all_resep($kode_produk);
         $data['bahan_baku'] = $this->Mod_bahan_baku->get_all_bahan_baku();
 		$this->load->view("backend/admin/produk/form_resep", $data);
     }

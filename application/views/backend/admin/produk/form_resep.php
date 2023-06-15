@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-7">
             <div class="form-group">
-                <select class="form-control kode_produk" name="kode_produk" id="kode_produk">
-                    <?php foreach($produk->result() as $row){ ?>
-                    <option value="<?php echo $row->kode_produk; ?>"><?php echo $row->nama_produk; ?></option>
+                <select class="form-control kode_bb" name="kode_bb" id="kode_bb">
+                    <?php foreach($bahan_baku->result() as $row){ ?>
+                    <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->nama_bb; ?></option>
                     <?php } ?> 
                 </select>
             </div>
