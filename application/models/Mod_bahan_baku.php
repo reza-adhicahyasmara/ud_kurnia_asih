@@ -6,9 +6,9 @@ class Mod_bahan_baku extends CI_Model {
     //BAHAN BAKU
     function get_all_bahan_baku(){ 
         $this->db->select('t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*, t_proposal.*');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->join('t_proposal', 't_proposal.kode_proposal = t_bahan_baku.kode_proposal', 'left');
         $this->db->order_by('t_bahan_baku.nama_bb ASC');
         return $this->db->get('t_bahan_baku'); 
@@ -16,18 +16,18 @@ class Mod_bahan_baku extends CI_Model {
 
     function get_bahan_baku($kode_bb){
         $this->db->select('t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->where('kode_bb', $kode_bb);
         return $this->db->get('t_bahan_baku');
     }
 
     function get_bahan_baku_supplier($id_supplier){
         $this->db->select('t_bahan_baku.*, t_supplier.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->where('t_bahan_baku.id_supplier', $id_supplier);
         return $this->db->get('t_bahan_baku');
     }
@@ -134,9 +134,9 @@ class Mod_bahan_baku extends CI_Model {
     //PENYESUAIAN STOK
     function get_all_penyesuaian_bb(){ 
         $this->db->select('t_penyesuaian_bb.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_penyesuaian_bb.kode_bb', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_penyesuaian_bb.kode_bb', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->order_by('t_penyesuaian_bb.tanggal_penyesuaian_bb ASC');
         return $this->db->get('t_penyesuaian_bb'); 
     }
@@ -386,10 +386,10 @@ class Mod_bahan_baku extends CI_Model {
     //BAHAN BAKU KELUAR
     function get_all_bahan_baku_keluar(){ 
         $this->db->select('t_bb_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'inner');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'left');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->order_by('t_bb_keluar.tanggal_bb_keluar ASC');
         return $this->db->get('t_bb_keluar'); 
     }
@@ -419,7 +419,7 @@ class Mod_bahan_baku extends CI_Model {
     //RESEP
     function get_all_resep($kode_produk){ 
         $this->db->select('t_resep.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->order_by('t_bahan_baku.nama_bb ASC');
@@ -429,7 +429,7 @@ class Mod_bahan_baku extends CI_Model {
 
     function get_resep($kode_resep){
         $this->db->select('t_resep.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_resep.kode_bb', 'left');
         $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
         $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->where('kode_resep', $kode_resep);
@@ -537,10 +537,10 @@ class Mod_bahan_baku extends CI_Model {
 
     function get_laporan_keluar($tanggal_awal, $tanggal_akhir,){ 
         $this->db->select('t_bb_keluar.*, t_bahan_baku.*, t_kategori.*, t_supplier.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'inner');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bb_keluar.kode_bb', 'left');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->where("t_bb_keluar.tanggal_bb_keluar BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
         $this->db->order_by('t_bb_keluar.tanggal_bb_keluar ASC');
         return $this->db->get('t_bb_keluar'); 
@@ -548,10 +548,10 @@ class Mod_bahan_baku extends CI_Model {
 
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir,){ 
         $this->db->select('t_penyesuaian_bb.*, t_supplier.*, t_bahan_baku.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bahan_baku.kode_bb', 'inner');
-        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'inner');
+        $this->db->join('t_bahan_baku', 't_bahan_baku.kode_bb = t_bahan_baku.kode_bb', 'left');
+        $this->db->join('t_supplier', 't_supplier.id_supplier = t_bahan_baku.id_supplier', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_bahan_baku.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_bahan_baku.kode_satuan', 'left');
         $this->db->where("t_penyesuaian_bb.tanggal_penyesuaian_bb BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
         $this->db->order_by('t_penyesuaian_bb.tanggal_penyesuaian_bb ASC');
         return $this->db->get('t_penyesuaian_bb'); 

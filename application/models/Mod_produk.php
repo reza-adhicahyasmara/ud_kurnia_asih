@@ -6,16 +6,16 @@ class Mod_produk extends CI_Model {
     //PRODUK
     function get_all_produk(){ 
         $this->db->select('t_produk.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
         $this->db->order_by('t_produk.nama_produk ASC');
         return $this->db->get('t_produk'); 
     }
 
     function get_produk($kode_produk){
         $this->db->select('t_produk.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
         $this->db->where('kode_produk', $kode_produk);
         return $this->db->get('t_produk');
     }
@@ -51,9 +51,9 @@ class Mod_produk extends CI_Model {
     //PENYESUAIAN STOK
     function get_all_penyesuaian_produk(){ 
         $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
         $this->db->order_by('t_penyesuaian_produk.tanggal_penyesuaian_produk ASC');
         return $this->db->get('t_penyesuaian_produk'); 
     }
@@ -279,8 +279,8 @@ class Mod_produk extends CI_Model {
     //PRODUK MASUK
     function get_all_produk_masuk(){ 
         $this->db->select('t_produk_masuk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
         $this->db->order_by('t_produk_masuk.tanggal_produk_masuk ASC');
         return $this->db->get('t_produk_masuk'); 
     }
@@ -309,8 +309,8 @@ class Mod_produk extends CI_Model {
     //PRODUK KELUAR
     function get_all_produk_keluar(){ 
         $this->db->select('t_produk_keluar.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_keluar.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_keluar.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
         $this->db->order_by('t_produk_keluar.tanggal_produk_keluar ASC');
         return $this->db->get('t_produk_keluar'); 
     }
@@ -376,9 +376,9 @@ class Mod_produk extends CI_Model {
     
     function get_laporan_masuk($tanggal_awal, $tanggal_akhir){ 
         $this->db->select('t_produk_masuk.*, t_produk.*, t_kategori.*, t_satuan.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
-        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'inner');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_produk_masuk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
+        $this->db->join('t_satuan', 't_satuan.kode_satuan = t_produk.kode_satuan', 'left');
         $this->db->where("t_produk_masuk.tanggal_produk_masuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
         $this->db->order_by('t_produk_masuk.tanggal_produk_masuk ASC');
         return $this->db->get('t_produk_masuk'); 
@@ -397,8 +397,8 @@ class Mod_produk extends CI_Model {
     
     function get_laporan_penyesuaian_stok($tanggal_awal, $tanggal_akhir){ 
         $this->db->select('t_penyesuaian_produk.*, t_produk.*, t_kategori.*');
-        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'inner');
-        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'inner');
+        $this->db->join('t_produk', 't_produk.kode_produk = t_penyesuaian_produk.kode_produk', 'left');
+        $this->db->join('t_kategori', 't_kategori.kode_kategori = t_produk.kode_kategori', 'left');
         $this->db->where("t_penyesuaian_produk.tanggal_penyesuaian_produk BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
         $this->db->order_by('t_penyesuaian_produk.tanggal_penyesuaian_produk ASC');
         return $this->db->get('t_penyesuaian_produk'); 
