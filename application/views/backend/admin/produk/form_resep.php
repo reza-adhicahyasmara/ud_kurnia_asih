@@ -6,7 +6,7 @@
             <div class="form-group">
                 <select class="form-control kode_bb" name="kode_bb" id="kode_bb">
                     <?php foreach($bahan_baku->result() as $row){ ?>
-                    <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->nama_bb; ?></option>
+                    <option value="<?php echo $row->kode_bb; ?>"><?php echo $row->nama_bb." (".$row->nama_satuan.")"; ?></option>
                     <?php } ?> 
                 </select>
             </div>

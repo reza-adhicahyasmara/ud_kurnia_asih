@@ -154,26 +154,49 @@
                     var html = '';
                     var i;
                     for(i=0; i<data.length; i++){
-                        if(data[i].status_penawaran_bb == 'Diterima'){ 
-                            html += '<option value='+data[i].kode_bb+' harga_bb = '+data[i].harga_bb+' stok_gudang_sup_bb = '+data[i].stok_gudang_sup_bb+'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'+'</option>';
+                        if(data[i].status_penawaran_bb == "Diterima"){
+                            html += '<option value='+data[i].kode_bb
+                                                    +' harga_bb = '+data[i].harga_bb
+                                                    +' stok_gudang_sup_bb = '+data[i].stok_gudang_sup_bb
+                                                    +' nama_satuan = '+data[i].nama_satuan
+                                                    +' isi_satuan = '+data[i].isi_satuan
+                                                    +' kelipatan_bb = '+data[i].kelipatan_bb
+                                        +'>'+data[i].kode_bb+' - '+data[i].nama_bb+' ('+data[i].nama_satuan+')'
+                                    +'</option>';
                             var harga_bb = data[0].harga_bb; //default nilai
                             var stok_gudang_sup_bb = data[0].stok_gudang_sup_bb; //default nilai
+                            var nama_satuan = data[0].nama_satuan; //default nilai
+                            var isi_satuan = data[0].isi_satuan; //default nilai
+                            var kelipatan_bb = data[0].kelipatan_bb; //default nilai
                         }
                     }
                     $('#kode_bb').html(html);
+
                     var number1 = new Number(harga_bb).toLocaleString("id-ID");
                     $('#harga_ipemesanan_bb_view').val(number1);
                     $("#harga_ipemesanan_bb").val(harga_bb);
 
                     var number2 = new Number(stok_gudang_sup_bb).toLocaleString("id-ID");
-                    $('#stok_gudang_sup_bb_view').val(number2);
+                    $('#stok_gudang_sup_bb_view').val(number2+" "+nama_satuan);
                     $("#stok_gudang_sup_bb").val(stok_gudang_sup_bb);
+
+                    var number3 = new Number(kelipatan_bb).toLocaleString("id-ID");
+                    $("#kelipatan_bb_view").val(number3+" "+isi_satuan+" / "+nama_satuan);
+                    $("#kelipatan_bb").val(kelipatan_bb);
+
+                    $("#nama_satuan_view").text(nama_satuan);
+
+                    load_data_item_bb();
                 }
             });     
         });    
     });
 
     $('.kode_bb').on('change', function() {
+        var nama_satuan = $('option:selected', this).attr('nama_satuan');
+        var isi_satuan = $('option:selected', this).attr('isi_satuan');
+        $("#nama_satuan_view").text(nama_satuan);
+
         var harga_bb = $('option:selected', this).attr('harga_bb');
         var number = new Number(harga_bb).toLocaleString("id-ID");
         $('#harga_ipemesanan_bb_view').val(number);
@@ -181,9 +204,14 @@
 
         var stok_gudang_sup_bb = $('option:selected', this).attr('stok_gudang_sup_bb');
         var number = new Number(stok_gudang_sup_bb).toLocaleString("id-ID");
-        $('#stok_gudang_sup_bb_view').val(number);
+        $('#stok_gudang_sup_bb_view').val(number+" "+nama_satuan);
         $("#stok_gudang_sup_bb").val(stok_gudang_sup_bb);
-    });    
+        
+        var kelipatan_bb = $('option:selected', this).attr('kelipatan_bb');
+        var number = new Number(kelipatan_bb).toLocaleString("id-ID");
+        $('#kelipatan_bb_view').val(number+" "+isi_satuan+" / "+nama_satuan);
+        $("#kelipatan_bb").val(kelipatan_bb);
+    });  
 
 
     load_data_item_bb();
