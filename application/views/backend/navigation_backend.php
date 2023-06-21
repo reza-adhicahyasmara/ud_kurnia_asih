@@ -2,7 +2,7 @@
     //NOTIF KARYAWAN
     $bb_limit = 0; 
     foreach($this->Mod_bahan_baku->get_all_bahan_baku()->result() as $row) {
-        if($row->stok_gudang_pab_bb <= $row->stok_limit_pab_bb){
+        if($row->stok_gudang_pab_bb <= $row->stok_limit_pab_bb && $row->status_penawaran_bb == "Diterima"){
             $bb_limit += 1;
         }
     }
